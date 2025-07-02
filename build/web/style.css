@@ -1,12 +1,4 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Jun 26, 2025, 8:38:16 AM
-    Author     : BINH NHI
-*/
-
+/* Reset và cài đặt cơ bản */
 * {
   margin: 0;
   padding: 0;
@@ -37,62 +29,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   font-weight: 500;
 }
 
-.dropdown {
-  position: relative;
-  cursor: pointer;
-}
-
-.dropdown span {
-  display: inline-block;
-}
-
-.dropdown-menu {
-  display: none;
-  position: absolute;
-  top: 120%;
-  left: 0;
-  background: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  border-radius: 4px;
-  min-width: 160px;
-  z-index: 1000;
-  padding: 10px;
-}
-
-.dropdown-menu a {
-  display: block;
-  padding: 5px 10px;
-  color: #333;
-  text-decoration: none;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-/* Wide services menu */
-.dropdown-menu.wide {
-  display: none;
-  top: 120%;
-  left: 0;
-  background: white;
-  border-radius: 4px;
-  min-width: 280px;
-  padding: 10px 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.dropdown-menu.wide div {
-  margin-bottom: 10px;
-}
-
-.dropdown-menu.wide p {
-  font-size: 12px;
-  margin: 3px 0 0;
-  color: #555;
-}
-
-
+/* Header chính */
 .main-header {
   display: flex;
   justify-content: space-between;
@@ -102,35 +39,91 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   border-bottom: 1px solid #ccc;
 }
 
-.main-header >li:first-child input {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid #333;
-  padding: 0 12px;
-}
-.main-header >li:first-child i {
-    position: absolute;
+/* Tìm kiếm */
+.search-box {
+  position: relative;
 }
 
+.search-box input {
+  width: 250px;
+  border: none;
+  border-bottom: 1px solid #333;
+  padding: 8px 12px;
+}
+
+.search-box i {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+}
+
+/* Logo */
 .logo {
   font-size: 24px;
   font-weight: bold;
-  color: #ccccff;
+  color: #6c63ff;
 }
 
+/* Nút login và giỏ hàng */
 .actions button {
   margin-left: 10px;
   padding: 5px 10px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
 }
 
+/* Thanh menu điều hướng */
 .nav-bar {
   background: #f9f9f9;
-  padding: 10px 15px;
+  padding: 20px 40px;
   display: flex;
   gap: 15px;
   font-size: 14px;
+  list-style: none;
 }
 
+.nav-bar li {
+  list-style: none;
+  position: relative;
+}
+
+.nav-bar a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 12px;
+  display: block;
+}
+
+/* Menu con (dropdown) */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  padding: 10px 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  z-index: 999;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f5f5f5;
+  color: #f22b07;
+}
+
+/* Thanh cảnh báo khuyến mãi */
 .alert-bar {
   background: #333;
   color: white;
@@ -138,22 +131,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   font-size: 14px;
 }
 
-.banner {
-  background: linear-gradient(to right, #ff0066, #ff66cc);
-  color: white;
-  text-align: center;
-  padding: 50px 15px;
+/* Banner slider */
+.banner-slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  margin-bottom: 30px;
 }
 
-.banner h1 {
-  font-size: 40px;
-  margin-bottom: 10px;
+.slides {
+  display: flex;
+  width: 300%; /* 3 ảnh => 3 slide */
+  transition: transform 0.5s ease-in-out;
 }
 
-.banner p {
-  font-size: 20px;
+.slides img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* hoặc "cover" nếu muốn ảnh lấp đầy */
+  flex-shrink: 0;
 }
 
+.banner-slider button.prev,
+.banner-slider button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  padding: 10px 15px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.banner-slider button.prev { left: 10px; }
+.banner-slider button.next { right: 10px; }
+
+/* Thanh tìm kiếm voucher */
 .voucher-search {
   background: #ffeeee;
   padding: 20px;
@@ -179,17 +196,23 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
   padding: 10px 15px;
   cursor: pointer;
 }
+
+/* Cố định header */
 header {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000; /* Đảm bảo header nằm trên cùng */
+  z-index: 1000;
   background: white;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
+
+/* Đẩy body xuống tránh bị che */
 body {
-  padding-top: 150px; /* Điều chỉnh theo chiều cao thực tế của header */
+  padding-top: 150px;
 }
+
+/* Footer */
 footer {
   background-color: #f8f8f8;
   color: #333;
@@ -215,9 +238,15 @@ footer {
   font-weight: bold;
 }
 
-.footer-section p {
-  margin: 5px 0;
-  cursor: pointer;
+.footer-section a {
+  display: block;
+  margin: 4px 0;
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-section a:hover {
+  text-decoration: underline;
 }
 
 .footer-app {
