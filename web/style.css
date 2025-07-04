@@ -11,7 +11,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f5f5f5;
+  background: #99ccff;
   padding: 5px 20px;
   font-size: 13px;
   color: #333;
@@ -69,15 +69,15 @@
 /* Nút login và giỏ hàng */
 .actions button {
   margin-left: 10px;
-  padding: 5px 10px;
+  padding: 5px 15px;
   cursor: pointer;
-  border: none;
+  border-collapse: collapse;
   background: transparent;
 }
 
 /* Thanh menu điều hướng */
 .nav-bar {
-  background: #f9f9f9;
+    background: #6699ff;
   padding: 20px 40px;
   display: flex;
   gap: 15px;
@@ -89,6 +89,10 @@
   list-style: none;
   position: relative;
 }
+.nav-bar > li > a {
+    font-weight: bold;
+
+} 
 
 .nav-bar a {
   text-decoration: none;
@@ -125,7 +129,7 @@
 
 /* Thanh cảnh báo khuyến mãi */
 .alert-bar {
-  background: #333;
+    background: #99ccff;
   color: white;
   padding: 8px 15px;
   font-size: 14px;
@@ -270,3 +274,100 @@ footer {
   align-items: center;
   padding-top: 10px;
 }
+/*cartelogy*/
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+.cartelogy{
+    padding: 50px 0 30px ;
+    
+}
+.cartelogy-top{
+   margin-bottom: 10px;
+  display: flex;
+  gap: 5px;
+  font-size: 14px;
+  color: #666;
+}
+.cartelogy-top p {
+    font-family: var(--main-text-font);
+    margin: 0 12px;
+    font-size: 12px;
+}
+.cartelogy-left{
+    width: 25%;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 6px;
+    
+}
+.cartelogy-left ul {
+  list-style: none;
+}
+
+.cartelogy-left-li > a {
+  font-weight: bold;
+  color: #333;
+  display: block;
+  padding: 8px 0;
+  text-decoration: none;
+}
+
+.cartelogy-left-li ul {
+  padding-left: none;
+}
+
+.cartelogy-left-li ul li a {
+  text-decoration: none;
+  font-size: 14px;
+  display: block;
+  padding: 4px 0;
+  color: #666;
+}
+
+.cartelogy-left-li a:hover {
+  color: #f22b07;
+}
+.cartelogy-right{
+    width: 75%;
+  
+
+}
+.cartelogy-right-top-item:first-child {
+    flex:2;
+     font-weight: bold;
+}
+.cartelogy-right-top-item{
+    padding: 10px 0;
+  font-size: 16px;
+}
+.row{
+     display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  align-items: flex-start;
+}
+.container .row {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.cartelogy-right-top-item select,
+.cartelogy-right-top-item button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.cartelogy-right-top-item button i {
+  margin-left: 5px;
+}
+
+
