@@ -64,4 +64,24 @@ window.onload = function () {
             alert(`Đã thêm ${quantity} x ${productName} (${selectedOption}) vào giỏ hàng!`);
         });
     }
+    //-------products-------
+    const Use = document.querySelector(".Use");
+    const Product = document.querySelector(".Product");
+    if(Use){
+        Use.addEventListener('click', function (){
+            document.querySelector(".products-content-right-button-content-product").style.display ="none";
+        document.querySelector(".products-content-right-button-content-Use").style.display ="block";
+        
+    });
+    }
+    if(Product){
+        Product.addEventListener('click', function (){
+            document.querySelector(".products-content-right-button-content-product").style.display ="block";
+        document.querySelector(".products-content-right-button-content-Use").style.display ="none";
+    });
+    }
+    
+    
+    
+    
 };
