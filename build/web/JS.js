@@ -65,6 +65,15 @@ window.onload = function () {
         });
     }
     //-------products-------
+    const bigimg =document.querySelector(".products-content-left-big-img img");
+    const  smallimg =document.querySelectorAll(".products-content-left-small-img img");
+    smallimgs.forEach(function (imgItem,X){
+        imgItem.addEventListener('click', function (){
+            bigimg.src = imgItem.src
+        });
+    });
+    
+    
     const Use = document.querySelector(".Use");
     const Product = document.querySelector(".Product");
     if(Use){
@@ -81,7 +90,12 @@ window.onload = function () {
     });
     }
     
-    
+    const button= document.querySelector(".products-content-right-button-top");
+    if(button){
+        button.addEventListener('click', function (){
+            document.querySelector(".products-content-right-button-content-big").classList.toggle("activeB");
+        });
+    }
     
     
 };
