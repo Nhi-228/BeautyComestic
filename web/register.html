@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beauty Daily</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <style>
+      /* ...existing code... */
+      .banner-slider {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 420px;
+        background: linear-gradient(120deg, #e0f0ff 0%, #b3d8ff 100%);
+      }
+      .login-form-container {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+        padding: 36px 32px 28px 32px;
+        width: 600px;
+        max-width: 98vw;
+        margin: 32px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .login-title {
+        text-align: center;
+        font-size: 26px;
+        color: #00a4bd;
+        margin-bottom: 18px;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+      .login-error {
+        color: #d9534f;
+        margin-bottom: 12px;
+        text-align: center;
+        min-height: 18px;
+      }
+      .login-input-group {
+        width: 100%;
+        margin-bottom: 18px;
+      }
+      .login-input-group label {
+        display: block;
+        margin-bottom: 6px;
+        color: #555;
+        font-size: 15px;
+        font-weight: 500;
+      }
+      .login-input-group i {
+        margin-right: 6px;
+        color: #00a4bd;
+      }
+      .login-input-group input {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #b3d8ff;
+        border-radius: 5px;
+        font-size: 15px;
+        outline: none;
+        transition: border 0.2s;
+      }
+      .login-input-group input:focus {
+        border: 1.5px solid #00a4bd;
+      }
+      .login-input-group select {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid #b3d8ff;
+        border-radius: 5px;
+        font-size: 15px;
+        outline: none;
+        background: #fff;
+        transition: border 0.2s;
+        margin-top: 2px;
+      }
+      .login-input-group select:focus {
+        border: 1.5px solid #00a4bd;
+      }
+      .login-password-box {
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+      .login-password-box input {
+        flex: 1;
+      }
+      .login-password-box .toggle {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #888;
+        font-size: 16px;
+        user-select: none;
+      }
+      .login-btn {
+        width: 100%;
+        padding: 12px;
+        background: #00a4bd;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        transition: background 0.2s;
+      }
+      .login-btn:hover {
+        background: #008a9a;
+      }
+      .login-links {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 8px;
+      }
+      .login-links a {
+        color: #00a4bd;
+        text-decoration: none;
+        font-size: 14px;
+        transition: text-decoration 0.2s;
+      }
+      .login-links a:hover {
+        text-decoration: underline;
+      }
+      .register-form-row {
+        display: flex;
+        gap: 32px;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+      .register-form-col {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      @media (max-width: 700px) {
+        .login-form-container {
+          width: 98vw;
+          min-width: unset;
+        }
+        .register-form-row {
+          flex-direction: column;
+          gap: 0;
+        }
+        .register-form-col {
+          width: 100%;
+        }
+      }
+    </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <span>Quick Access</span>
+    </div>
+
+    <div class="main-header">
+      <div class="search-box">
+        <input type="text" placeholder="Gift with purchase" />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="logo">Beauty Daily</div>
+      <div class="actions">
+        <button>LOGIN</button>
+        <button class="add-to-cart"><i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG</button>
+      </div>
+    </div>
+
+    <nav>
+      <ul class="nav-bar">
+        <li class="dropdown">
+          <a href="#">Summer Sale</a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Sale 15%</a></li>
+            <li><a href="#">Sale 50%</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Makeup</a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Face</a></li>
+            <li><a href="#">Lips</a></li>
+            <li><a href="#">Eyes</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Skincare</a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Acne treatment</a></li>
+            <li><a href="#">Mask</a></li>
+            <li><a href="#">Cleaning</a></li>
+            <li><a href="#">Toner</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Hair Care</a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Shampoo</a></li>
+            <li><a href="#">Conditioner</a></li>
+            <li><a href="#">Hair mask</a></li>
+            <li><a href="#">Hair oil</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Personal Care</a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Product consulting</a></li>
+            <li><a href="#">Purchasing support</a></li>
+            <li><a href="#">Answer questions</a></li>
+            <li><a href="#">Complaint handling</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
+  </header>
+
+  <section class="banner-slider">
+    <div class="login-form-container">
+      <form id="registerForm">
+        <h2 class="login-title">Đăng ký tài khoản</h2>
+        <div class="login-error" id="registerError"></div>
+        <div class="register-form-row">
+          <div class="register-form-col">
+            <div class="login-input-group">
+              <label for="registerFullName"><i class="fa fa-user"></i> Họ và tên</label>
+              <input type="text" id="registerFullName" placeholder="Nhập họ và tên" required>
+            </div>
+            <div class="login-input-group">
+              <label for="registerUsername"><i class="fa fa-user-circle"></i> Tên tài khoản</label>
+              <input type="text" id="registerUsername" placeholder="Nhập tên tài khoản" required>
+            </div>
+            <div class="login-input-group">
+              <label for="registerPassword"><i class="fa fa-lock"></i> Mật khẩu</label>
+              <div class="login-password-box">
+                <input type="password" id="registerPassword" placeholder="Nhập mật khẩu" required>
+                <span class="toggle" onclick="togglePwd('registerPassword', this)"><i class="fa-regular fa-eye"></i></span>
+              </div>
+            </div>
+            <div class="login-input-group">
+              <label for="registerRePassword"><i class="fa fa-lock"></i> Nhập lại mật khẩu</label>
+              <div class="login-password-box">
+                <input type="password" id="registerRePassword" placeholder="Nhập lại mật khẩu" required>
+                <span class="toggle" onclick="togglePwd('registerRePassword', this)"><i class="fa-regular fa-eye"></i></span>
+              </div>
+            </div>
+          </div>
+          <div class="register-form-col">
+            <div class="login-input-group">
+              <label for="registerEmail"><i class="fa fa-envelope"></i> Email</label>
+              <input type="email" id="registerEmail" placeholder="Nhập email" required>
+            </div>
+            <div class="login-input-group">
+              <label for="registerPhone"><i class="fa fa-phone"></i> Số điện thoại</label>
+              <input type="tel" id="registerPhone" placeholder="Nhập số điện thoại" required>
+            </div>
+            <div class="login-input-group">
+              <label for="registerAddress"><i class="fa fa-map-marker-alt"></i> Địa chỉ</label>
+              <select id="registerAddress" required>
+                <option value="">Chọn tỉnh/thành phố</option>
+                <option value="Hà Nội">Hà Nội</option>
+                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                <option value="Đà Nẵng">Đà Nẵng</option>
+                <option value="Hải Phòng">Hải Phòng</option>
+                <option value="Cần Thơ">Cần Thơ</option>
+                <option value="Khác">Khác</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="login-btn">Đăng ký</button>
+        <div class="login-links">
+          <a href="login.html"><i class="fa fa-sign-in-alt"></i> Đã có tài khoản?</a>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="voucher-search">
+    <div class="search-bar">
+      <input type="text" placeholder="Search voucher keywords" />
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-section">
+        <h4>ABOUT US</h4>
+        <a href="#">Who We Are</a>
+        <a href="#">Sustainability</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>BEAUTY DAILY MEMBER</h4>
+        <a href="#">Beauty Daily Club</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>SHOPPING AT BEAUTY DAILY</h4>
+        <a href="#">Find a Store</a><br>
+        <a href="#">Chat & Shop</a><br>
+        <a href="#">Contact Us</a>
+      </div>
+
+      <div class="footer-section">
+        <h4>FIND US ON</h4>
+        <i class="fa-brands fa-facebook" style="color: #1374be;"></i>
+        <i class="fa-brands fa-youtube" style="color: #e11305;"></i>
+        <i class="fa-brands fa-instagram" style="color: #ae3287;"></i>
+        <i class="fa-brands fa-tiktok fa-beat"></i>
+        <i class="fa-solid fa-house" style="color: #74C0FC;"></i>
+      </div>
+
+      <div class="footer-app">
+        <h3>Get Our App</h3>
+        <p>to enjoy your best online shopping experience.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/QR_code_example.svg" alt="QR Code" width="80" />
+        <div>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" width="120" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Download_on_the_App_Store_Badge.svg" alt="App Store" width="120" />
+        </div>
+        <img src="https://online.gov.vn/Content/EndUser/LogoCCDVSaleNoti/logoSaleNoti.png" alt="Thông báo BCT" width="150" />
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <img src="image/BD.png" alt="Beauty Daily Logo" width="120" />
+    </div>
+  </footer>
+    <script src="JS.js"></script>
+    <script>
+      function togglePwd(id, el) {
+        const inp = document.getElementById(id);
+        if (inp.type === "password") {
+          inp.type = "text";
+          el.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
+        } else {
+          inp.type = "password";
+          el.innerHTML = '<i class="fa-regular fa-eye"></i>';
+        }
+      }
+    </script>
+  </body>
+</html>
