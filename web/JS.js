@@ -16,7 +16,19 @@ window.onload = function () {
 
         setInterval(() => changeSlide(1), 5000);
     }
+//dropdown cho login
+const loginBtn = document.getElementById('loginBtn');
+  const loginDropdown = document.getElementById('loginDropdown');
 
+  loginBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
+    loginDropdown.classList.toggle('show');
+  });
+
+  // Đóng dropdown khi click ngoài
+  document.addEventListener('click', function () {
+    loginDropdown.classList.remove('show');
+  });
     // Số lượng
     const minusBtn = document.querySelector('.quantity-box button:first-child');
     const plusBtn = document.querySelector('.quantity-box button:last-child');
@@ -96,6 +108,9 @@ window.onload = function () {
             document.querySelector(".products-content-right-button-content-big").classList.toggle("activeB");
         });
     }
+    
+    /* code cho register*/
+    
     
     
 };

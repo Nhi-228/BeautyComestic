@@ -20,7 +20,16 @@
                 </div>
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
-                    <button>LOGIN</button>
+                    <div class="login-dropdown">
+  <button class="login-btn" id="loginBtn">LOGIN</button>
+  <ul class="dropdown-list" id="loginDropdown">
+    <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
+    <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+    <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+    <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
+    <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
+  </ul>
+</div>
                     <button><i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG</button>
                 </div>
             </div>
@@ -117,7 +126,8 @@
                             </div>
                         </div>
                         <div class="buy-buttons">
-                            <button class="buy-now">buy now</button>
+                           <button class="buy-now" id="buyNowBtn">buy now</button>
+
                             <button class="add-to-cart"><i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i>add to cart</button>
                         </div>
                         <div class="products-content-right-button">
@@ -262,5 +272,61 @@
             </div>
         </footer>
         <script src="JS.js"></script>
+        <script >
+            const addToCartBtn = document.querySelector('.add-to-cart');
+
+// Khi click, thêm sản phẩm vào localStorage
+addToCartBtn.addEventListener('click', function () {
+    const product = {
+        id: "SP670942631",
+        name: "3CE BARE COVER CUSHION",
+        price: 450000,
+        quantity: parseInt(document.querySelector('.quantity-box input').value),
+        image: "image/cushion.jpg"
+    };
+
+    // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mới)
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Kiểm tra nếu sản phẩm đã có trong giỏ → tăng số lượng
+    const existing = cart.find(p => p.id === product.id);
+    if (existing) {
+        existing.quantity += product.quantity;
+    } else {
+        cart.push(product);
+    }
+
+    // Lưu lại vào localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Hiển thị thông báo hoặc chuyển trang nếu cần
+    alert("Đã thêm vào giỏ hàng!");
+    function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById("cart-count").textContent = totalQuantity;
+}
+
+// Gọi hàm khi trang load
+window.addEventListener("load", updateCartCount);
+});
+document.getElementById("buyNowBtn").addEventListener("click", function () {
+    // (Tuỳ chọn) bạn có thể lưu thông tin sản phẩm cần thanh toán riêng nếu cần
+    const product = {
+        id: "SP670942631",
+        name: "3CE BARE COVER CUSHION",
+        price: 450000,
+        quantity: parseInt(document.querySelector('.quantity-box input').value),
+        image: "image/cushion.jpg"
+    };
+
+    // Lưu sản phẩm tạm thời vào localStorage để dùng ở trang payment
+    localStorage.setItem("paymentProduct", JSON.stringify(product));
+
+    // Chuyển sang trang thanh toán
+    window.location.href = "payment.html";
+});
+
+        </script>
     </body>
 </html>

@@ -1,164 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Beauty Daily</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" \
+        crossorigin="anonymous">
   <style>
-      /* ...existing code... */
-      .banner-slider {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 420px;
-        background: linear-gradient(120deg, #e0f0ff 0%, #b3d8ff 100%);
-      }
-      .login-form-container {
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-        padding: 36px 32px 28px 32px;
-        width: 600px;
-        max-width: 98vw;
-        margin: 32px 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-      .login-title {
-        text-align: center;
-        font-size: 26px;
-        color: #00a4bd;
-        margin-bottom: 18px;
-        font-weight: 700;
-        letter-spacing: 1px;
-      }
-      .login-error {
-        color: #d9534f;
-        margin-bottom: 12px;
-        text-align: center;
-        min-height: 18px;
-      }
-      .login-input-group {
-        width: 100%;
-        margin-bottom: 18px;
-      }
-      .login-input-group label {
-        display: block;
-        margin-bottom: 6px;
-        color: #555;
-        font-size: 15px;
-        font-weight: 500;
-      }
-      .login-input-group i {
-        margin-right: 6px;
-        color: #00a4bd;
-      }
-      .login-input-group input {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #b3d8ff;
-        border-radius: 5px;
-        font-size: 15px;
-        outline: none;
-        transition: border 0.2s;
-      }
-      .login-input-group input:focus {
-        border: 1.5px solid #00a4bd;
-      }
-      .login-input-group select {
-        width: 100%;
-        padding: 10px 12px;
-        border: 1px solid #b3d8ff;
-        border-radius: 5px;
-        font-size: 15px;
-        outline: none;
-        background: #fff;
-        transition: border 0.2s;
-        margin-top: 2px;
-      }
-      .login-input-group select:focus {
-        border: 1.5px solid #00a4bd;
-      }
-      .login-password-box {
-        display: flex;
-        align-items: center;
-        position: relative;
-      }
-      .login-password-box input {
-        flex: 1;
-      }
-      .login-password-box .toggle {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        color: #888;
-        font-size: 16px;
-        user-select: none;
-      }
-      .login-btn {
-        width: 100%;
-        padding: 12px;
-        background: #00a4bd;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 17px;
-        font-weight: 600;
-        cursor: pointer;
-        margin-top: 8px;
-        margin-bottom: 8px;
-        transition: background 0.2s;
-      }
-      .login-btn:hover {
-        background: #008a9a;
-      }
-      .login-links {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-        margin-top: 8px;
-      }
-      .login-links a {
-        color: #00a4bd;
-        text-decoration: none;
-        font-size: 14px;
-        transition: text-decoration 0.2s;
-      }
-      .login-links a:hover {
-        text-decoration: underline;
-      }
-      .register-form-row {
-        display: flex;
-        gap: 32px;
-        width: 100%;
-        margin-bottom: 8px;
-      }
-      .register-form-col {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-      }
-      @media (max-width: 700px) {
-        .login-form-container {
-          width: 98vw;
-          min-width: unset;
-        }
-        .register-form-row {
-          flex-direction: column;
-          gap: 0;
-        }
-        .register-form-col {
-          width: 100%;
-        }
-      }
-    </style>
+    .error {
+      color: red;
+      font-size: 14px;
+      display: none;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -173,8 +32,17 @@
       </div>
       <div class="logo">Beauty Daily</div>
       <div class="actions">
-        <button>LOGIN</button>
-        <button class="add-to-cart"><i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG</button>
+        <div class="login-dropdown">
+  <button class="login-btn" id="loginBtn">LOGIN</button>
+  <ul class="dropdown-list" id="loginDropdown">
+    <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
+    <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+    <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+    <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
+    <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
+  </ul>
+</div>
+        <button ><i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG</button>
       </div>
     </div>
 
@@ -228,63 +96,49 @@
     <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
   </header>
 
-  <section class="banner-slider">
-    <div class="login-form-container">
-      <form id="registerForm">
-        <h2 class="login-title">Đăng ký tài khoản</h2>
-        <div class="login-error" id="registerError"></div>
-        <div class="register-form-row">
-          <div class="register-form-col">
-            <div class="login-input-group">
-              <label for="registerFullName"><i class="fa fa-user"></i> Họ và tên</label>
-              <input type="text" id="registerFullName" placeholder="Nhập họ và tên" required>
-            </div>
-            <div class="login-input-group">
-              <label for="registerUsername"><i class="fa fa-user-circle"></i> Tên tài khoản</label>
-              <input type="text" id="registerUsername" placeholder="Nhập tên tài khoản" required>
-            </div>
-            <div class="login-input-group">
-              <label for="registerPassword"><i class="fa fa-lock"></i> Mật khẩu</label>
-              <div class="login-password-box">
-                <input type="password" id="registerPassword" placeholder="Nhập mật khẩu" required>
-                <span class="toggle" onclick="togglePwd('registerPassword', this)"><i class="fa-regular fa-eye"></i></span>
-              </div>
-            </div>
-            <div class="login-input-group">
-              <label for="registerRePassword"><i class="fa fa-lock"></i> Nhập lại mật khẩu</label>
-              <div class="login-password-box">
-                <input type="password" id="registerRePassword" placeholder="Nhập lại mật khẩu" required>
-                <span class="toggle" onclick="togglePwd('registerRePassword', this)"><i class="fa-regular fa-eye"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="register-form-col">
-            <div class="login-input-group">
-              <label for="registerEmail"><i class="fa fa-envelope"></i> Email</label>
-              <input type="email" id="registerEmail" placeholder="Nhập email" required>
-            </div>
-            <div class="login-input-group">
-              <label for="registerPhone"><i class="fa fa-phone"></i> Số điện thoại</label>
-              <input type="tel" id="registerPhone" placeholder="Nhập số điện thoại" required>
-            </div>
-            <div class="login-input-group">
-              <label for="registerAddress"><i class="fa fa-map-marker-alt"></i> Địa chỉ</label>
-              <select id="registerAddress" required>
-                <option value="">Chọn tỉnh/thành phố</option>
-                <option value="Hà Nội">Hà Nội</option>
-                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
-                <option value="Đà Nẵng">Đà Nẵng</option>
-                <option value="Hải Phòng">Hải Phòng</option>
-                <option value="Cần Thơ">Cần Thơ</option>
-                <option value="Khác">Khác</option>
-              </select>
-            </div>
-          </div>
+  <section class="py-5" style="background-color: #f0f0ff;">
+    <div class="container">
+      <form id="formregister" style="max-width: 500px; margin: auto;">
+        <h3 class="text-center mb-4">Đăng ký tài khoản</h3>
+
+        <div class="mb-3">
+          <label class="form-label">Họ và tên</label>
+          <input type="text" class="form-control" id="username">
+          <div class="error" id="nameerror">Tên không được để trống</div>
         </div>
-        <button type="submit" class="login-btn">Đăng ký</button>
-        <div class="login-links">
-          <a href="login.html"><i class="fa fa-sign-in-alt"></i> Đã có tài khoản?</a>
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-control" id="email">
+          <div class="error" id="emailerror">Email sai định dạng hoặc đã tồn tại</div>
         </div>
+
+        <div class="mb-3">
+          <label class="form-label">Số điện thoại</label>
+          <input type="text" class="form-control" id="phone">
+          <div class="error" id="phoneerror">Số điện thoại sai định dạng hoặc đã tồn tại</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Mật khẩu</label>
+          <input type="password" class="form-control" id="password">
+          <div class="error" id="passworderror">Mật khẩu cần chữ hoa, ký tự đặc biệt, tối đa 6 ký tự</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Nhập lại mật khẩu</label>
+          <input type="password" class="form-control" id="repassword">
+          <div class="error" id="repassworderror">Mật khẩu nhập lại không khớp</div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Địa chỉ</label>
+          <textarea class="form-control" id="address"></textarea>
+        </div>
+
+        <div class="error text-center mb-3" id="duplicateerror">Thông tin đăng ký đã tồn tại!</div>
+
+        <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
       </form>
     </div>
   </section>
@@ -342,16 +196,102 @@
   </footer>
     <script src="JS.js"></script>
     <script>
-      function togglePwd(id, el) {
-        const inp = document.getElementById(id);
-        if (inp.type === "password") {
-          inp.type = "text";
-          el.innerHTML = '<i class="fa-regular fa-eye-slash"></i>';
-        } else {
-          inp.type = "password";
-          el.innerHTML = '<i class="fa-regular fa-eye"></i>';
-        }
+    const form = document.getElementById('formregister');
+    const username = document.getElementById('username');
+    const email = document.getElementById('email');
+    const phone = document.getElementById('phone');
+    const password = document.getElementById('password');
+    const repassword = document.getElementById('repassword');
+    const address = document.getElementById('address');
+
+    const nameerror = document.getElementById('nameerror');
+    const emailerror = document.getElementById('emailerror');
+    const phoneerror = document.getElementById('phoneerror');
+    const passworderror = document.getElementById('passworderror');
+    const repassworderror = document.getElementById('repassworderror');
+    const duplicateerror = document.getElementById('duplicateerror');
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+
+    function validatePhone(phone) {
+      const re = /^[0-9]{10}$/;
+      return re.test(phone);
+    }
+
+    function validatePassword(password) {
+      const hasUppercase = /[A-Z]/.test(password);
+      const hasSpecial = /[^A-Za-z0-9]/.test(password);
+      return hasUppercase && hasSpecial && password.length <= 6;
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      let isValid = true;
+
+      // Reset lỗi
+      nameerror.style.display = emailerror.style.display = phoneerror.style.display =
+      passworderror.style.display = repassworderror.style.display = duplicateerror.style.display = 'none';
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      // Kiểm tra lỗi
+      if (!username.value.trim()) {
+        nameerror.style.display = 'block';
+        isValid = false;
       }
+
+      if (!validateEmail(email.value)) {
+        emailerror.style.display = 'block';
+        isValid = false;
+      }
+
+      if (!validatePhone(phone.value)) {
+        phoneerror.style.display = 'block';
+        isValid = false;
+      }
+
+      if (!validatePassword(password.value)) {
+        passworderror.style.display = 'block';
+        isValid = false;
+      }
+
+      if (repassword.value !== password.value || repassword.value === "") {
+        repassworderror.style.display = 'block';
+        isValid = false;
+      }
+
+      // Kiểm tra trùng
+      const isDuplicate = users.some(u =>
+        u.username === username.value.trim() ||
+        u.email === email.value.trim() ||
+        u.phone === phone.value.trim() ||
+        u.password === password.value.trim()
+      );
+
+      if (isDuplicate) {
+        duplicateerror.style.display = 'block';
+        isValid = false;
+      }
+
+      // Nếu hợp lệ và không trùng, lưu vào localStorage
+      if (isValid) {
+        const newUser = {
+          username: username.value.trim(),
+          email: email.value.trim(),
+          phone: phone.value.trim(),
+          password: password.value.trim(),
+          address: address.value.trim()
+        };
+
+        users.push(newUser);
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Đăng ký thành công!");
+        window.location.href = "login.html";
+      }
+    });
     </script>
   </body>
 </html>
