@@ -77,16 +77,35 @@ const loginBtn = document.getElementById('loginBtn');
         });
     }
     //-------products-------
-    const bigimg =document.querySelector(".products-content-left-big-img img");
-    const  smallimg =document.querySelectorAll(".products-content-left-small-img img");
-    smallimgs.forEach(function (imgItem,X){
-        imgItem.addEventListener('click', function (){
-            bigimg.src = imgItem.src
-        });
+ const tabButtons = document.querySelectorAll('.products-content-right-button-content-item');
+const tabContents = document.querySelectorAll('.products-content-right-button-content .tab-content');
+
+// Lặp qua các nút tab
+tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const tab = btn.dataset.tab;
+
+        // Bỏ active tất cả
+        tabButtons.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(content => content.style.display = 'none');
+
+        // Hiện nội dung đúng tab
+        btn.classList.add('active');
+        const activeContent = document.querySelector(`.products-content-right-button-content .tab-content[data-tab="${tab}"]`);
+        if (activeContent) activeContent.style.display = 'block';
     });
+});
+
+// Hiển thị tab đầu tiên khi trang load
+if (tabButtons.length > 0) {
+    tabButtons[0].click(); // Kích hoạt tab đầu
+}
+
+
+
+
     
-    
-    const Use = document.querySelector(".Use");
+   /* const Use = document.querySelector(".Use");
     const Product = document.querySelector(".Product");
     if(Use){
         Use.addEventListener('click', function (){

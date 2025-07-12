@@ -25,16 +25,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
                     <div class="login-dropdown">
-  <button class="login-btn" id="loginBtn">LOGIN</button>
-  <ul class="dropdown-list" id="loginDropdown">
-    <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
-    <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
-    <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
-    <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
-    <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
-  </ul>
-</div>
-                    <button><i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG</button>
+                        <button class="login-btn" id="loginBtn">LOGIN</button>
+                        <ul class="dropdown-list" id="loginDropdown">
+                            <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
+                            <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+                            <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+                            <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
+                            <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
+                        </ul>
+                    </div>
+                    <a href="mybag.html" id="myBagBtn" class="btn-bag">
+                        <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
+                    </a>
                 </div>
             </div>
 
@@ -60,7 +62,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <ul class="dropdown-menu">
                             <li><a href="#">Acne treatment</a></li>
                             <li><a href="#">Mask</a></li>
-                            <li><a href="#">Cleansing</a></li>
+                            <li><a href="#">Cleaning</a></li>
                             <li><a href="#">Toner</a></li>
                         </ul>
                     </li>
@@ -74,19 +76,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#">Personal Care</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Product consulting</a></li>
-                            <li><a href="#">Purchasing support</a></li>
-                            <li><a href="#">Answer questions</a></li>
-                            <li><a href="#">Complaint handling</a></li>
-                        </ul>
+                        <a href="personalcare.html">Personal Care</a>
                     </li>
                 </ul>
             </nav>
 
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
+
 
 
 

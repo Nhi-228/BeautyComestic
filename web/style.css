@@ -710,6 +710,18 @@ footer {
 .product-related-item p{
     font-size: 12px;
 }
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.products-content-right-button-content-item.active {
+    font-weight: bold;
+    border-bottom: 2px solid #f22b07;
+}
 
 /*------CART-------*/
 .cart{

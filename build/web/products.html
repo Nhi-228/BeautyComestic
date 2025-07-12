@@ -13,26 +13,30 @@
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
+
             <div class="main-header">
                 <div class="search-box">
-                    <input type="text" placeholder="Gift with purchase">
+                    <input type="text" placeholder="Gift with purchase" />
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
                     <div class="login-dropdown">
-  <button class="login-btn" id="loginBtn">LOGIN</button>
-  <ul class="dropdown-list" id="loginDropdown">
-    <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
-    <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
-    <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
-    <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
-    <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
-  </ul>
-</div>
-                    <button><i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG</button>
+                        <button class="login-btn" id="loginBtn">LOGIN</button>
+                        <ul class="dropdown-list" id="loginDropdown">
+                            <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
+                            <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+                            <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+                            <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
+                            <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
+                        </ul>
+                    </div>
+                    <a href="mybag.html" id="myBagBtn" class="btn-bag">
+                        <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
+                    </a>
                 </div>
             </div>
+
             <nav>
                 <ul class="nav-bar">
                     <li class="dropdown">
@@ -55,7 +59,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#">Acne treatment</a></li>
                             <li><a href="#">Mask</a></li>
-                            <li><a href="#">Cleansing</a></li>
+                            <li><a href="#">Cleaning</a></li>
                             <li><a href="#">Toner</a></li>
                         </ul>
                     </li>
@@ -69,18 +73,14 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#">Personal Care</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Product consulting</a></li>
-                            <li><a href="#">Purchasing support</a></li>
-                            <li><a href="#">Answer questions</a></li>
-                            <li><a href="#">Complaint handling</a></li>
-                        </ul>
+                        <a href="personalcare.html">Personal Care</a>
                     </li>
                 </ul>
             </nav>
+
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
+
 
         <!-- PRODUCT DETAIL -->
         <section class="products">
@@ -136,21 +136,14 @@
                             </div>
                             <div class="products-content-right-button-content-big">
                                 <div class="products-content-right-button-content-title row">
-                                    <div  class="products-content-right-button-content-item Product">
-                                        <p>Product description </p>
-                                    </div>
-                                    <div  class="products-content-right-button-content-item Use">
-                                        <p>Use</p>
-                                    </div>
-                                    <div  class="products-content-right-button-content-item Suggest">
-                                        <p>Suggest</p>
-                                    </div>
-                                    <div  class="products-content-right-button-content-item Evaluate">
-                                        <p>Evaluate</p>
-                                    </div>
+                                    <div class="products-content-right-button-content-item" data-tab="product">Product description</div>
+<div class="products-content-right-button-content-item" data-tab="use">Use</div>
+<div class="products-content-right-button-content-item" data-tab="suggest">Suggest</div>
+<div class="products-content-right-button-content-item" data-tab="evaluate">Evaluate</div>
+
                                 </div>
                                 <div class="products-content-right-button-content">
-                                    <div class="products-content-right-button-content-product" >
+                                     <div class="tab-content" data-tab="product">
                                         Phấn Nước 3CE Bare Cover Cushion SPF40 PA++ là dòng sản phẩm vừa ra mắt của thương hiệu Hàn đình đám 3CE.<br>
                                         Sản phẩm nổi bật với kết cấu kem lỏng mềm mịn, dễ tán đều trên da, không vón cục, không gây bết dính trên da. Khi apply cushion lên da, kem nhẹ nhàng ôm sát làn da, để lại lớp phủ mỏng nhẹ, tạo nên lớp nền sáng bóng tự nhiên như chính làn da của bạn.<br>
                                         Phấn nước 3CE Bare Cover Cushion đi kèm với bông phấn hình kim cương, cầm vừa tay, thuận tiện khi trang điểm. Bông phấn có thể chạm đến mọi vùng da trên khuôn mặt, kể cả hai bên mũi và vùng da quanh mắt.<br>
@@ -168,7 +161,7 @@
 
                                         - Butylene Glycol Dicaprylate/Dicaprate: cải thiện cảm giác lướt nhẹ khi thoa phấn và giữ cho da được cung cấp độ ẩm, giúp tránh tình trạng da khô và căng trước ánh nắng mặt trời.
                                     </div>
-                                    <div class="products-content-right-button-content-Use">
+                                   <div class="tab-content" data-tab="use">
                                         Tạo lớp nền mỏng nhẹ: Cushion tạo lớp nền mỏng nhẹ, tạo cảm giác nhẹ nhàng, thoải mái trên da. <br>
                                         Dưỡng sáng da: Sản phẩm tạo lớp nền sáng bóng tự nhiên như chính làn da của bạn. <br>
                                         Giữ ẩm: Sản phẩm sử dụng công thức giữ ẩm từ bên trong, tạo lớp nền ẩm mượt, hạn chế xảy ra tình trạng cakey, mốc nền.  <br>
@@ -192,9 +185,10 @@
                                         - Hạn sử dụng của sản phẩm: 36 tháng kể từ ngày sản xuất, 12 tháng sau khi mở nắp
 
                                     </div>
-                                    <div class="products-content-right-button-content-Suggest">
+                                     <div class="tab-content" data-tab="suggest">
 
                                     </div>
+                                    <div class="tab-content" data-tab="evaluate"></div>
                                 </div>
                             </div>
                         </div>
@@ -203,7 +197,7 @@
         </section>
         <section class="product-related container">
             <div class="product-related-tittle">
-                <p> san phan lien quan</p>
+                <p> Sản phẩm liên quan </p>
                 
             </div>
             <div class="products-content row">
