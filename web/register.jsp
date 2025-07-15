@@ -1,3 +1,10 @@
+<%-- 
+    Document   : register
+    Created on : Jul 15, 2025, 8:16:15 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -292,3 +299,4 @@
     </script>
   </body>
 </html>
+

@@ -1,3 +1,10 @@
+<%-- 
+    Document   : cart
+    Created on : Jul 15, 2025, 8:21:07 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,7 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-       <header>
+        <header>
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
@@ -85,95 +92,90 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </header>
 
         
-        
-        <section class="payment">
+        <!-- CART -->
+        <section class="cart">
             <div class="container">
-                <div class="payment-top-wrap">
-                    <div class="payment-top">
-                        <div class="payment-top-payment payment-top-item">
+                <div class="cart-top-wrap">
+                    <div class="cart-top">
+                        <div class="cart-top-cart cart-top-item">
                             <i class="fa-solid fa-cart-shopping " style="color: #f22b07;"></i>
                         </div>
-                        <div class="payment-top-map payment-top-item">
+                        <div class="cart-top-map cart-top-item">
                             <i class="fa-solid fa-location-dot " style="color: #ee1742;"></i>
                         </div>
-                        <div class="payment-top-monney payment-top-item">
+                        <div class="cart-top-monney cart-top-item">
                             <i class="fa-solid fa-money-check-dollar " style="color: #1e3c71;"></i>
                         </div>
                     </div>
                 </div>
+
             </div>
             <div class="container">
-                <div class="payment-content row">
-                    <div class="payment-content-left">
-                        <div class="payment-content-left-method-delivery">
-                            <p style="font-weight: bold;">Phương thức giao hàng</p>
-                            <div class="payment-content-left-method-delivery-item">
-                                <input type="radio">
-                                <label for="">Express</label>
-                            </div>
-                        </div>
-                        <div class="payment-content-left-method-payment">
-                            <p style="font-weight: bold;">Phương thức thanh toán</p>
-                            <p>Mọi giao dịch được bảo mật</p>
-                            <div class="payment-content-left-method-payment-item">
-                                <input name="method-payment" type="radio">
-                                <label for="thanh toan bang the tin dung "></label>
-                            </div>
-                            <div class="payment-content-left-method-payment-item img">
-                                <img src="image/visa.jpg" alt="">
-                            </div>
-                            <div class="payment-content-left-method-payment-item">
-                                <input name="method-payment" type="radio">
-                                <label for="">Thanh toán bằng thẻ ATM</label>
-                            </div>
-                            <div class="payment-content-left-method-payment-item">
-                                <img src="image/bank.png" alt="">
-                            </div>
-                            <div class="payment-content-left-method-payment-item">
-                                <input name="method-payment" type="radio">
-                                <label for="">Thanh toán bằng ví trả ngay</label>
-                            </div>
-                            <div class="payment-content-left-method-payment-item">
-                                <img src="image/pay.png" alt="">
-                            </div>
-                            <div class="payment-content-left-method-payment-item">
-                                <input name="method-payment" type="radio">
-                                <label for="">Thu tiền tận nơi </label>
-                            </div>
-                        </div>
-                        
+                <div class="cart-content row">
+                    <div class="cart-content-left">
+                        <table>
+                            <tr>
+                                <th> Product</th>
+                                <th> Name</th>
+                                <th>Species</th>
+                                <th>Quantity</th>
+                                <th>Price</th>
+                                <th>Delete</th>
+                            </tr>
+                            <tr>
+                                <td> <img src="image/cushion.jpg" alt=""></td>
+                                <td> 3CE BARE COVER CUSHION</td>
+                                <td> <img src="image/cushion1.1.jpg" alt=""></td>
+                                <td> <input type="number" value="1" min="1"></td>
+                                <td> <p>450000<sup>đ</sup></p></td>
+                                <td> <span>x</span></td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="payment-content-right">
-                        <div  class="payment-content-right-button">
-                            <input type="text" placeholder="Mã giảm giá / Quà tặng">
-                            <button><i class="fa-solid fa-check" style="color: #3e65a8;"></i></button>
+                    <div class="cart-content-right">
+                        <table>
+                            <tr>
+                                <th colspan="2">Total product</th>
+                            </tr>
+                            <tr>
+                                <td>Quantity</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>Total</td>
+                                <td><p>450000<sup>đ</sup></p></td>
+                            </tr>
+                            <tr>
+                                <td>Provisional</td>
+                                <td><p style=" color: black; font-weight: bold;">450000<sup>đ</sup></p></td>
+                            </tr>
+
+                        </table>
+                        <div class="cart-content-right-text">
+                            <p>Miễn phí với đơn hàng từ 500000đ trở lên </p>
+                            <p style=" color: red; font-weight: bold;">Mua thêm <span style="font-size:18px; ">50000 đ</span>để được nhận thêm ưu đãi  </p>
                         </div>
-                        <div  class="payment-content-right-button">
-                            <input type="text" placeholder="Mã giới thiệu">
-                            <button><i class="fa-solid fa-check" style="color: #3e65a8;"></i></button>
+                        <div class="cart-content-right-button">
+                            <button>Tiếp tục mua sắm </button>
+                            <button>Thanh toán </button>
                         </div>
-                        <div  class="payment-content-right-discount">
-                            <select name=""id="">
-                                <option value="">Nhập mã khách hàng thân thiết</option>
-                                <option value="">#12309</option>
-                                <option value="">#ma6455</option>
-                                <option value="">#6545p</option>
-                                
-                            </select>
+                        <div class="cart-content-right-insign">
+                            <p> Tài khoản Daily Beauty </p>
+                            <p>Hãy <a href=""> Dang nhap </a> tai khoan tich diem thanh vien</p>
                         </div>
                     </div>
-                </div>
-                <div class="payment-content-right-payment">
-                    <button>TIẾP TỤC THANH TOÁN</button>
                 </div>
             </div>
-            
+
+
         </section>
-        
-        
-        
-         <!-- footer -->
-         <footer>
+
+
+
+
+
+
+        <footer>
             <div class="footer-top">
                 <div class="footer-section">
                     <h4>ABOUT US</h4>
@@ -218,14 +220,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <img src="image/BD.png" alt="Beauty Daily Logo" width="120" />
             </div>
         </footer>
-          <script src="JS.js"></script>
-          <script >
-            const product = JSON.parse(localStorage.getItem("paymentProduct"));
-if (product) {
-    console.log("Sản phẩm cần thanh toán:", product);
-    // Bạn có thể hiển thị product.name, product.price, product.quantity,...
-}
-   
-          </script>
+         <script src="JS.js"></script>
     </body>
 </html>
+

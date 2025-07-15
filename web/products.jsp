@@ -1,3 +1,10 @@
+<%-- 
+    Document   : products
+    Created on : Jul 15, 2025, 8:17:56 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -324,3 +331,4 @@ document.getElementById("buyNowBtn").addEventListener("click", function () {
         </script>
     </body>
 </html>
+

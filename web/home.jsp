@@ -1,18 +1,24 @@
+<%-- 
+    Document   : home
+    Created on : Jul 15, 2025, 7:27:01 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+   String email = (String) request.getAttribute("email");
+%>
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
-<html>
+<html lang="en">
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Beauty Daily</title>
+        <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
     </head>
     <body>
-       <header>
+        <header>
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
@@ -25,14 +31,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
                     <div class="login-dropdown">
-                        <button class="login-btn" id="loginBtn">LOGIN</button>
+                        <button class="login-btn" id="loginBtn"> ${sessionScope.userEmail}</button>
                         <ul class="dropdown-list" id="loginDropdown">
-                            <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
+                            <li><i class="fa-regular fa-user"></i>Email : ${sessionScope.userEmail} </li>
                             <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
                             <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
+                        </form>
                     </div>
                     <a href="mybag.html" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
@@ -77,52 +84,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     </li>
                     <li class="dropdown">
                         <a href="personalcare.html">Personal Care</a>
-                        <!--   <ul class="dropdown-menu">
-                            <li><a href="#">Product consulting</a></li>
-                            <li><a href="#">Purchasing support</a></li>
-                            <li><a href="#">Answer questions</a></li>
-                            <li><a href="#">Complaint handling</a></li>
-                        </ul>
-                        -->
                     </li>
                 </ul>
             </nav>
 
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
-        
-        
-        <section class="personal-care-section" style="padding: 40px; text-align: center;">
-    <h3>Hỗ trợ khách hàng</h3>
-    <p>Vui lòng nhập nội dung bạn muốn hỏi:</p>
-    
-    <!-- Input có gợi ý -->
-    <input
-      type="text"
-      id="questionInput"
-      list="suggestions"
-      placeholder="Nhập nội dung..."
-      style="padding: 8px; width: 60%; max-width: 400px;"
-    />
-    <datalist id="suggestions">
-      <option value="Phản ánh nhân viên">
-      <option value="Thông tin sản phẩm">
-      <option value="Xử lí khiếu nại">
-    </datalist>
 
-    <!-- Nút hỏi đáp -->
-    <div style="margin-top: 20px;">
-      <button
-        onclick="alert('Cảm ơn bạn! Chúng tôi sẽ phản hồi sớm.')"
-        style="padding: 10px 20px; background-color: #f22b07; color: white; border: none; border-radius: 5px; cursor: pointer;"
-      >
-        Hỏi Đáp
-      </button>
-    </div>
-  </section>
-        
-        
-        
+        <section class="banner-slider">
+            <div class="slides" id="slideWrapper">
+                <img src="image/sale.png"   alt="Banner 1" />
+                <img src="image/nen1.png"  alt="Banner 2" />
+                <img src="image/nen2.png"  alt="Banner 3" />
+            </div>
+            <button class="prev" onclick="changeSlide(-1)">❮</button>
+            <button class="next" onclick="changeSlide(1)">❯</button>
+        </section>
+
+        <section class="voucher-search">
+            <div class="search-bar">
+                <input type="text" placeholder="Search voucher keywords" />
+            </div>
+        </section>
+
         <footer>
             <div class="footer-top">
                 <div class="footer-section">
@@ -168,5 +152,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <img src="image/BD.png" alt="Beauty Daily Logo" width="120" />
             </div>
         </footer>
+        <script src="JS.js"></script>
+
     </body>
 </html>

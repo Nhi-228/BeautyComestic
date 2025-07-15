@@ -1,3 +1,10 @@
+<%-- 
+    Document   : delivery
+    Created on : Jul 15, 2025, 8:20:01 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,7 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <header>
+        <<header>
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
@@ -84,91 +91,114 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
 
-        
-        <!-- CART -->
-        <section class="cart">
-            <div class="container">
-                <div class="cart-top-wrap">
-                    <div class="cart-top">
-                        <div class="cart-top-cart cart-top-item">
+       <!-- delivery -->
+       <section class="delivery">
+           <div class="container">
+               <div class="delivery-top-wrap">
+                    <div class="delivery-top">
+                        <div class="delivery-top-delivery delivery-top-item">
                             <i class="fa-solid fa-cart-shopping " style="color: #f22b07;"></i>
                         </div>
-                        <div class="cart-top-map cart-top-item">
+                        <div class="delivery-top-map delivery-top-item">
                             <i class="fa-solid fa-location-dot " style="color: #ee1742;"></i>
                         </div>
-                        <div class="cart-top-monney cart-top-item">
+                        <div class="delivery-top-monney delivery-top-item">
                             <i class="fa-solid fa-money-check-dollar " style="color: #1e3c71;"></i>
                         </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="container">
-                <div class="cart-content row">
-                    <div class="cart-content-left">
-                        <table>
-                            <tr>
-                                <th> Product</th>
-                                <th> Name</th>
-                                <th>Species</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Delete</th>
-                            </tr>
-                            <tr>
-                                <td> <img src="image/cushion.jpg" alt=""></td>
-                                <td> 3CE BARE COVER CUSHION</td>
-                                <td> <img src="image/cushion1.1.jpg" alt=""></td>
-                                <td> <input type="number" value="1" min="1"></td>
-                                <td> <p>450000<sup>đ</sup></p></td>
-                                <td> <span>x</span></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="cart-content-right">
-                        <table>
-                            <tr>
-                                <th colspan="2">Total product</th>
-                            </tr>
-                            <tr>
-                                <td>Quantity</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>Total</td>
-                                <td><p>450000<sup>đ</sup></p></td>
-                            </tr>
-                            <tr>
-                                <td>Provisional</td>
-                                <td><p style=" color: black; font-weight: bold;">450000<sup>đ</sup></p></td>
-                            </tr>
-
-                        </table>
-                        <div class="cart-content-right-text">
-                            <p>Miễn phí với đơn hàng từ 500000đ trở lên </p>
-                            <p style=" color: red; font-weight: bold;">Mua thêm <span style="font-size:18px; ">50000 đ</span>để được nhận thêm ưu đãi  </p>
-                        </div>
-                        <div class="cart-content-right-button">
-                            <button>Tiếp tục mua sắm </button>
-                            <button>Thanh toán </button>
-                        </div>
-                        <div class="cart-content-right-insign">
-                            <p> Tài khoản Daily Beauty </p>
-                            <p>Hãy <a href=""> Dang nhap </a> tai khoan tich diem thanh vien</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </section>
-
-
-
-
-
-
-        <footer>
+           </div>
+           <div class="container">
+               <div class="delivery-content row">
+                   <div class="delivery-content-left">
+                       <p> Vui lòng chọn địa chỉ giao hàng </p>
+                       <div class="delivery-content-left-insign row">
+                           <i class="fa-solid fa-right-to-bracket" style="color: #2354a9;"></i>
+                           <p> <a href="">Đăng nhập </a> nếu bạn đã có tài khoản BEAUTY DAILY</p>
+                       </div>
+                       <div class="delivery-content-left-le row">
+                         
+                           <p><span style="font-weight: bold;">Khach le </span> (nếu bạn muốn lưu lại thông tin)</p>
+                              <input  name="loaikhach" type="radio" >   
+                       </div>
+                       <div class="delivery-content-left-dangki row">
+                          
+                           <p><span style="font-weight: bold;">Dang ki</span> (tạo mới với tài khoản đăng kí bên dưới )</p>
+                             <input  name="loaikhach" type="radio" >   
+                       </div>
+                       <div class="delivery-content-left-form row">
+                           <div class="delivery-content-left-form-item">
+                               <label for="">Ho ten <span style="color: red;">*</span></label>
+                               <input type="text">
+                           </div>
+                           <div class="delivery-content-left-form-item">
+                               <label for="">Dien thoai</label>
+                               <input type="text">
+                           </div>
+                           <div class="delivery-content-left-form-item">
+                               <label for="">Tinh/Thanh pho</label>
+                               <input type="text">
+                           </div>
+                           <div class="delivery-content-left-form-item">
+                               <label for="">Quan</label>
+                               <input type="text">
+                           </div>
+                           <div class="delivery-content-left-form-item">
+                               <label for="">Phuong</label>
+                               <input type="text">
+                           </div>
+                       </div>
+                       <div class="delivery-content-left-form-button ">
+                           <label for="">Dia chi</label>
+                               <input type="text">
+                       </div>
+                       <div class="delivery-content-left-form-password ">
+                           <label for="">Password</label>
+                               <input type="text">
+                       </div>
+                        <div class="delivery-content-left-button row ">
+                            <a href=""><span>&#171;</span> <p>Quay lại giỏ hàng</p> </a>
+                            <button><p style="font-weight: bold;"> Thanh toan va giao hang </p></button>
+                       </div>
+                   </div>
+                   <div class="delivery-content-right">
+                       <table>
+                           <tr>
+                               <th>Name</th>
+                               <th>Discount</th>
+                               <th>Quantity</th>
+                               <th>Total</th>
+                               
+                           </tr>
+                           <tr>
+                               <td> 3CE BARE COVER CUSHION</td>
+                               <td> -30%</td>
+                               <td>1</td>
+                               <td> <p>450000<sup>đ</sup></p></td>
+                           </tr>
+                           
+                           <tr>
+                               <td style="font-weight: bold;" colspan="3">Tong</td>
+                               <td style="font-weight: bold;" ><p>450000<sup>đ</sup></p></td>
+                           </tr>
+                           <tr>
+                               <td style="font-weight: bold;" colspan="3">Thue VAT</td>
+                               <td style="font-weight: bold;" ><p>2000<sup>đ</sup></p></td>
+                           </tr>
+                           <tr>
+                               <td style="font-weight: bold;" colspan="3">Tong tien hang</td>
+                               <td style="font-weight: bold;" ><p>452000<sup>đ</sup></p></td>
+                           </tr>
+                       </table>
+                   </div>
+               </div>
+           </div>
+       </section>
+       
+       
+       
+       <!-- footer -->
+         <footer>
             <div class="footer-top">
                 <div class="footer-section">
                     <h4>ABOUT US</h4>
@@ -213,6 +243,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <img src="image/BD.png" alt="Beauty Daily Logo" width="120" />
             </div>
         </footer>
-         <script src="JS.js"></script>
+        <script src="JS.js"></script>
     </body>
 </html>

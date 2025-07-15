@@ -1,3 +1,10 @@
+<%-- 
+    Document   : category
+    Created on : Jul 15, 2025, 8:20:51 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

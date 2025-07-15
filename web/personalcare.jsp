@@ -1,20 +1,25 @@
+<%-- 
+    Document   : personalcare
+    Created on : Jul 15, 2025, 8:18:30 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Beauty Daily</title>
-        <link rel="stylesheet" href="css/style.css" />
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-              rel="stylesheet" 
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" \
-              crossorigin="anonymous">
-
-
     </head>
     <body>
-        <header>
+       <header>
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
@@ -79,42 +84,52 @@
                     </li>
                     <li class="dropdown">
                         <a href="personalcare.html">Personal Care</a>
+                        <!--   <ul class="dropdown-menu">
+                            <li><a href="#">Product consulting</a></li>
+                            <li><a href="#">Purchasing support</a></li>
+                            <li><a href="#">Answer questions</a></li>
+                            <li><a href="#">Complaint handling</a></li>
+                        </ul>
+                        -->
                     </li>
                 </ul>
             </nav>
 
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
-        <section class="login-section">
-            <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-                <form id="formlogin" action="login" method="post" style="width: 400px; margin: 100px auto;">
-                    <h3 class="text-center">ĐĂNG NHẬP</h3>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control" id="email" placeholder="name@gmail.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="password" required>
-                        </div>
-                        <div class="mb-2 text-end">
-                            <a href="forgotPassword.html" class="text-decoration-none" style="font-size: 0.9em;">Quên mật khẩu?</a>
-                        </div>
-                        <div id="alerterorr" style="display: none;" class="alert alert-danger" role="alert">
-                            Email hoặc mật khẩu không đúng
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-                        <p class="text-center mt-2">Bạn chưa có tài khoản? <a href="register.html">Đăng ký</a></p>  
-                </form>
-            </div>
-        </section>
+        
+        
+        <section class="personal-care-section" style="padding: 40px; text-align: center;">
+    <h3>Hỗ trợ khách hàng</h3>
+    <p>Vui lòng nhập nội dung bạn muốn hỏi:</p>
+    
+    <!-- Input có gợi ý -->
+    <input
+      type="text"
+      id="questionInput"
+      list="suggestions"
+      placeholder="Nhập nội dung..."
+      style="padding: 8px; width: 60%; max-width: 400px;"
+    />
+    <datalist id="suggestions">
+      <option value="Phản ánh nhân viên">
+      <option value="Thông tin sản phẩm">
+      <option value="Xử lí khiếu nại">
+    </datalist>
 
-        <section class="voucher-search">
-            <div class="search-bar">
-                <input type="text" placeholder="Search voucher keywords" />
-            </div>
-        </section>
-
+    <!-- Nút hỏi đáp -->
+    <div style="margin-top: 20px;">
+      <button
+        onclick="alert('Cảm ơn bạn! Chúng tôi sẽ phản hồi sớm.')"
+        style="padding: 10px 20px; background-color: #f22b07; color: white; border: none; border-radius: 5px; cursor: pointer;"
+      >
+        Hỏi Đáp
+      </button>
+    </div>
+  </section>
+        
+        
+        
         <footer>
             <div class="footer-top">
                 <div class="footer-section">
@@ -160,16 +175,5 @@
                 <img src="image/BD.png" alt="Beauty Daily Logo" width="120" />
             </div>
         </footer>
-        <script src="JS.js"></script>
-
-        <p id="error" style="color:red;"></p>
-
-        <script>
-            const params = new URLSearchParams(window.location.search);
-            if (params.get("error") === "true") {
-                document.getElementById("error").textContent = "Email hoặc mật khẩu không đúng.";
-            }
-        </script>
-
     </body>
 </html>

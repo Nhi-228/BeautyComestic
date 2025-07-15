@@ -1,3 +1,10 @@
+<%-- 
+    Document   : forgotPassword
+    Created on : Jul 15, 2025, 8:19:39 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -9,7 +16,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css" />
-         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+              rel="stylesheet" 
+              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" \
+              crossorigin="anonymous">
     </head>
     <body>
        <header>
@@ -84,9 +95,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
 
+        <!-- forgot pasword -->
         
-        
-        
+        <section class="login-section">
+            <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <form id="forgotForm" style="width: 400px;">
+      <h3 class="text-center mb-3">Quên mật khẩu</h3>
+      <div class="mb-3">
+        <label for="forgotEmail" class="form-label">Nhập email của bạn</label>
+        <input type="email" class="form-control" id="forgotEmail" placeholder="name@example.com" required>
+      </div>
+      <button type="submit" class="btn btn-warning w-100">Gửi yêu cầu</button>
+      <p class="text-center mt-3">Quay lại <a href="login.html">Đăng nhập</a></p>
+    </form>
+  </div>
+        </section>
         
         <footer>
     <div class="footer-top">
@@ -134,6 +157,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     </div>
   </footer>
     <script src="JS.js"></script>
-
+    <script >
+         document.getElementById("forgotForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("forgotEmail").value;
+      if (email) {
+        alert("Yêu cầu đặt lại mật khẩu đã được gửi tới " + email);
+        window.location.href = "login.html";
+      }
+    });
+    </script>
     </body>
 </html>

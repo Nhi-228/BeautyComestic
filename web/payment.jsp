@@ -1,3 +1,10 @@
+<%-- 
+    Document   : payment
+    Created on : Jul 15, 2025, 8:21:26 PM
+    Author     : nathv
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,7 +19,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <<header>
+       <header>
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
@@ -84,113 +91,95 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
 
-       <!-- delivery -->
-       <section class="delivery">
-           <div class="container">
-               <div class="delivery-top-wrap">
-                    <div class="delivery-top">
-                        <div class="delivery-top-delivery delivery-top-item">
+        
+        
+        <section class="payment">
+            <div class="container">
+                <div class="payment-top-wrap">
+                    <div class="payment-top">
+                        <div class="payment-top-payment payment-top-item">
                             <i class="fa-solid fa-cart-shopping " style="color: #f22b07;"></i>
                         </div>
-                        <div class="delivery-top-map delivery-top-item">
+                        <div class="payment-top-map payment-top-item">
                             <i class="fa-solid fa-location-dot " style="color: #ee1742;"></i>
                         </div>
-                        <div class="delivery-top-monney delivery-top-item">
+                        <div class="payment-top-monney payment-top-item">
                             <i class="fa-solid fa-money-check-dollar " style="color: #1e3c71;"></i>
                         </div>
                     </div>
                 </div>
-           </div>
-           <div class="container">
-               <div class="delivery-content row">
-                   <div class="delivery-content-left">
-                       <p> Vui lòng chọn địa chỉ giao hàng </p>
-                       <div class="delivery-content-left-insign row">
-                           <i class="fa-solid fa-right-to-bracket" style="color: #2354a9;"></i>
-                           <p> <a href="">Đăng nhập </a> nếu bạn đã có tài khoản BEAUTY DAILY</p>
-                       </div>
-                       <div class="delivery-content-left-le row">
-                         
-                           <p><span style="font-weight: bold;">Khach le </span> (nếu bạn muốn lưu lại thông tin)</p>
-                              <input  name="loaikhach" type="radio" >   
-                       </div>
-                       <div class="delivery-content-left-dangki row">
-                          
-                           <p><span style="font-weight: bold;">Dang ki</span> (tạo mới với tài khoản đăng kí bên dưới )</p>
-                             <input  name="loaikhach" type="radio" >   
-                       </div>
-                       <div class="delivery-content-left-form row">
-                           <div class="delivery-content-left-form-item">
-                               <label for="">Ho ten <span style="color: red;">*</span></label>
-                               <input type="text">
-                           </div>
-                           <div class="delivery-content-left-form-item">
-                               <label for="">Dien thoai</label>
-                               <input type="text">
-                           </div>
-                           <div class="delivery-content-left-form-item">
-                               <label for="">Tinh/Thanh pho</label>
-                               <input type="text">
-                           </div>
-                           <div class="delivery-content-left-form-item">
-                               <label for="">Quan</label>
-                               <input type="text">
-                           </div>
-                           <div class="delivery-content-left-form-item">
-                               <label for="">Phuong</label>
-                               <input type="text">
-                           </div>
-                       </div>
-                       <div class="delivery-content-left-form-button ">
-                           <label for="">Dia chi</label>
-                               <input type="text">
-                       </div>
-                       <div class="delivery-content-left-form-password ">
-                           <label for="">Password</label>
-                               <input type="text">
-                       </div>
-                        <div class="delivery-content-left-button row ">
-                            <a href=""><span>&#171;</span> <p>Quay lại giỏ hàng</p> </a>
-                            <button><p style="font-weight: bold;"> Thanh toan va giao hang </p></button>
-                       </div>
-                   </div>
-                   <div class="delivery-content-right">
-                       <table>
-                           <tr>
-                               <th>Name</th>
-                               <th>Discount</th>
-                               <th>Quantity</th>
-                               <th>Total</th>
-                               
-                           </tr>
-                           <tr>
-                               <td> 3CE BARE COVER CUSHION</td>
-                               <td> -30%</td>
-                               <td>1</td>
-                               <td> <p>450000<sup>đ</sup></p></td>
-                           </tr>
-                           
-                           <tr>
-                               <td style="font-weight: bold;" colspan="3">Tong</td>
-                               <td style="font-weight: bold;" ><p>450000<sup>đ</sup></p></td>
-                           </tr>
-                           <tr>
-                               <td style="font-weight: bold;" colspan="3">Thue VAT</td>
-                               <td style="font-weight: bold;" ><p>2000<sup>đ</sup></p></td>
-                           </tr>
-                           <tr>
-                               <td style="font-weight: bold;" colspan="3">Tong tien hang</td>
-                               <td style="font-weight: bold;" ><p>452000<sup>đ</sup></p></td>
-                           </tr>
-                       </table>
-                   </div>
-               </div>
-           </div>
-       </section>
-       
-       
-       
-       <!-- footer -->
+            </div>
+            <div class="container">
+                <div class="payment-content row">
+                    <div class="payment-content-left">
+                        <div class="payment-content-left-method-delivery">
+                            <p style="font-weight: bold;">Phương thức giao hàng</p>
+                            <div class="payment-content-left-method-delivery-item">
+                                <input type="radio">
+                                <label for="">Express</label>
+                            </div>
+                        </div>
+                        <div class="payment-content-left-method-payment">
+                            <p style="font-weight: bold;">Phương thức thanh toán</p>
+                            <p>Mọi giao dịch được bảo mật</p>
+                            <div class="payment-content-left-method-payment-item">
+                                <input name="method-payment" type="radio">
+                                <label for="thanh toan bang the tin dung "></label>
+                            </div>
+                            <div class="payment-content-left-method-payment-item img">
+                                <img src="image/visa.jpg" alt="">
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <input name="method-payment" type="radio">
+                                <label for="">Thanh toán bằng thẻ ATM</label>
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <img src="image/bank.png" alt="">
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <input name="method-payment" type="radio">
+                                <label for="">Thanh toán bằng ví trả ngay</label>
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <img src="image/pay.png" alt="">
+                            </div>
+                            <div class="payment-content-left-method-payment-item">
+                                <input name="method-payment" type="radio">
+                                <label for="">Thu tiền tận nơi </label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="payment-content-right">
+                        <div  class="payment-content-right-button">
+                            <input type="text" placeholder="Mã giảm giá / Quà tặng">
+                            <button><i class="fa-solid fa-check" style="color: #3e65a8;"></i></button>
+                        </div>
+                        <div  class="payment-content-right-button">
+                            <input type="text" placeholder="Mã giới thiệu">
+                            <button><i class="fa-solid fa-check" style="color: #3e65a8;"></i></button>
+                        </div>
+                        <div  class="payment-content-right-discount">
+                            <select name=""id="">
+                                <option value="">Nhập mã khách hàng thân thiết</option>
+                                <option value="">#12309</option>
+                                <option value="">#ma6455</option>
+                                <option value="">#6545p</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-content-right-payment">
+                    <button>TIẾP TỤC THANH TOÁN</button>
+                </div>
+            </div>
+            
+        </section>
+        
+        
+        
+         <!-- footer -->
          <footer>
             <div class="footer-top">
                 <div class="footer-section">
@@ -236,6 +225,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <img src="image/BD.png" alt="Beauty Daily Logo" width="120" />
             </div>
         </footer>
-        <script src="JS.js"></script>
+          <script src="JS.js"></script>
+          <script >
+            const product = JSON.parse(localStorage.getItem("paymentProduct"));
+if (product) {
+    console.log("Sản phẩm cần thanh toán:", product);
+    // Bạn có thể hiển thị product.name, product.price, product.quantity,...
+}
+   
+          </script>
     </body>
 </html>
