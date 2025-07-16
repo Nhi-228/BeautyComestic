@@ -34,7 +34,7 @@
                         <button class="login-btn" id="loginBtn"> ${sessionScope.userEmail}</button>
                         <ul class="dropdown-list" id="loginDropdown">
                             <li><i class="fa-regular fa-user"></i>Email : ${sessionScope.userEmail} </li>
-                            <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+                            <li><i class="fa-regular fa-user"></i><a href="logout">Đăng xuất</a></li>
                             <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
