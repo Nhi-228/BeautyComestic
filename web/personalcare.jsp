@@ -83,7 +83,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.html">Personal Care</a>
+                        <a href="personalcare.jsp">Personal Care</a>
                         <!--   <ul class="dropdown-menu">
                             <li><a href="#">Product consulting</a></li>
                             <li><a href="#">Purchasing support</a></li>

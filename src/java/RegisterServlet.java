@@ -10,6 +10,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.User;
 
 /**
  *
@@ -56,7 +59,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+      // processRequest(request, response);
     }
 
     /**
@@ -70,7 +73,79 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        request.setCharacterEncoding("UTF-8");
+    response.setCharacterEncoding("UTF-8");
+
+    String username = request.getParameter("username");
+    String email = request.getParameter("email");
+    String password = request.getParameter("password");
+    String phone = request.getParameter("phone");
+    String address = request.getParameter("address");
+    String repassword = request.getParameter("repassword");
+
+
+    // Xác thực dữ liệu phía server
+    if (username == null || username.trim().isEmpty()) {
+        request.setAttribute("error", "Tên không được để trống.");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+        return;
+    }
+
+    if (email == null || !email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
+        request.setAttribute("error", "Email sai định dạng.");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+        return;
+    }
+
+    if (phone == null || !phone.matches("^\\d{10}$")) {
+        request.setAttribute("error", "Số điện thoại sai định dạng.");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+        return;
+    }
+
+    if (password == null || !password.matches("(?=.*[A-Z])(?=.*[^A-Za-z0-9]).{6,16}")) {
+        request.setAttribute("error", "Mật khẩu cần ít nhất 6 ký tự, có chữ hoa và ký tự đặc biệt.");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+        return;
+    }
+    if (repassword == null || !repassword.equals(password)) {
+    request.setAttribute("error", "Mật khẩu nhập lại không khớp.");
+    request.getRequestDispatcher("register.jsp").forward(request, response);
+    return;
+}
+
+
+    // Tạo đối tượng người dùng nếu hợp lệ
+    User user = new User();
+    user.setUsername(username);
+    user.setEmail(email);
+    user.setPassword(password); // (Lưu ý: nên mã hóa!)
+    user.setPhone(phone);
+    user.setAddress(address);
+    user.setRole("user");
+
+    // Kiểm tra trùng thông tin
+    try {
+        UserDAO dao = new UserDAO();
+        if (dao.isDuplicate(email, phone)) {
+            request.setAttribute("error", "Email hoặc số điện thoại đã tồn tại.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+            return;
+        }
+
+        if (dao.insertUser(user)) {
+            response.sendRedirect("login.html");
+        } else {
+            request.setAttribute("error", "Đăng ký thất bại. Vui lòng thử lại.");
+            request.getRequestDispatcher("register.jsp").forward(request, response);
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+        request.setAttribute("error", "Lỗi kết nối hoặc xử lý dữ liệu.");
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+    }
+
     }
 
     /**

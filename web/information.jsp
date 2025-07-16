@@ -1,20 +1,48 @@
+<%-- 
+    Document   : information
+    Created on : Jul 16, 2025, 8:00:17 AM
+    Author     : BINH NHI
+--%>
+<%@page import="model.User"%>
+
+<%
+    
+    User user = (User) session.getAttribute("user");
+    if (user == null) {
+        response.sendRedirect("login.html");
+        return;
+    }
+
+    String email = user.getEmail();
+    String username = user.getUsername();
+    String phone = user.getPhone();
+    String password = user.getPassword();
+    String address = user.getAddress();
+   
+%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Beauty Daily</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-              rel="stylesheet" 
-              integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" \
-              crossorigin="anonymous">
-
-
+          rel="stylesheet" 
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" \
+        crossorigin="anonymous">
+  <style>
+      .error {
+      color: red;
+      font-size: 14px;
+      display: none;
+    }
+  </style>
     </head>
     <body>
-        <header>
+      <header>
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
@@ -27,13 +55,12 @@
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
                     <div class="login-dropdown">
-                        <button class="login-btn" id="loginBtn">LOGIN</button>
+                        <button class="login-btn" id="loginBtn"> ${sessionScope.userEmail}</button>
                         <ul class="dropdown-list" id="loginDropdown">
                             <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
-                            <li><i class="fa-regular fa-user"></i><a href="register.jsp">Đăng ký</a></li>
-                            <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+                            <li><i class="fa-regular fa-user"></i><a href="logout">Đăng xuất</a></li>
+                            <li><i class="fa-regular fa-heart"></i><a href="information">Information</a></li>
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
-                            <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
                     </div>
                     <a href="mybag.html" id="myBagBtn" class="btn-bag">
@@ -78,43 +105,63 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.html">Personal Care</a>
+                        <a href="personalcare.jsp">Personal Care</a>
                     </li>
                 </ul>
             </nav>
 
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
-        <section class="login-section">
-            <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-                <form id="formlogin" action="login" method="post" style="width: 400px; margin: 100px auto;">
-                    <h3 class="text-center">ĐĂNG NHẬP</h3>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" name="email" class="form-control" id="email" placeholder="name@gmail.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control" id="password" required>
-                        </div>
-                        <div class="mb-2 text-end">
-                            <a href="forgotPassword.html" class="text-decoration-none" style="font-size: 0.9em;">Quên mật khẩu?</a>
-                        </div>
-                        <div id="alerterorr" style="display: none;" class="alert alert-danger" role="alert">
-                            Email hoặc mật khẩu không đúng
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-                        <p class="text-center mt-2">Bạn chưa có tài khoản? <a href="register.jsp">Đăng ký</a></p>  
-                </form>
-            </div>
-        </section>
+        
+        <section class="py-5" style="background-color: #f0f0ff;">
+  <div class="container">
+      <% String successMsg = (String) request.getAttribute("success");
+   String errorMsg = (String) request.getAttribute("error");
+%>
 
-        <section class="voucher-search">
-            <div class="search-bar">
-                <input type="text" placeholder="Search voucher keywords" />
-            </div>
-        </section>
+<% if (successMsg != null) { %>
+    <div class="alert alert-success"><%= successMsg %></div>
+<% } %>
+<% if (errorMsg != null) { %>
+    <div class="alert alert-danger"><%= errorMsg %></div>
+<% } %>
 
+    <form action="updateUser" method="post" style="max-width: 500px; margin: auto;">
+      <h3 class="text-center mb-4">Thông tin tài khoản</h3>
+
+      <div class="mb-3">
+        <label class="form-label">Họ và tên</label>
+        <input type="text" class="form-control" name="username" value="<%= username %>" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" name="email" value="<%= email %>" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Số điện thoại</label>
+        <input type="text" class="form-control" name="phone" value="<%= phone %>" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Mật khẩu</label>
+        <input type="password" class="form-control" name="password" value="<%= password %>" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Địa chỉ</label>
+        <textarea class="form-control" name="address"><%= address %></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Lưu thay đổi</button>
+    </form>
+  </div>
+</section>
+
+
+
+        
         <footer>
             <div class="footer-top">
                 <div class="footer-section">
@@ -161,15 +208,5 @@
             </div>
         </footer>
         <script src="JS.js"></script>
-
-        <p id="error" style="color:red;"></p>
-
-        <script>
-            const params = new URLSearchParams(window.location.search);
-            if (params.get("error") === "true") {
-                document.getElementById("error").textContent = "Email hoặc mật khẩu không đúng.";
-            }
-        </script>
-
     </body>
 </html>

@@ -35,11 +35,11 @@
                         <ul class="dropdown-list" id="loginDropdown">
                             <li><i class="fa-regular fa-user"></i>Email : ${sessionScope.userEmail} </li>
                             <li><i class="fa-regular fa-user"></i><a href="logout">Đăng xuất</a></li>
-                            <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+                            <li><i class="fa-regular fa-heart"></i><a href="information">Information</a></li>
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
-                        </form>
+                        
                     </div>
                     <a href="mybag.html" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
@@ -83,7 +83,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.html">Personal Care</a>
+                        <a href="personalcare.jsp">Personal Care</a>
                     </li>
                 </ul>
             </nav>

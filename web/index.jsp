@@ -31,7 +31,7 @@
                         <button class="login-btn" id="loginBtn">LOGIN</button>
                         <ul class="dropdown-list" id="loginDropdown">
                             <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
-                            <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+                            <li><i class="fa-regular fa-user"></i><a href="register.jsp">Đăng ký</a></li>
                             <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
@@ -79,7 +79,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.html">Personal Care</a>
+                        <a href="personalcare.jsp">Personal Care</a>
                     </li>
                 </ul>
             </nav>

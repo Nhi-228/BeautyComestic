@@ -27,6 +27,7 @@ public class HomeServlet extends HttpServlet {
             // Ngược lại redirect về login
             resp.sendRedirect("login.html");
         }
+        
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
