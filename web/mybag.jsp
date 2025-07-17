@@ -32,15 +32,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
                     <div class="login-dropdown">
-                        <button class="login-btn" id="loginBtn"> ${sessionScope.userEmail}</button>
+                        <button class="login-btn" id="loginBtn">LOGIN</button>
                         <ul class="dropdown-list" id="loginDropdown">
-                            <li><i class="fa-regular fa-user"></i>Email : ${sessionScope.userEmail} </li>
-                            <li><i class="fa-regular fa-user"></i><a href="logout">Đăng xuất</a></li>
-                            <li><i class="fa-regular fa-heart"></i><a href="information">Information</a></li>
+                            <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
+                            <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+                            <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
-                        
                     </div>
                     <a href="mybag.html" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
@@ -84,7 +83,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.jsp">Personal Care</a>
+                        <a href="personalcare.html">Personal Care</a>
                     </li>
                 </ul>
             </nav>
@@ -92,7 +91,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
 
-
+        
         
         
         

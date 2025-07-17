@@ -1,6 +1,3 @@
-package model;
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -15,6 +12,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String full_name;
     private String phone;
     private String address;
     private String role;
@@ -22,11 +20,21 @@ public class User {
     public User() {
     }
 
-    public User(int user_id, String username, String email, String password,  String phone, String address, String role) {
+    public User(String username, String email, String password, String full_name, String phone, String address) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.full_name = full_name;
+        this.phone = phone;
+        this.address = address;
+    }
+
+    public User(int user_id, String username, String email, String password, String full_name, String phone, String address, String role) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.full_name = full_name;
         this.phone = phone;
         this.address = address;
         this.role = role;
@@ -64,7 +72,14 @@ public class User {
         this.password = password;
     }
 
-    
+    public String getFull_name() {
+        return full_name;
+    }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+
     public String getPhone() {
         return phone;
     }
