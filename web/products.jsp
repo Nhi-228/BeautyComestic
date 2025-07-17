@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Product" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -205,29 +208,22 @@
         <section class="product-related container">
             <div class="product-related-tittle">
                 <p> Sản phẩm liên quan </p>
-                
             </div>
             <div class="products-content row">
+                <% 
+                    List<Product> products = (List<Product>) request.getAttribute("products");
+                    if (products != null) {
+                        for (Product p : products) { 
+                %>
                 <div class="product-related-item">
-                    <img src="image/cushion1.1.jpg" alt="">
-                    <h1>3CE BARE COVER CUSHION</h1>
-                    <p>450000<sup>đ</sup></p>
+                    <img src="<%= p.getImage() %>" alt="">
+                    <h1><%= p.getName() %></h1>
+                    <p><%= p.getPrice() %><sup>đ</sup></p>
                 </div>
-                <div class="product-related-item">
-                    <img src="image/cushion1.2.jpg" alt="">
-                    <h1>3CE BARE COVER CUSHION</h1>
-                    <p>450000<sup>đ</sup></p>
-                </div>
-                <div class="product-related-item">
-                    <img src="image/cushion1.3.jpg" alt="">
-                    <h1>3CE BARE COVER CUSHION</h1>
-                    <p>450000<sup>đ</sup></p>
-                </div>
-                <div class="product-related-item">
-                    <img src="image/cushion1.4.jpg" alt="">
-                    <h1>3CE BARE COVER CUSHION</h1>
-                    <p>450000<sup>đ</sup></p>
-                </div>
+                <%      }
+                    } else { %>
+                <p>Không có sản phẩm liên quan.</p>
+                <% } %>
             </div>
         </section>
 
