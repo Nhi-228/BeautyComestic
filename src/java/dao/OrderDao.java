@@ -43,5 +43,15 @@ public class OrderDao {
         }
         return list;
     }
-
+    
+public int countAllOrders() throws Exception {
+    String sql = "SELECT COUNT(*) FROM orders";
+    Connection conn = connect.kn();
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) {
+        return rs.getInt(1);
+    }
+    return 0;
+}
 }

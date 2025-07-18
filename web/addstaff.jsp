@@ -1,87 +1,145 @@
-<%-- 
-    Document   : addstaff
-    Created on : Jul 18, 2025, 2:23:52 PM
-    Author     : BINH NHI
---%>
-
-<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.time.LocalDate" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="jakarta.servlet.http.*, jakarta.servlet.*" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Thêm Nhân Viên</title>
-    <!-- Bootstrap 5 -->
+    <title>Thêm sản phẩm mới</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .sidebar {
+            height: 100vh;
+            background-color: #e0aade;
+            color: #fff;
+            padding: 20px;
+        }
+        .sidebar a {
+            display: block;
+            color: #fff;
+            margin: 8px 0;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+        .dropdown-menu-custom {
+            display: none;
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+        .dropdown-menu-custom a {
+            color: #fff;
+            font-size: 14px;
+        }
+        .main-content {
+            background-color: #f9f9f9;
+            padding: 30px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+    </style>
 </head>
 <body>
- <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addStaffModal">
-        Thêm nhân viên
-    </button>
-<!-- Modal thêm nhân viên -->
-<div class="modal fade" id="addStaffModal" tabindex="-1" aria-labelledby="addStaffModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <form action="addstaff" method="post" class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="addStaffModalLabel">Thêm Nhân Viên</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
-      </div>
-      <div class="modal-body">
-        
-        <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input type="text" class="form-control" name="username" required>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-2 sidebar">
+            <button class="login-btn" id="loginBtn">${sessionScope.userEmail}</button>
+            <ul class="dropdown-list" id="loginDropdown">
+                <li>Email: ${sessionScope.userEmail}</li>
+                <li><a href="logout">Đăng xuất</a></li>
+            </ul>
+            <ul class="list-unstyled">
+                <li><a href="#">Bán hàng</a></li>
+                <li><a href="#">Điều khiển</a></li>
+
+                <li>
+                    <a onclick="toggleStaffDropdown()">Quản lý nhân viên ▼</a>
+                    <div class="dropdown-menu-custom" id="staffDropdown">
+                        <a href="addstaff.jsp">+ Thêm nhân viên</a>
+                        <a href="showstaff.jsp">+ Xem thông tin nhân viên</a>
+                    </div>
+                </li>
+
+                <li><a href="#">Quản lý khách hàng</a></li>
+
+                <li>
+                    <a onclick="toggleProductDropdown()">Quản lý sản phẩm ▼</a>
+                    <div class="dropdown-menu-custom" id="productDropdown">
+                        <a href="addproduct.jsp">+ Tạo mới sản phẩm</a>
+                        <a href="addcategory.jsp">+ Thêm danh mục</a>
+                        <a href="addsupplier.jsp">+ Thêm nhà cung cấp</a>
+                        <a href="showProduct.jsp">Danh sách sản phẩm</a>
+                    </div>
+                </li>
+
+                <li>
+                    <a onclick="toggleOrderDropdown()">Quản lý đơn hàng (<%= request.getAttribute("totalOrders") != null ? request.getAttribute("totalOrders") : 0 %>) ▼</a>
+                    <div class="dropdown-menu-custom" id="orderDropdown">
+                        <a href="orderList.jsp">📋 Danh sách đơn hàng</a>
+                        <a href="orders-delivered.jsp">✅ Đơn hàng đã giao</a>
+                        <a href="orders-return.jsp">↩️ Trả hàng</a>
+                    </div>
+                </li>
+
+                <li><a href="#">Báo cáo doanh thu</a></li>
+            </ul>
         </div>
 
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" name="email" required>
+        <!-- Main content -->
+        <div class="col-md-10 main-content">
+            <h3>Thêm sản phẩm mới</h3>
+            <form action="AddProductServlet" method="post">
+                <div class="mb-3">
+                    <label for="productName" class="form-label">Tên sản phẩm</label>
+                    <input type="text" class="form-control" id="productName" name="product_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="price" class="form-label">Giá</label>
+                    <input type="number" class="form-control" id="price" name="price" required>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Mô tả</label>
+                    <textarea class="form-control" id="description" name="description"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Danh mục</label>
+                    <input type="text" class="form-control" id="category" name="category_id">
+                </div>
+                <div class="mb-3">
+                    <label for="supplier" class="form-label">Nhà cung cấp</label>
+                    <input type="text" class="form-control" id="supplier" name="supplier_id">
+                </div>
+                <div class="mb-3">
+                    <label for="quantity" class="form-label">Số lượng</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity">
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm sản phẩm</button>
+            </form>
         </div>
-
-        <div class="mb-3">
-          <label for="full_name" class="form-label">Họ tên</label>
-          <input type="text" class="form-control" name="full_name" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="phone" class="form-label">Số điện thoại</label>
-          <input type="text" class="form-control" name="phone" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="address" class="form-label">Địa chỉ</label>
-          <input type="text" class="form-control" name="address" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="role" class="form-label">Vai trò</label>
-          <select class="form-select" name="role" required>
-            <option value="staff">Nhân viên</option>
-            <option value="admin">Quản trị</option>
-          </select>
-        </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">Mật khẩu</label>
-          <input type="password" class="form-control" name="password" required>
-        </div>
-
-        <div class="mb-3">
-          <label for="updated_at" class="form-label">Ngày cập nhật</label>
-          <input type="date" class="form-control" name="updated_at" value="<%= LocalDate.now() %>" required>
-        </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-        <button type="submit" class="btn btn-primary">Lưu nhân viên</button>
-      </div>
-    </form>
-  </div>
+    </div>
 </div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleProductDropdown() {
+        var dropdown = document.getElementById("productDropdown");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
 
+    function toggleOrderDropdown() {
+        var dropdown = document.getElementById("orderDropdown");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+
+    function toggleStaffDropdown() {
+        var dropdown = document.getElementById("staffDropdown");
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+</script>
 </body>
 </html>

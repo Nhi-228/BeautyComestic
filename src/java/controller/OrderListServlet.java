@@ -63,12 +63,20 @@ public class OrderListServlet extends HttpServlet {
             throws ServletException, IOException {
       try {
             OrderDao dao = new OrderDao();
+            
+            // Lấy tất cả đơn hàng
             List<Order> orders = dao.getAllOrders();
             request.setAttribute("orders", orders);
-            request.getRequestDispatcher("orderList.jsp").forward(request, response);
+
+            // Đếm tổng số đơn hàng
+            int totalOrders = dao.countAllOrders();
+            request.setAttribute("totalOrders", totalOrders);
+
+            // Gửi về trang quản lý nhân viên để hiển thị
+            request.getRequestDispatcher("managerstaff.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().println("Lỗi: " + e.getMessage());
+            response.getWriter().println("Lỗi servlet: " + e.getMessage());
         }
     }
     
@@ -83,7 +91,7 @@ public class OrderListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       doGet(request, response);
         
     }
 

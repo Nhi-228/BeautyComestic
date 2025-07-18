@@ -13,7 +13,7 @@
         }
         .sidebar {
             height: 100vh;
-            background-color: #0d6efd;
+            background-color: #e0aade;
             color: #fff;
             padding: 20px;
         }
@@ -22,9 +22,19 @@
             color: #fff;
             margin: 8px 0;
             text-decoration: none;
+            cursor: pointer;
         }
         .sidebar a:hover {
             text-decoration: underline;
+        }
+        .dropdown-menu-custom {
+            display: none;
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+        .dropdown-menu-custom a {
+            color: #fff;
+            font-size: 14px;
         }
         .main-content {
             background-color: #f9f9f9;
@@ -32,34 +42,61 @@
             height: 100vh;
             overflow-y: auto;
         }
-        .form-container {
-            width: 100%;
-            max-width: 500px;
-            margin: auto;
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .dropdown-menu {
+            display: none;
+            margin-top: 8px;
         }
-        textarea {
-            height: 100px;
+        .dropdown-menu.show {
+            display: block;
+        }
+        .dropdown-item {
+            color: #fff;
+            padding-left: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar bên trái -->
+            <!-- Sidebar -->
             <div class="col-md-2 sidebar">
-                <h5>Xin chào</h5>
                 <p>${sessionScope.userEmail}</p>
                 <ul class="list-unstyled">
                     <li><a href="#">Bán hàng</a></li>
                     <li><a href="#">Điều khiển</a></li>
-                    <li><a href="#">Quản lý nhân viên</a></li>
+                    
+                    <!-- Quản lý nhân viên -->
+                    <li>
+                        <a onclick="toggleStaffDropdown()">Quản lý nhân viên ▼</a>
+                        <div class="dropdown-menu-custom" id="staffDropdown">
+                            <a href="addstaff.jsp">+ Thêm nhân viên</a>
+                            <a href="showstaff.jsp">+ Xem thông tin nhân viên</a>
+                        </div>
+                    </li>
+
                     <li><a href="#">Quản lý khách hàng</a></li>
-                    <li><a href="managerProduct.jsp">Quản lý sản phẩm</a></li>
-                    <li><a href="#">Quản lý đơn hàng</a></li>
+
+                    <!-- Quản lý sản phẩm -->
+                    <li>
+                        <a onclick="toggleProductDropdown()">Quản lý sản phẩm ▼</a>
+                        <div class="dropdown-menu-custom" id="productDropdown">
+                            <a href="addproduct.jsp">+ Tạo mới sản phẩm</a>
+                            <a href="addcategory.jsp">+ Thêm danh mục</a>
+                            <a href="addsupplier.jsp">+ Thêm nhà cung cấp</a>
+                            <a href="showProduct.jsp">+Danh sách sản phẩm</a>
+                        </div>
+                    </li>
+
+                    <!-- Quản lý đơn hàng -->
+                    <li>
+                        <a onclick="toggleOrderDropdown()">Quản lý đơn hàng (<%= request.getAttribute("totalOrders") != null ? request.getAttribute("totalOrders") : 0 %>) ▼</a>
+                        <div class="dropdown-menu-custom" id="orderDropdown">
+                            <a href="orderList.jsp">📋 Danh sách đơn hàng</a>
+                            <a href="orders-delivered.jsp">✅ Đơn hàng đã giao</a>
+                            <a href="orders-return.jsp">↩️ Trả hàng</a>
+                        </div>
+                    </li>
+
                     <li><a href="#">Báo cáo doanh thu</a></li>
                     <li><a href="logout">Đăng xuất</a></li>
                 </ul>
@@ -103,5 +140,23 @@
             </div>
         </div>
     </div>
+                <script>
+    function toggleDropdown(id) {
+        const dropdown = document.getElementById(id);
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    function toggleStaffDropdown() {
+        toggleDropdown("staffDropdown");
+    }
+
+    function toggleProductDropdown() {
+        toggleDropdown("productDropdown");
+    }
+
+    function toggleOrderDropdown() {
+        toggleDropdown("orderDropdown");
+    }
+</script>
 </body>
 </html>

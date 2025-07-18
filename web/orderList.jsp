@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.List"%>
 <%@page import="model.Order"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
     List<Order> orders = (List<Order>) request.getAttribute("orders");
     int totalOrders = (orders != null) ? orders.size() : 0;
@@ -12,28 +13,22 @@
     <title>Quản lý đơn hàng</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
         .sidebar {
-            background-color: #e0aade;
-            height: 100vh;
-            padding: 1rem;
+            height: 100vh; background-color: #e0aade; color: #fff; padding: 20px;
         }
-        .filter-container {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 20px;
+        .sidebar a {
+            display: block; color: #fff; margin: 8px 0; text-decoration: none; cursor: pointer;
         }
-        .dropdown-menu {
-            display: none;
-            margin-top: 0.5rem;
+        .sidebar a:hover { text-decoration: underline; }
+        .dropdown-menu-custom {
+            display: none; margin-left: 15px; margin-top: 5px;
         }
-        .dropdown-menu.show {
-            display: block;
+        .dropdown-menu-custom a {
+            color: #fff; font-size: 14px;
         }
-        .dropdown-toggle {
-            cursor: pointer;
-        }
-        .dropdown-item:hover {
-            background-color: #f0f0f0;
+        .main-content {
+            background-color: #f9f9f9; padding: 30px; height: 100vh; overflow-y: auto;
         }
     </style>
 </head>
@@ -42,41 +37,50 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-2 sidebar">
-            <button class="login-btn" id="loginBtn">${sessionScope.userEmail}</button>
-            <ul class="dropdown-list" id="loginDropdown">
-                <li>Email: ${sessionScope.userEmail}</li>
-                <li><a href="logout">Đăng xuất</a></li>
-            </ul>
-
-            <ul class="list-unstyled mt-3">
+            <p>${sessionScope.userEmail}</p>
+            <ul class="list-unstyled">
                 <li><a href="#">Bán hàng</a></li>
                 <li><a href="#">Điều khiển</a></li>
-                <li><a href="managerstaff.jsp">Quản lý nhân viên</a></li>
-                <li><a href="#">Quản lý khách hàng</a></li>
-                <li><a href="managerProduct.jsp">Quản lý sản phẩm</a></li>
-
-                <!-- 🔽 Dropdown: Quản lý đơn hàng -->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" id="orderDropdown">Quản lý đơn hàng (<%= totalOrders %>)</a>
-                    <ul class="dropdown-menu list-unstyled ps-3" id="orderDropdownMenu">
-                        <li><a class="dropdown-item" href="orderList.jsp">📋 Danh sách đơn hàng</a></li>
-                        <li><a class="dropdown-item" href="orders-delivered.jsp">✅ Đơn hàng đã giao</a></li>
-                        <li><a class="dropdown-item" href="orders-return.jsp">↩️ Trả hàng</a></li>
-                    </ul>
+                <!-- Quản lý nhân viên -->
+                <li>
+                    <a onclick="toggleDropdown('staffDropdown')">Quản lý nhân viên ▼</a>
+                    <div class="dropdown-menu-custom" id="staffDropdown">
+                        <a href="addstaff.jsp">+ Thêm nhân viên</a>
+                        <a href="showstaff.jsp">+ Xem thông tin nhân viên</a>
+                    </div>
                 </li>
-
-                <li><a href="#">Quản lí kho</a></li>
+                <li><a href="#">Quản lý khách hàng</a></li>
+                <!-- Quản lý sản phẩm -->
+                <li>
+                    <a onclick="toggleDropdown('productDropdown')">Quản lý sản phẩm ▼</a>
+                    <div class="dropdown-menu-custom" id="productDropdown">
+                        <a href="addproduct.jsp">+ Tạo mới sản phẩm</a>
+                        <a href="addcategory.jsp">+ Thêm danh mục</a>
+                        <a href="addsupplier.jsp">+ Thêm nhà cung cấp</a>
+                        <a href="showProduct.jsp">+ Danh sách sản phẩm</a>
+                    </div>
+                </li>
+                <!-- Quản lý đơn hàng -->
+                <li>
+                    <a onclick="toggleDropdown('orderDropdown')">Quản lý đơn hàng (<%= totalOrders %>) ▼</a>
+                    <div class="dropdown-menu-custom" id="orderDropdown">
+                        <a href="orderList.jsp">📋 Danh sách đơn hàng</a>
+                        <a href="orders-delivered.jsp">✅ Đơn hàng đã giao</a>
+                        <a href="orders-return.jsp">↩️ Trả hàng</a>
+                    </div>
+                </li>
                 <li><a href="#">Báo cáo doanh thu</a></li>
+                <li><a href="logout">Đăng xuất</a></li>
             </ul>
         </div>
 
-        <!-- Nội dung bên phải -->
-        <div class="col-md-10">
+        <!-- Nội dung -->
+        <div class="col-md-10 main-content">
             <h3 class="mt-4">Quản Lý Đơn Hàng</h3>
             <p>Tổng số đơn hàng: <strong><%= totalOrders %></strong></p>
 
-            <!-- Bộ lọc dropdown -->
-            <div class="filter-container">
+            <!-- Bộ lọc -->
+            <div class="d-flex mb-3 gap-3">
                 <select id="statusFilter" class="form-select w-25">
                     <option value="">-- Trạng thái đơn hàng --</option>
                     <option value="Chờ xử lý">Chờ xử lý</option>
@@ -84,7 +88,6 @@
                     <option value="Đã giao">Đã giao</option>
                     <option value="Đã hủy">Đã hủy</option>
                 </select>
-
                 <select id="paymentFilter" class="form-select w-25">
                     <option value="">-- Trạng thái thanh toán --</option>
                     <option value="Đã thanh toán">Đã thanh toán</option>
@@ -125,22 +128,13 @@
 
 <!-- JS -->
 <script>
-    // Dropdown toggle
-    document.getElementById("orderDropdown").addEventListener("click", function (e) {
-        e.preventDefault();
-        const menu = document.getElementById("orderDropdownMenu");
-        menu.classList.toggle("show");
-    });
+    // Toggle sidebar dropdown
+    function toggleDropdown(id) {
+        const menu = document.getElementById(id);
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
 
-    document.addEventListener("click", function (e) {
-        const dropdown = document.getElementById("orderDropdownMenu");
-        const toggle = document.getElementById("orderDropdown");
-        if (!toggle.contains(e.target) && !dropdown.contains(e.target)) {
-            dropdown.classList.remove("show");
-        }
-    });
-
-    // Filter function
+    // Bộ lọc
     const statusFilter = document.getElementById("statusFilter");
     const paymentFilter = document.getElementById("paymentFilter");
 

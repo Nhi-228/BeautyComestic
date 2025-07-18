@@ -13,7 +13,7 @@
         }
         .sidebar {
             height: 100vh;
-            background-color: #0d6efd;
+            background-color: #e0aade;
             color: #fff;
             padding: 20px;
         }
@@ -22,25 +22,25 @@
             color: #fff;
             margin: 8px 0;
             text-decoration: none;
+            cursor: pointer;
         }
         .sidebar a:hover {
             text-decoration: underline;
+        }
+        .dropdown-menu-custom {
+            display: none;
+            margin-left: 15px;
+            margin-top: 5px;
+        }
+        .dropdown-menu-custom a {
+            color: #fff;
+            font-size: 14px;
         }
         .main-content {
             background-color: #f9f9f9;
             padding: 30px;
             height: 100vh;
             overflow-y: auto;
-        }
-        .form-control, .form-select {
-            margin-bottom: 15px;
-        }
-        textarea {
-            height: 150px;
-        }
-        .btn-area button a {
-            color: white;
-            text-decoration: none;
         }
     </style>
 </head>
@@ -49,15 +49,35 @@
     <div class="row">
         <!-- Sidebar -->
         <div class="col-md-2 sidebar">
-            <h5>Xin chào</h5>
-            <p><%= session.getAttribute("userEmail") != null ? session.getAttribute("userEmail") : "Khách" %></p>
+            <p>${sessionScope.userEmail}</p>
             <ul class="list-unstyled">
                 <li><a href="#">Bán hàng</a></li>
                 <li><a href="#">Điều khiển</a></li>
-                <li><a href="#">Quản lý nhân viên</a></li>
+                <li>
+                    <a onclick="toggleDropdown('staffDropdown')">Quản lý nhân viên ▼</a>
+                    <div class="dropdown-menu-custom" id="staffDropdown">
+                        <a href="addstaff.jsp">+ Thêm nhân viên</a>
+                        <a href="showstaff.jsp">+ Xem thông tin nhân viên</a>
+                    </div>
+                </li>
                 <li><a href="#">Quản lý khách hàng</a></li>
-                <li><a href="managerProduct.jsp">Quản lý sản phẩm</a></li>
-                <li><a href="#">Quản lý đơn hàng</a></li>
+                <li>
+                    <a onclick="toggleDropdown('productDropdown')">Quản lý sản phẩm ▼</a>
+                    <div class="dropdown-menu-custom" id="productDropdown">
+                        <a href="addproduct.jsp">+ Tạo mới sản phẩm</a>
+                        <a href="addcategory.jsp">+ Thêm danh mục</a>
+                        <a href="addsupplier.jsp">+ Thêm nhà cung cấp</a>
+                        <a href="showProduct.jsp">+Danh sách sản phẩm</a>
+                    </div>
+                </li>
+                <li>
+                    <a onclick="toggleDropdown('orderDropdown')">Quản lý đơn hàng ▼</a>
+                    <div class="dropdown-menu-custom" id="orderDropdown">
+                        <a href="orderList.jsp">📋 Danh sách đơn hàng</a>
+                        <a href="orders-delivered.jsp">✅ Đơn hàng đã giao</a>
+                        <a href="orders-return.jsp">↩️ Trả hàng</a>
+                    </div>
+                </li>
                 <li><a href="#">Báo cáo doanh thu</a></li>
                 <li><a href="logout">Đăng xuất</a></li>
             </ul>
@@ -66,12 +86,11 @@
         <!-- Main Content -->
         <div class="col-md-10 main-content">
             <div class="btn-area mb-3">
-                <button class="btn btn-success"><a href="addproduct.jsp">+ Tạo mới sản phẩm</a></button>
-                <button class="btn btn-success"><a href="addcategory.jsp">+ Thêm danh mục</a></button>
-                <button class="btn btn-success">+ Thêm nhà cung cấp</button>
+                <a href="addproduct.jsp" class="btn btn-success">+ Tạo mới sản phẩm</a>
+                <a href="addcategory.jsp" class="btn btn-success">+ Thêm danh mục</a>
+                <a href="addsupplier.jsp" class="btn btn-success">+ Thêm nhà cung cấp</a>
             </div>
 
-            <!-- Bảng hiển thị sản phẩm -->
             <h4 class="mt-4">Danh sách sản phẩm</h4>
             <table class="table table-bordered">
                 <thead>
@@ -111,5 +130,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    function toggleDropdown(id) {
+        var dropdown = document.getElementById(id);
+        dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+    }
+</script>
 </body>
 </html>
