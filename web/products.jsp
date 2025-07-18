@@ -83,7 +83,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.html">Personal Care</a>
+                        <a href="personalcare.jsp">Personal Care</a>
                     </li>
                 </ul>
             </nav>
@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <div class="buy-buttons">
-                           <button class="buy-now" id="buyNowBtn">buy now</button>
+                            <button class="buy-now" id="buyNowBtn">buy now</button>
 
                             <button class="add-to-cart"><i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i>add to cart</button>
                         </div>
@@ -147,13 +147,13 @@
                             <div class="products-content-right-button-content-big">
                                 <div class="products-content-right-button-content-title row">
                                     <div class="products-content-right-button-content-item" data-tab="product">Product description</div>
-<div class="products-content-right-button-content-item" data-tab="use">Use</div>
-<div class="products-content-right-button-content-item" data-tab="suggest">Suggest</div>
-<div class="products-content-right-button-content-item" data-tab="evaluate">Evaluate</div>
+                                    <div class="products-content-right-button-content-item" data-tab="use">Use</div>
+                                    <div class="products-content-right-button-content-item" data-tab="suggest">Suggest</div>
+                                    <div class="products-content-right-button-content-item" data-tab="evaluate">Evaluate</div>
 
                                 </div>
                                 <div class="products-content-right-button-content">
-                                     <div class="tab-content" data-tab="product">
+                                    <div class="tab-content" data-tab="product">
                                         Phấn Nước 3CE Bare Cover Cushion SPF40 PA++ là dòng sản phẩm vừa ra mắt của thương hiệu Hàn đình đám 3CE.<br>
                                         Sản phẩm nổi bật với kết cấu kem lỏng mềm mịn, dễ tán đều trên da, không vón cục, không gây bết dính trên da. Khi apply cushion lên da, kem nhẹ nhàng ôm sát làn da, để lại lớp phủ mỏng nhẹ, tạo nên lớp nền sáng bóng tự nhiên như chính làn da của bạn.<br>
                                         Phấn nước 3CE Bare Cover Cushion đi kèm với bông phấn hình kim cương, cầm vừa tay, thuận tiện khi trang điểm. Bông phấn có thể chạm đến mọi vùng da trên khuôn mặt, kể cả hai bên mũi và vùng da quanh mắt.<br>
@@ -171,7 +171,7 @@
 
                                         - Butylene Glycol Dicaprylate/Dicaprate: cải thiện cảm giác lướt nhẹ khi thoa phấn và giữ cho da được cung cấp độ ẩm, giúp tránh tình trạng da khô và căng trước ánh nắng mặt trời.
                                     </div>
-                                   <div class="tab-content" data-tab="use">
+                                    <div class="tab-content" data-tab="use">
                                         Tạo lớp nền mỏng nhẹ: Cushion tạo lớp nền mỏng nhẹ, tạo cảm giác nhẹ nhàng, thoải mái trên da. <br>
                                         Dưỡng sáng da: Sản phẩm tạo lớp nền sáng bóng tự nhiên như chính làn da của bạn. <br>
                                         Giữ ẩm: Sản phẩm sử dụng công thức giữ ẩm từ bên trong, tạo lớp nền ẩm mượt, hạn chế xảy ra tình trạng cakey, mốc nền.  <br>
@@ -195,7 +195,7 @@
                                         - Hạn sử dụng của sản phẩm: 36 tháng kể từ ngày sản xuất, 12 tháng sau khi mở nắp
 
                                     </div>
-                                     <div class="tab-content" data-tab="suggest">
+                                    <div class="tab-content" data-tab="suggest">
 
                                     </div>
                                     <div class="tab-content" data-tab="evaluate"></div>
@@ -210,20 +210,20 @@
                 <p> Sản phẩm liên quan </p>
             </div>
             <div class="products-content row">
-                <% 
+                <%
                     List<Product> products = (List<Product>) request.getAttribute("products");
                     if (products != null) {
-                        for (Product p : products) { 
+                        for (Product p : products) {
                 %>
                 <div class="product-related-item">
-                    <img src="<%= p.getImage() %>" alt="">
-                    <h1><%= p.getName() %></h1>
-                    <p><%= p.getPrice() %><sup>đ</sup></p>
+                    <img src="<%= p.getImage()%>" alt="">
+                    <h1><%= p.getName()%></h1>
+                    <p><%= p.getPrice()%><sup>đ</sup></p>
                 </div>
                 <%      }
-                    } else { %>
+                } else { %>
                 <p>Không có sản phẩm liên quan.</p>
-                <% } %>
+                <% }%>
             </div>
         </section>
 
@@ -273,56 +273,56 @@
             const addToCartBtn = document.querySelector('.add-to-cart');
 
 // Khi click, thêm sản phẩm vào localStorage
-addToCartBtn.addEventListener('click', function () {
-    const product = {
-        id: "SP670942631",
-        name: "3CE BARE COVER CUSHION",
-        price: 450000,
-        quantity: parseInt(document.querySelector('.quantity-box input').value),
-        image: "image/cushion.jpg"
-    };
+            addToCartBtn.addEventListener('click', function () {
+                const product = {
+                    id: "SP670942631",
+                    name: "3CE BARE COVER CUSHION",
+                    price: 450000,
+                    quantity: parseInt(document.querySelector('.quantity-box input').value),
+                    image: "image/cushion.jpg"
+                };
 
-    // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mới)
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mới)
+                let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // Kiểm tra nếu sản phẩm đã có trong giỏ → tăng số lượng
-    const existing = cart.find(p => p.id === product.id);
-    if (existing) {
-        existing.quantity += product.quantity;
-    } else {
-        cart.push(product);
-    }
+                // Kiểm tra nếu sản phẩm đã có trong giỏ → tăng số lượng
+                const existing = cart.find(p => p.id === product.id);
+                if (existing) {
+                    existing.quantity += product.quantity;
+                } else {
+                    cart.push(product);
+                }
 
-    // Lưu lại vào localStorage
-    localStorage.setItem("cart", JSON.stringify(cart));
+                // Lưu lại vào localStorage
+                localStorage.setItem("cart", JSON.stringify(cart));
 
-    // Hiển thị thông báo hoặc chuyển trang nếu cần
-    alert("Đã thêm vào giỏ hàng!");
-    function updateCartCount() {
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-    document.getElementById("cart-count").textContent = totalQuantity;
-}
+                // Hiển thị thông báo hoặc chuyển trang nếu cần
+                alert("Đã thêm vào giỏ hàng!");
+                function updateCartCount() {
+                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+                    document.getElementById("cart-count").textContent = totalQuantity;
+                }
 
 // Gọi hàm khi trang load
-window.addEventListener("load", updateCartCount);
-});
-document.getElementById("buyNowBtn").addEventListener("click", function () {
-    // (Tuỳ chọn) bạn có thể lưu thông tin sản phẩm cần thanh toán riêng nếu cần
-    const product = {
-        id: "SP670942631",
-        name: "3CE BARE COVER CUSHION",
-        price: 450000,
-        quantity: parseInt(document.querySelector('.quantity-box input').value),
-        image: "image/cushion.jpg"
-    };
+                window.addEventListener("load", updateCartCount);
+            });
+            document.getElementById("buyNowBtn").addEventListener("click", function () {
+                // (Tuỳ chọn) bạn có thể lưu thông tin sản phẩm cần thanh toán riêng nếu cần
+                const product = {
+                    id: "SP670942631",
+                    name: "3CE BARE COVER CUSHION",
+                    price: 450000,
+                    quantity: parseInt(document.querySelector('.quantity-box input').value),
+                    image: "image/cushion.jpg"
+                };
 
-    // Lưu sản phẩm tạm thời vào localStorage để dùng ở trang payment
-    localStorage.setItem("paymentProduct", JSON.stringify(product));
+                // Lưu sản phẩm tạm thời vào localStorage để dùng ở trang payment
+                localStorage.setItem("paymentProduct", JSON.stringify(product));
 
-    // Chuyển sang trang thanh toán
-    window.location.href = "payment.html";
-});
+                // Chuyển sang trang thanh toán
+                window.location.href = "payment.html";
+            });
 
         </script>
     </body>

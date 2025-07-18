@@ -14,7 +14,7 @@
 
             .sidebar {
                 height: 100vh;
-                background-color: #0d6efd;
+                background-color: #e0aade;
                 color: #fff;
                 padding: 20px;
             }
@@ -35,7 +35,7 @@
             }
 
             .main-content {
-                background-color: #f9f9f9;
+                background-color: #e0aade;
                 padding: 30px;
                 height: 100vh;
                 overflow-y: auto;
@@ -76,6 +76,7 @@
                     <li><a href="#">Quản lý khách hàng</a></li>
                     <li> <a href="managerProduct.jsp">Quản lý sản phẩm</a></li>  
                     <li><a href="#">Quản lý đơn hàng</a></li> 
+                    <li><a href="#">Quản lí kho</a></li>
                     <li><a href="#">Báo cáo doanh thu</a></li>
 
                     

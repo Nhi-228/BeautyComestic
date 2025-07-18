@@ -66,16 +66,11 @@
                         <input type="text" name="name" class="form-control" placeholder="Tên sản phẩm" required>
                         <input type="number" name="quantity" class="form-control" placeholder="Số lượng" required>
 
-                        <select name="status" class="form-select" required>
-                            <option value="">-- Tình trạng --</option>
-                            <option value="Còn hàng">Còn hàng</option>
-                            <option value="Hết hàng">Hết hàng</option>
-                        </select>
-
                         <select name="category" class="form-select" required>
                             <option value="">-- Chọn danh mục --</option>
-                            <option value="1">Mỹ phẩm</option>
-                            <option value="2">Dưỡng da</option>
+                            <option value="1">Makeup</option>
+                            <option value="2">Skincare</option>
+                            <option value="2">Haircare</option>
                         </select>
 
                         <select name="supplier" class="form-select" required>
