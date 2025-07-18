@@ -1,6 +1,5 @@
 package controller;
 
-
 import dao.UserDAO;
 import model.User;
 import jakarta.mail.Transport;
@@ -27,7 +26,14 @@ public class RegisterServlet extends HttpServlet {
         String fullname = request.getParameter("fullname");
         String address = request.getParameter("address");
 
-        User u = new User(username, email, password, sdt, fullname, address);
+        User u = new User();
+        u.setUsername(username);
+        u.setEmail(email);
+        u.setPassword(password);
+        u.setFull_name(fullname);
+        u.setPhone(sdt);
+        u.setAddress(address);
+
         try {
             UserDAO dao = new UserDAO();
             boolean isValid = dao.exists(username, email);

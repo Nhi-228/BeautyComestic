@@ -72,7 +72,7 @@
                     </ul>
                     <li> <a href="#">Bán hàng</a></li>
                     <li> <a href="#">Điều khiển</a></li>
-                    <li> <a href="#">Quản lý nhân viên</a></li>
+                    <li> <a href="managerstaff.jsp">Quản lý nhân viên</a></li>
                     <li><a href="#">Quản lý khách hàng</a></li>
                     <li> <a href="managerProduct.jsp">Quản lý sản phẩm</a></li>  
                     <li><a href="#">Quản lý đơn hàng</a></li> 

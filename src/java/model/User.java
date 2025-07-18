@@ -18,20 +18,13 @@ public class User {
     private String phone;
     private String address;
     private String role;
+    private String update_at;
 
     public User() {
     }
 
-    public User(String username, String email, String password, String full_name, String phone, String address) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.full_name = full_name;
-        this.phone = phone;
-        this.address = address;
-    }
-
-    public User(int user_id, String username, String email, String password, String full_name, String phone, String address, String role) {
+   
+    public User(int user_id, String username, String email, String password, String full_name, String phone, String address, String role, String update_at) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -40,7 +33,10 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.role = role;
+        this.update_at = update_at;
     }
+
+    
 
     public int getUser_id() {
         return user_id;
@@ -104,6 +100,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getUpdate_at() {
+        return update_at;
+    }
+
+    public void setUpdate_at(String update_at) {
+        this.update_at = update_at;
     }
     
 }
