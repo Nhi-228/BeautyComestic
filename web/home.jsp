@@ -39,7 +39,7 @@
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
-                        </form>
+                       
                     </div>
                     <a href="mybag.html" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)

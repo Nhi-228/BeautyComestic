@@ -1,4 +1,8 @@
+package controller;
 
+
+import dao.UserDAO;
+import model.User;
 import jakarta.mail.Transport;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

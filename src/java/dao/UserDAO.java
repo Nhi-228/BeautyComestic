@@ -1,14 +1,17 @@
+package dao;
 
+import model.User;
 import java.sql.*;
 
 public class UserDAO {
     private final Connection conn;
 
+    // Constructor để khởi tạo kết nối
     public UserDAO() throws Exception {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/cosmetics_store", "root", "");
+        this.conn = connect.kn(); // Gọi phương thức kn() từ lớp connect
     }
 
+    // Kiểm tra đăng nhập
     public boolean checkLogin(String email, String password) throws SQLException {
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         PreparedStatement stmt = conn.prepareStatement(sql);
@@ -17,11 +20,11 @@ public class UserDAO {
         ResultSet rs = stmt.executeQuery();
         return rs.next(); // Nếu có dòng nào khớp => đúng
     }
+
+    // Lấy thông tin user theo email
     public User getUserByEmail(String email) throws SQLException {
-        String sql = "SELECT user_id, username, email, password, full_name, phone, address, role FROM users WHERE email = ? AND password = ?";
-
+        String sql = "SELECT user_id, username, email, password, full_name, phone, address, role FROM users WHERE email = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
@@ -38,30 +41,32 @@ public class UserDAO {
                 }
             }
         }
-
         return null;
     }
+
+    // Thêm người dùng
     public int add(User u) throws SQLException {
-    String sql = "INSERT INTO users(full_name,username,email,phone,password,address) VALUES(?,?,?,?,?,?)";
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-      ps.setString(1, u.getFull_name());
-      ps.setString(2, u.getUsername());
-      ps.setString(3, u.getEmail());
-      ps.setString(4, u.getPhone());
-      ps.setString(5, u.getPassword());
-      ps.setString(6, u.getAddress());
-      return ps.executeUpdate();
+        String sql = "INSERT INTO users(full_name, username, email, phone, password, address) VALUES(?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, u.getFull_name());
+            ps.setString(2, u.getUsername());
+            ps.setString(3, u.getEmail());
+            ps.setString(4, u.getPhone());
+            ps.setString(5, u.getPassword());
+            ps.setString(6, u.getAddress());
+            return ps.executeUpdate();
+        }
     }
-        
-}
+
+    // Kiểm tra username hoặc email đã tồn tại chưa
     public boolean exists(String username, String email) throws SQLException {
-    String sql = "SELECT user_id FROM users WHERE username=? OR email=?";
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-      ps.setString(1, username);
-      ps.setString(2, email);
-      try (ResultSet rs = ps.executeQuery()) {
-        return rs.next();
-      }
+        String sql = "SELECT user_id FROM users WHERE username = ? OR email = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, username);
+            ps.setString(2, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
     }
-  }
 }
