@@ -60,17 +60,17 @@
         <div class="row">
             <!-- Sidebar -->
             <div class="col-md-2 sidebar">
-                <p>${sessionScope.userEmail}</p>
+                  <li><i class="fa-regular fa-user"></i>Email : ${sessionScope.userEmail} </li>
                 <ul class="list-unstyled">
-                    <li><a href="#">Bán hàng</a></li>
+                    <li><a href="home.jsp">Bán hàng</a></li>
                     <li><a href="#">Điều khiển</a></li>
                     
                     <!-- Quản lý nhân viên -->
                     <li>
                         <a onclick="toggleStaffDropdown()">Quản lý nhân viên ▼</a>
                         <div class="dropdown-menu-custom" id="staffDropdown">
-                            <a href="addstaff.jsp">+ Thêm nhân viên</a>
-                            <a href="showstaff.jsp">+ Xem thông tin nhân viên</a>
+                            <a href="addstaff.jsp">Thêm nhân viên</a>
+                            <a href="showstaff.jsp">Xem thông tin nhân viên</a>
                         </div>
                     </li>
 
@@ -80,10 +80,10 @@
                     <li>
                         <a onclick="toggleProductDropdown()">Quản lý sản phẩm ▼</a>
                         <div class="dropdown-menu-custom" id="productDropdown">
-                            <a href="addproduct.jsp">+ Tạo mới sản phẩm</a>
-                            <a href="addcategory.jsp">+ Thêm danh mục</a>
-                            <a href="addsupplier.jsp">+ Thêm nhà cung cấp</a>
-                            <a href="showProduct.jsp">+Danh sách sản phẩm</a>
+                            <a href="addproduct.jsp"> Tạo mới sản phẩm</a>
+                            <a href="addcategory.jsp"> Thêm danh mục</a>
+                            <a href="addsupplier.jsp"> Thêm nhà cung cấp</a>
+                            <a href="showProduct.jsp"> Danh sách sản phẩm</a>
                         </div>
                     </li>
 
@@ -97,7 +97,7 @@
                         </div>
                     </li>
 
-                    <li><a href="#">Báo cáo doanh thu</a></li>
+                    <li><a href="report.jsp">Báo cáo doanh thu</a></li>
                     <li><a href="logout">Đăng xuất</a></li>
                 </ul>
             </div>

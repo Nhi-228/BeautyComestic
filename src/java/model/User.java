@@ -19,12 +19,13 @@ public class User {
     private String address;
     private String role;
     private String update_at;
+    private boolean is_verified;
+    private boolean is_blocked;   
 
     public User() {
     }
 
-   
-    public User(int user_id, String username, String email, String password, String full_name, String phone, String address, String role, String update_at) {
+    public User(int user_id, String username, String email, String password, String full_name, String phone, String address, String role, String update_at, boolean is_verified, boolean is_blocked) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
@@ -34,9 +35,9 @@ public class User {
         this.address = address;
         this.role = role;
         this.update_at = update_at;
+        this.is_verified = is_verified;
+        this.is_blocked = is_blocked;
     }
-
-    
 
     public int getUser_id() {
         return user_id;
@@ -109,5 +110,22 @@ public class User {
     public void setUpdate_at(String update_at) {
         this.update_at = update_at;
     }
-    
+
+    public boolean isIs_verified() {
+        return is_verified;
+    }
+
+    public void setIs_verified(boolean is_verified) {
+        this.is_verified = is_verified;
+    }
+
+    public boolean isIs_blocked() {
+        return is_blocked;
+    }
+
+    public void setIs_blocked(boolean is_blocked) {
+        this.is_blocked = is_blocked;
+    }
+
+   
 }

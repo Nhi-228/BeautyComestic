@@ -116,5 +116,40 @@ public User getUserById(int id) throws SQLException {
     }
     return null;
 }
+public List<User> getAllCustomers() throws Exception {
+    List<User> list = new ArrayList<>();
+    String sql = "SELECT * FROM users WHERE role = 'customer'";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ResultSet rs = ps.executeQuery();
+    while (rs.next()) {
+        User u = new User();
+        u.setUser_id(rs.getInt("user_id"));
+        u.setFull_name(rs.getString("full_name"));
+        u.setEmail(rs.getString("email"));
+        u.setPhone(rs.getString("phone"));
+        u.setVerified(rs.getBoolean("is_verified"));
+        list.add(u);
+    }
+    return list;
+}
 
+// Đếm đơn đã giao thành công
+public int countSuccessfulOrdersByCustomer(int userId) throws Exception {
+    String sql = "SELECT COUNT(*) FROM orders WHERE customer_id = ? AND status = 'DELIVERED'";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setInt(1, userId);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) return rs.getInt(1);
+    return 0;
+}
+
+// Đếm đơn đã hủy
+public int countCanceledOrdersByCustomer(int userId) throws Exception {
+    String sql = "SELECT COUNT(*) FROM orders WHERE customer_id = ? AND status = 'CANCELLED'";
+    PreparedStatement ps = conn.prepareStatement(sql);
+    ps.setInt(1, userId);
+    ResultSet rs = ps.executeQuery();
+    if (rs.next()) return rs.getInt(1);
+    return 0;
+}
 }
