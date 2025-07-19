@@ -1,58 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
+
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-/**
- *
- * @author Admib
- */
 public class Product {
-     private int productId;
+
+    private int productId;
     private String productName;
     private String description;
-    private double price;
-    private Double discountPrice;
+    private BigDecimal price;
+    private BigDecimal discountPrice;
     private int stockQuantity;
+    private String sku;
+    private String ingredients;
     private String imageUrl;
     private String imageGallery;
-    private Integer categoryId;
-    private Integer brandId;
-    private boolean active;
+    private int categoryId;
+    private int brandId;
+    private String status;
     private float ratingAverage;
     private int reviewCount;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-
-    public Product() {
-    }
-    
-    
-
-    public Product(int quantity, String id, String name, int aInt1, String status1, double price1, int aInt2, Timestamp cost) {
-    }
-
-    public Product(int productId, String productName, String description, double price, Double discountPrice,
-                   int stockQuantity, String imageUrl, String imageGallery, Integer categoryId, Integer brandId,
-                   boolean active, float ratingAverage, int reviewCount, Timestamp createdAt, Timestamp updatedAt) {
-        this.productId = productId;
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-        this.discountPrice = discountPrice;
-        this.stockQuantity = stockQuantity;
-        this.imageUrl = imageUrl;
-        this.imageGallery = imageGallery;
-        this.categoryId = categoryId;
-        this.brandId = brandId;
-         this.active = active;
-        this.ratingAverage = ratingAverage;
-        this.reviewCount = reviewCount;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
 
     // Getters and Setters
 
@@ -80,19 +49,19 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public Double getDiscountPrice() {
+    public BigDecimal getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(Double discountPrice) {
+    public void setDiscountPrice(BigDecimal discountPrice) {
         this.discountPrice = discountPrice;
     }
 
@@ -102,6 +71,22 @@ public class Product {
 
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
     public String getImageUrl() {
@@ -120,28 +105,28 @@ public class Product {
         this.imageGallery = imageGallery;
     }
 
-    public Integer getCategoryId() {
+    public int getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(int categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Integer getBrandId() {
+    public int getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Integer brandId) {
+    public void setBrandId(int brandId) {
         this.brandId = brandId;
     }
 
-   public boolean isActive() {
-        return active;
+    public String getStatus() {
+        return status;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public float getRatingAverage() {
@@ -175,5 +160,4 @@ public class Product {
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
-    
 }

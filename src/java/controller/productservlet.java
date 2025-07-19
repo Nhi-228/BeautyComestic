@@ -20,6 +20,7 @@ import java.util.*;
 import java.sql.*;
 
 import jakarta.servlet.annotation.MultipartConfig;
+import java.math.BigDecimal;
 
 /**
  *
@@ -71,11 +72,8 @@ public class productservlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
         String action = request.getParameter("action");
-        if (action == null) {
-            action = "list";
-        }
+        if (action == null) action = "list";
 
         try {
             ProductDao dao = new ProductDao();
@@ -91,23 +89,25 @@ public class productservlet extends HttpServlet {
                     int editId = Integer.parseInt(request.getParameter("id"));
                     Product product = dao.getProductById(editId);
                     request.setAttribute("product", product);
-                    request.getRequestDispatcher("editproduct.jsp").forward(request, response);
+                    request.getRequestDispatcher("editProduct.jsp").forward(request, response);
                     break;
 
                 case "add":
-                    request.getRequestDispatcher("addproduct.jsp").forward(request, response);
+                    request.getRequestDispatcher("addProduct.jsp").forward(request, response);
                     break;
 
-                default: // action = list
-                    List<Product> list = dao.getAllProducts();
-                    request.setAttribute("productList", list);
+                default: // list
+                    List<Product> productList = dao.getAllProducts();
+                    request.setAttribute("productList", productList);
                     request.getRequestDispatcher("managerProduct.jsp").forward(request, response);
                     break;
             }
+
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("error.jsp");
         }
+
     }
 
     /**
@@ -121,33 +121,31 @@ public class productservlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-        request.setCharacterEncoding("UTF-8");
+          request.setCharacterEncoding("UTF-8");
 
         try {
-            int id = request.getParameter("product_id") != null && !request.getParameter("product_id").isEmpty()
-                    ? Integer.parseInt(request.getParameter("product_id")) : 0;
+            int id = request.getParameter("product_id") != null ? Integer.parseInt(request.getParameter("product_id")) : 0;
 
+            // Đọc các field từ form
             String name = request.getParameter("product_name");
             String description = request.getParameter("description");
-            double price = Double.parseDouble(request.getParameter("price"));
-            double discount = Double.parseDouble(request.getParameter("discount_price"));
-            int quantity = Integer.parseInt(request.getParameter("quantity"));
-            String image = request.getParameter("image");
+            BigDecimal price = new BigDecimal(request.getParameter("price"));
+            BigDecimal discount = new BigDecimal(request.getParameter("discount_price"));
+            int quantity = Integer.parseInt(request.getParameter("stock_quantity"));
+            String sku = request.getParameter("sku");
+            String ingredients = request.getParameter("ingredients");
+            String image = request.getParameter("image_url");
             String gallery = request.getParameter("image_gallery");
             int categoryId = Integer.parseInt(request.getParameter("category_id"));
             int brandId = Integer.parseInt(request.getParameter("brand_id"));
             String status = request.getParameter("status");
-boolean active = (status != null && status.equalsIgnoreCase("Active"));
 
-            // Kiểm tra và chuẩn hóa status (nếu cần)
-            if (status == null || status.trim().isEmpty()) {
-                status = "Inactive";
-            } else if (status.equalsIgnoreCase("1") || status.equalsIgnoreCase("true") || status.equalsIgnoreCase("active")) {
-                status = "Active";
-            } else {
-                status = "Inactive";
-            }
+            float ratingAvg = request.getParameter("rating_average") != null ?
+                    Float.parseFloat(request.getParameter("rating_average")) : 0;
+            int reviewCount = request.getParameter("review_count") != null ?
+                    Integer.parseInt(request.getParameter("review_count")) : 0;
+
+            Timestamp now = new Timestamp(System.currentTimeMillis());
 
             Product p = new Product();
             p.setProductId(id);
@@ -156,17 +154,21 @@ boolean active = (status != null && status.equalsIgnoreCase("Active"));
             p.setPrice(price);
             p.setDiscountPrice(discount);
             p.setStockQuantity(quantity);
+            p.setSku(sku);
+            p.setIngredients(ingredients);
             p.setImageUrl(image);
             p.setImageGallery(gallery);
             p.setCategoryId(categoryId);
             p.setBrandId(brandId);
-          p.setActive(active);
-            p.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+            p.setStatus(status);
+            p.setRatingAverage(ratingAvg);
+            p.setReviewCount(reviewCount);
+            p.setUpdatedAt(now);
 
             ProductDao dao = new ProductDao();
 
             if (id == 0) {
-                p.setCreatedAt(new Timestamp(System.currentTimeMillis()));
+                p.setCreatedAt(now);
                 dao.addProduct(p);
             } else {
                 dao.updateProduct(p);

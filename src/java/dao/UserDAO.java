@@ -8,40 +8,30 @@ import java.util.List;
 public class UserDAO {
     private final Connection conn;
 
-    // Constructor để khởi tạo kết nối
     public UserDAO() throws Exception {
-        this.conn = connect.kn(); // Gọi phương thức kn() từ lớp connect
+        this.conn = connect.kn();
     }
 
     // Kiểm tra đăng nhập
     public boolean checkLogin(String email, String password) throws SQLException {
-    String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-    try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setString(1, email);
-        stmt.setString(2, password);
-        try (ResultSet rs = stmt.executeQuery()) {
-            return rs.next();
+        String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next();
+            }
         }
     }
-}
 
     // Lấy thông tin user theo email
     public User getUserByEmail(String email) throws SQLException {
-        String sql = "SELECT user_id, username, email, password, full_name, phone, address, role FROM users WHERE email = ?";
+        String sql = "SELECT * FROM users WHERE email = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    User u = new User();
-                    u.setUser_id(rs.getInt("user_id"));
-                    u.setUsername(rs.getString("username"));
-                    u.setEmail(rs.getString("email"));
-                    u.setPassword(rs.getString("password"));
-                    u.setFull_name(rs.getString("full_name"));
-                    u.setPhone(rs.getString("phone"));
-                    u.setAddress(rs.getString("address"));
-                    u.setRole(rs.getString("role"));
-                    return u;
+                    return extractUser(rs);
                 }
             }
         }
@@ -49,21 +39,27 @@ public class UserDAO {
     }
 
     // Thêm người dùng
-  public int add(User u) throws SQLException {
-    String sql = "INSERT INTO users(full_name, username, email, phone, password, address, updated_at, role) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setString(1, u.getFull_name());
-        ps.setString(2, u.getUsername());
-        ps.setString(3, u.getEmail());
-        ps.setString(4, u.getPhone());
-        ps.setString(5, u.getPassword());
-        ps.setString(6, u.getAddress());
-        ps.setString(7, u.getUpdate_at()); // giá trị yyyy-MM-dd
-        ps.setString(8, u.getRole());      // bạn nên set mặc định là "staff" nếu cần
-        return ps.executeUpdate();
+    public int add(User u) throws SQLException {
+        String sql = "INSERT INTO users(full_name, username, email, phone, password, address, role, created_at, updated_at, verified, blocked, is_active) " +
+                     "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, u.getFull_name());
+            ps.setString(2, u.getUsername());
+            ps.setString(3, u.getEmail());
+            ps.setString(4, u.getPhone());
+            ps.setString(5, u.getPassword());
+            ps.setString(6, u.getAddress());
+            ps.setString(7, u.getRole());
+            ps.setString(8, u.getCreated_at());
+            ps.setString(9, u.getUpdated_at());
+            ps.setBoolean(10, u.isVerified());
+            ps.setBoolean(11, u.isBlocked());
+            ps.setBoolean(12, u.isActive());
+            return ps.executeUpdate();
+        }
     }
-}
-    // Kiểm tra username hoặc email đã tồn tại chưa
+
+    // Kiểm tra username hoặc email đã tồn tại
     public boolean exists(String username, String email) throws SQLException {
         String sql = "SELECT user_id FROM users WHERE username = ? OR email = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -74,34 +70,67 @@ public class UserDAO {
             }
         }
     }
+
+    // Lấy danh sách nhân viên
     public List<User> getAllStaff() throws SQLException {
-    List<User> list = new ArrayList<>();
-    String sql = "SELECT * FROM users WHERE role = 'staff'";
-    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        List<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE role = 'staff'";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(extractUser(rs));
+            }
+        }
+        return list;
+    }
+
+    // Lấy user theo ID
+    public User getUserById(int id) throws SQLException {
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+
+        if (rs.next()) {
+            return extractUser(rs);
+        }
+        return null;
+    }
+
+    // Lấy danh sách khách hàng
+    public List<User> getAllCustomers() throws Exception {
+        List<User> list = new ArrayList<>();
+        String sql = "SELECT * FROM users WHERE role = 'customer'";
+        PreparedStatement ps = conn.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            User u = new User();
-            u.setUser_id(rs.getInt("user_id"));
-            u.setUsername(rs.getString("username"));
-            u.setEmail(rs.getString("email"));
-            u.setPassword(rs.getString("password"));
-            u.setFull_name(rs.getString("full_name"));
-            u.setPhone(rs.getString("phone"));
-            u.setAddress(rs.getString("address"));
-            u.setRole(rs.getString("role"));
-            u.setUpdate_at(rs.getString("updated_at"));
-            list.add(u);
+            list.add(extractUser(rs));
         }
+        return list;
     }
-    return list;
-}
-public User getUserById(int id) throws SQLException {
-    String sql = "SELECT * FROM users WHERE user_id = ?";
-    PreparedStatement stmt = conn.prepareStatement(sql);
-    stmt.setInt(1, id);
-    ResultSet rs = stmt.executeQuery();
 
-    if (rs.next()) {
+    // Đếm đơn giao thành công
+    public int countSuccessfulOrdersByCustomer(int userId) throws Exception {
+        String sql = "SELECT COUNT(*) FROM orders WHERE customer_id = ? AND status = 'DELIVERED'";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) return rs.getInt(1);
+        return 0;
+    }
+
+    // Đếm đơn đã hủy
+    public int countCanceledOrdersByCustomer(int userId) throws Exception {
+        String sql = "SELECT COUNT(*) FROM orders WHERE customer_id = ? AND status = 'CANCELLED'";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) return rs.getInt(1);
+        return 0;
+    }
+
+    // Hàm extractUser để tái sử dụng
+    private User extractUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setUser_id(rs.getInt("user_id"));
         user.setUsername(rs.getString("username"));
@@ -111,45 +140,34 @@ public User getUserById(int id) throws SQLException {
         user.setPhone(rs.getString("phone"));
         user.setAddress(rs.getString("address"));
         user.setRole(rs.getString("role"));
-        user.setUpdate_at(rs.getString("updated_at"));
+        user.setCreated_at(rs.getString("created_at"));
+        user.setUpdated_at(rs.getString("updated_at"));
+        user.setVerified(rs.getBoolean("verified"));
+        user.setBlocked(rs.getBoolean("blocked"));
+        user.setActive(rs.getBoolean("is_active"));
         return user;
     }
-    return null;
-}
-public List<User> getAllCustomers() throws Exception {
-    List<User> list = new ArrayList<>();
-    String sql = "SELECT * FROM users WHERE role = 'customer'";
-    PreparedStatement ps = conn.prepareStatement(sql);
-    ResultSet rs = ps.executeQuery();
-    while (rs.next()) {
-        User u = new User();
-        u.setUser_id(rs.getInt("user_id"));
-        u.setFull_name(rs.getString("full_name"));
-        u.setEmail(rs.getString("email"));
-        u.setPhone(rs.getString("phone"));
-        u.setVerified(rs.getBoolean("is_verified"));
-        list.add(u);
+    public void updateVerified(int userId) throws SQLException {
+    String sql = "UPDATE users SET verified = NOT verified WHERE user_id = ?";
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, userId);
+        ps.executeUpdate();
     }
-    return list;
 }
 
-// Đếm đơn đã giao thành công
-public int countSuccessfulOrdersByCustomer(int userId) throws Exception {
-    String sql = "SELECT COUNT(*) FROM orders WHERE customer_id = ? AND status = 'DELIVERED'";
-    PreparedStatement ps = conn.prepareStatement(sql);
-    ps.setInt(1, userId);
-    ResultSet rs = ps.executeQuery();
-    if (rs.next()) return rs.getInt(1);
-    return 0;
+public void updateBlocked(int userId) throws SQLException {
+    String sql = "UPDATE users SET blocked = NOT blocked WHERE user_id = ?";
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, userId);
+        ps.executeUpdate();
+    }
 }
 
-// Đếm đơn đã hủy
-public int countCanceledOrdersByCustomer(int userId) throws Exception {
-    String sql = "SELECT COUNT(*) FROM orders WHERE customer_id = ? AND status = 'CANCELLED'";
-    PreparedStatement ps = conn.prepareStatement(sql);
-    ps.setInt(1, userId);
-    ResultSet rs = ps.executeQuery();
-    if (rs.next()) return rs.getInt(1);
-    return 0;
+public void updateActive(int userId) throws SQLException {
+    String sql = "UPDATE users SET is_active = NOT is_active WHERE user_id = ?";
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, userId);
+        ps.executeUpdate();
+    }
 }
 }
