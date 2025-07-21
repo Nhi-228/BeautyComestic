@@ -12,7 +12,7 @@ import java.sql.DriverManager;
  * @author BINH NHI
  */
 public class connect {
-    public static final String URL="jdbc:mysql://localhost:3306/comestics_store";
+    public static final String URL="jdbc:mysql://localhost:3306/cosmetics_store";
     public static final String USER="root";
     public static final String PASSWORD="";
      public static Connection kn(){

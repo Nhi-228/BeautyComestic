@@ -15,8 +15,8 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        String email = req.getParameter("email").trim();
+        String password = req.getParameter("password").trim();
 
         try {
             UserDAO dao = new UserDAO();
@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
             if (isValid) {
                 HttpSession session = req.getSession(); // tạo hoặc lấy session hiện tại
                 session.setAttribute("userEmail", email);   // lưu email vào session
-                res.sendRedirect("home");              // hoặc forward
+                res.sendRedirect("home.jsp");              // chuyển về home.jsp
             } else {
                 res.sendRedirect("login.html?error=true");
             }

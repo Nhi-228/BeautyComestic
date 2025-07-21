@@ -14,12 +14,16 @@ public class UserDAO {
 
     // Kiểm tra đăng nhập
     public boolean checkLogin(String email, String password) throws SQLException {
+        System.out.println("DEBUG: Email nhận được = '" + email + "'");
+        System.out.println("DEBUG: Password nhận được = '" + password + "'");
         String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next();
+                boolean result = rs.next();
+                System.out.println("DEBUG: Kết quả truy vấn = " + result);
+                return result;
             }
         }
     }
