@@ -14,7 +14,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Beauty Daily - Product Page</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     </head>
     <body>
@@ -49,6 +49,7 @@
 
             <nav>
                 <ul class="nav-bar">
+                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">
@@ -146,10 +147,10 @@
                             </div>
                             <div class="products-content-right-button-content-big">
                                 <div class="products-content-right-button-content-title row">
-                                    <div class="products-content-right-button-content-item" data-tab="product">Product description</div>
-                                    <div class="products-content-right-button-content-item" data-tab="use">Use</div>
-                                    <div class="products-content-right-button-content-item" data-tab="suggest">Suggest</div>
-                                    <div class="products-content-right-button-content-item" data-tab="evaluate">Evaluate</div>
+                                    <div class="products-content-right-button-content-item" data-tab="product">Mô tả sản phẩm</div>
+                                    <div class="products-content-right-button-content-item" data-tab="use">Cách dùng</div>
+                                    <div class="products-content-right-button-content-item" data-tab="suggest">Gợi ý</div>
+                                    <div class="products-content-right-button-content-item" data-tab="evaluate">Đánh giá</div>
 
                                 </div>
                                 <div class="products-content-right-button-content">
@@ -196,9 +197,17 @@
 
                                     </div>
                                     <div class="tab-content" data-tab="suggest">
-
+                                        <b>Gợi ý:</b><br>
+                                        - Kết hợp với kem nền 3CE để có lớp nền hoàn hảo, lâu trôi.<br>
+                                        - Sử dụng thêm xịt khoáng để giữ lớp nền tươi tắn suốt ngày dài.<br>
+                                        - Phù hợp cho mọi loại da, đặc biệt là da khô cần dưỡng ẩm.<br>
                                     </div>
-                                    <div class="tab-content" data-tab="evaluate"></div>
+                                    <div class="tab-content" data-tab="evaluate">
+                                        <b>Đánh giá:</b><br>
+                                        - Sản phẩm được nhiều beauty blogger Hàn Quốc đánh giá cao về độ che phủ và tự nhiên.<br>
+                                        - Người dùng phản hồi lớp nền mỏng nhẹ, không gây bí da.<br>
+                                        - Đa số khách hàng hài lòng với khả năng giữ ẩm và độ bền màu của cushion.<br>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -216,13 +225,32 @@
                         for (Product p : products) {
                 %>
                 <div class="product-related-item">
-                    <img src="<%= p.getImage()%>" alt="">
-                    <h1><%= p.getName()%></h1>
+                    <img src="<%= p.getImageUrl()%>" alt="">
+                    <h1><%= p.getProductName()%></h1>
                     <p><%= p.getPrice()%><sup>đ</sup></p>
                 </div>
                 <%      }
                 } else { %>
-                <p>Không có sản phẩm liên quan.</p>
+                <div class="product-related-item">
+                    <img src="image/cushion.jpg" alt="">
+                    <h1>3CE BARE COVER CUSHION</h1>
+                    <p>580000<sup>đ</sup></p>
+                </div>
+                <div class="product-related-item">
+                    <img src="image/mascara.jpg" alt="">
+                    <h1>Mascara</h1>
+                    <p>190000<sup>đ</sup></p>
+                </div>
+                <div class="product-related-item">
+                    <img src="image/phanmat.png" alt="">
+                    <h1>Palette Eyes</h1>
+                    <p>2000000<sup>đ</sup></p>
+                </div>
+                <div class="product-related-item">
+                    <img src="image/kematnuoc.jpg" alt="">
+                    <h1>Bút kẻ mắt nước</h1>
+                    <p>175000<sup>đ</sup></p>
+                </div>
                 <% }%>
             </div>
         </section>

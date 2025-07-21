@@ -49,7 +49,7 @@
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
                     </div>
-                    <a href="mybag.html" id="myBagBtn" class="btn-bag">
+                    <a href="cart.jsp" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
                     </a>
                 </div>
@@ -57,6 +57,7 @@
 
             <nav>
                 <ul class="nav-bar">
+                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">

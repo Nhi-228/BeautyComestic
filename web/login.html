@@ -36,7 +36,7 @@
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
                     </div>
-                    <a href="mybag.html" id="myBagBtn" class="btn-bag">
+                    <a href="cart.jsp" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
                     </a>
                 </div>
@@ -44,6 +44,7 @@
 
             <nav>
                 <ul class="nav-bar">
+                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">
@@ -104,6 +105,7 @@
                             Email hoặc mật khẩu không đúng
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                        <div id="error" style="color:red; margin-top:10px; text-align:center;"></div>
                         <p class="text-center mt-2">Bạn chưa có tài khoản? <a href="register.html">Đăng ký</a></p>  
                 </form>
             </div>
@@ -161,8 +163,6 @@
             </div>
         </footer>
         <script src="JS.js"></script>
-
-        <p id="error" style="color:red;"></p>
 
         <script>
             const params = new URLSearchParams(window.location.search);

@@ -31,17 +31,27 @@
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
                     <div class="login-dropdown">
-                        <button class="login-btn" id="loginBtn"> ${sessionScope.userEmail}</button>
-                        <ul class="dropdown-list" id="loginDropdown">
-                            <li><i class="fa-regular fa-user"></i>Email : ${sessionScope.userEmail} </li>
-                            <li><i class="fa-regular fa-user"></i><a href="logout">Đăng xuất</a></li>
-                            <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
-                            <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
-                            <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
-                        </ul>
-                       
+                        <% if (session.getAttribute("userEmail") == null) { %>
+                            <button class="login-btn" id="loginBtn">LOGIN</button>
+                            <ul class="dropdown-list" id="loginDropdown">
+                                <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
+                                <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+                                <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+                                <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
+                                <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
+                            </ul>
+                        <% } else { %>
+                            <button class="login-btn" id="loginBtn"><%= session.getAttribute("userEmail") %></button>
+                            <ul class="dropdown-list" id="loginDropdown">
+                                <li><i class="fa-regular fa-user"></i>Email : <%= session.getAttribute("userEmail") %></li>
+                                <li><i class="fa-regular fa-user"></i><a href="logout">Đăng xuất</a></li>
+                                <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+                                <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
+                                <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
+                            </ul>
+                        <% } %>
                     </div>
-                    <a href="mybag.html" id="myBagBtn" class="btn-bag">
+                    <a href="cart.jsp" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
                     </a>
                 </div>
@@ -49,6 +59,8 @@
 
             <nav>
                 <ul class="nav-bar">
+                    <li><a href="category.jsp">ALL</a></li>
+                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">

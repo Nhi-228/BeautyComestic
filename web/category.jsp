@@ -12,7 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -49,6 +49,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
             <nav>
                 <ul class="nav-bar">
+                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">
@@ -97,7 +98,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <section class="cartelogy">
             <div class="container">
                 <div class="cartelogy-top row">
-                    <p>Home</p><span>&#8594;</span><p>Makeup</p>
+                    <p>Home</p><span>&#8594;</span><p>All</p>
                 </div>
             </div>
             <div class="container">
@@ -107,28 +108,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
                             <li class="cartelogy-left-li"><a href="">Makeup</a>
                                 <ul>
-                                    <li><a href="">Cushion</a></li>
-                                    <li><a href="">Cream</a></li>
-                                    <li><a href="">Mascara</a></li>
-                                    <li><a href="">Lip teen</a></li>
+                                    <li><a href="cushion.jsp">Cushion</a></li>
+                                    <li><a href="cream.jsp">Cream</a></li>
+                                    <li><a href="mascara.jsp">Mascara</a></li>
+                                    <li><a href="lipteen.jsp">Lip teen</a></li>
                                 </ul>
                             </li>
                             <li class="cartelogy-left-li"><a href="">Skincare</a>
                                 <ul>
-                                    <li><a href="">Serum</a></li>
-                                    <li><a href="">Cleaning</a></li>
-                                    <li><a href="">Mask</a></li>
-                                    <li><a href="">Acne treatment</a></li>
-                                    <li><a href="">Tonner</a></li>
+                                    <li><a href="serum.jsp">Serum</a></li>
+                                    <li><a href="cleaning.jsp">Cleaning</a></li>
+                                    <li><a href="mask.jsp">Mask</a></li>
+                                    <li><a href="acnetreatment.jsp">Acne treatment</a></li>
+                                    <li><a href="tonner.jsp">Tonner</a></li>
 
                                 </ul>
                             </li>
                             <li class="cartelogy-left-li"><a href="">Hair Care</a>
                                 <ul>
-                                    <li><a href="">Shampoo</a></li>
-                                    <li><a href="">Conditioner</a></li>
-                                    <li><a href="">Hair mask</a></li>
-                                    <li><a href="">Hair oil</a></li>
+                                    <li><a href="shampoo.jsp">Shampoo</a></li>
+                                    <li><a href="conditioner.jsp">Conditioner</a></li>
+                                    <li><a href="hairmask.jsp">Hair mask</a></li>
+                                    <li><a href="hairoil.jsp">Hair oil</a></li>
                                 </ul>
                             </li>
 
@@ -138,7 +139,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <div class="cartelogy-right row">
                         <div class="cartelogy-right-top">
                             <div class="cartelogy-right-top-item">
-                                <p>MAKEUPS</p>
+                                <p>ALL</p>
                             </div>
                             <div class="cartelogy-right-top-item">
                                 <button><span>filter</span><i class="fa-solid fa-filter" style="color: #4e82c6;"></i></button>
