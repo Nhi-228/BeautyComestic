@@ -1,15 +1,18 @@
 package dao;
 
-import model.Order;
 import java.sql.*;
 import java.util.*;
+import model.Connect;
+import model.Connect;
+import model.Order;
+import model.Order;
 
 public class OrderDao {
     private Connection conn;
 
     public OrderDao() {
         try {
-            conn = connect.kn(); // Đổi từ connect thành Connect (viết hoa đúng class name)
+            conn = Connect.getConnection(); // Đổi từ connect thành Connect (viết hoa đúng class name)
             if (conn == null) {
                 System.err.println("Không thể kết nối đến cơ sở dữ liệu trong OrderDao.");
             }

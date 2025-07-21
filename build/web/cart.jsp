@@ -12,7 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -49,7 +49,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
             <nav>
                 <ul class="nav-bar">
-                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">
@@ -84,7 +83,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.jsp">Personal Care</a>
+                        <a href="personalcare.html">Personal Care</a>
                     </li>
                 </ul>
             </nav>
@@ -157,7 +156,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <p style=" color: red; font-weight: bold;">Mua thêm <span style="font-size:18px; ">50000 đ</span>để được nhận thêm ưu đãi  </p>
                         </div>
                         <div class="cart-content-right-button">
-                            <button onclick="window.location.href='category.jsp'">Tiếp tục mua sắm </button>
+                            <button>Tiếp tục mua sắm </button>
                             <button>Thanh toán </button>
                         </div>
                         <div class="cart-content-right-insign">

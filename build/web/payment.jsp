@@ -12,7 +12,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -49,7 +49,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
             <nav>
                 <ul class="nav-bar">
-                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">

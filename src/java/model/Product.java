@@ -1,44 +1,73 @@
 package model;
-
-import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.List;
 
 public class Product {
-
-    private int productId;
-    private String productName;
-    private String description;
-    private BigDecimal price;
-    private BigDecimal discountPrice;
-    private int stockQuantity;
+    private int id;
+    private String name;
     private String sku;
-    private String ingredients;
-    private String imageUrl;
-    private String imageGallery;
-    private int categoryId;
-    private int brandId;
-    private String status;
-    private float ratingAverage;
-    private int reviewCount;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private double price;
+    private double discountPrice;
+    private String description;
+    private String usage;
+    private String suggestion;
 
-    // Getters and Setters
+    private List<ProductImage> imageGallery;     // Danh sách ảnh của sản phẩm
+    private List<ProductVariant> variants;       // Danh sách biến thể của sản phẩm
 
-    public int getProductId() {
-        return productId;
+ 
+    // Getters & Setters
+
+    public Product() {
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public Product(String name, String sku, String status, double price, double discountPrice, String description, String usage, String suggestion) {
+        this.name = name;
+        this.sku = sku;
+        this.price = price;
+        this.discountPrice = discountPrice;
+        this.description = description;
+        this.usage = usage;
+        this.suggestion = suggestion;
+    }
+    
+
+    public int getId() {
+        return id;
     }
 
-    public String getProductName() {
-        return productName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getDiscountPrice() {
+        return discountPrice;
+    }
+
+    public void setDiscountPrice(double discountPrice) {
+        this.discountPrice = discountPrice;
     }
 
     public String getDescription() {
@@ -49,115 +78,36 @@ public class Product {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public String getUsage() {
+        return usage;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setUsage(String usage) {
+        this.usage = usage;
     }
 
-    public BigDecimal getDiscountPrice() {
-        return discountPrice;
+    public String getSuggestion() {
+        return suggestion;
     }
 
-    public void setDiscountPrice(BigDecimal discountPrice) {
-        this.discountPrice = discountPrice;
+    public void setSuggestion(String suggestion) {
+        this.suggestion = suggestion;
     }
 
-    public int getStockQuantity() {
-        return stockQuantity;
-    }
-
-    public void setStockQuantity(int stockQuantity) {
-        this.stockQuantity = stockQuantity;
-    }
-
-    public String getSku() {
-        return sku;
-    }
-
-    public void setSku(String sku) {
-        this.sku = sku;
-    }
-
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public String getImageGallery() {
+    public List<ProductImage> getImageGallery() {
         return imageGallery;
     }
 
-    public void setImageGallery(String imageGallery) {
+    public void setImageGallery(List<ProductImage> imageGallery) {
         this.imageGallery = imageGallery;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public List<ProductVariant> getVariants() {
+        return variants;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setVariants(List<ProductVariant> variants) {
+        this.variants = variants;
     }
-
-    public int getBrandId() {
-        return brandId;
-    }
-
-    public void setBrandId(int brandId) {
-        this.brandId = brandId;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public float getRatingAverage() {
-        return ratingAverage;
-    }
-
-    public void setRatingAverage(float ratingAverage) {
-        this.ratingAverage = ratingAverage;
-    }
-
-    public int getReviewCount() {
-        return reviewCount;
-    }
-
-    public void setReviewCount(int reviewCount) {
-        this.reviewCount = reviewCount;
-    }
-
-    public Timestamp getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    
 }

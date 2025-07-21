@@ -15,15 +15,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
               rel="stylesheet" 
               integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" \
               crossorigin="anonymous">
     </head>
     <body>
-       <header>
+        <header>
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
@@ -96,76 +96,73 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         </header>
 
         <!-- forgot pasword -->
-        
+
         <section class="login-section">
             <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-    <form id="forgotForm" style="width: 400px;">
-      <h3 class="text-center mb-3">Quên mật khẩu</h3>
-      <div class="mb-3">
-        <label for="forgotEmail" class="form-label">Nhập email của bạn</label>
-        <input type="email" class="form-control" id="forgotEmail" placeholder="name@example.com" required>
-      </div>
-      <button type="submit" class="btn btn-warning w-100">Gửi yêu cầu</button>
-      <p class="text-center mt-3">Quay lại <a href="login.html">Đăng nhập</a></p>
-    </form>
-  </div>
+                <form action="forgot-password" method="post" id="forgotForm" style="width: 400px;">
+                    <h3 class="text-center mb-3">Quên mật khẩu</h3>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="text" name="email" class="form-control" id="email" placeholder="name@gmail.com" required>
+                    </div>
+                    <p style="color: green;">
+                        ${message}
+                    </p>
+                    <p style="color: red;">
+                        ${error}
+                    </p>       
+                    <button type="submit" class="btn btn-warning w-100">Gửi yêu cầu</button>
+                    <p class="text-center mt-3">Quay lại <a href="login.html">Đăng nhập</a></p>
+                </form>
+
+            </div>
         </section>
-        
+
         <footer>
-    <div class="footer-top">
-      <div class="footer-section">
-        <h4>ABOUT US</h4>
-        <a href="#">Who We Are</a>
-        <a href="#">Sustainability</a>
-      </div>
+            <div class="footer-top">
+                <div class="footer-section">
+                    <h4>ABOUT US</h4>
+                    <a href="#">Who We Are</a>
+                    <a href="#">Sustainability</a>
+                </div>
 
-      <div class="footer-section">
-        <h4>BEAUTY DAILY MEMBER</h4>
-        <a href="#">Beauty Daily Club</a>
-      </div>
+                <div class="footer-section">
+                    <h4>BEAUTY DAILY MEMBER</h4>
+                    <a href="#">Beauty Daily Club</a>
+                </div>
 
-      <div class="footer-section">
-        <h4>SHOPPING AT BEAUTY DAILY</h4>
-        <a href="#">Find a Store</a><br>
-        <a href="#">Chat & Shop</a><br>
-        <a href="#">Contact Us</a>
-      </div>
+                <div class="footer-section">
+                    <h4>SHOPPING AT BEAUTY DAILY</h4>
+                    <a href="#">Find a Store</a><br>
+                    <a href="#">Chat & Shop</a><br>
+                    <a href="#">Contact Us</a>
+                </div>
 
-      <div class="footer-section">
-        <h4>FIND US ON</h4>
-        <i class="fa-brands fa-facebook" style="color: #1374be;"></i>
-        <i class="fa-brands fa-youtube" style="color: #e11305;"></i>
-        <i class="fa-brands fa-instagram" style="color: #ae3287;"></i>
-        <i class="fa-brands fa-tiktok fa-beat"></i>
-        <i class="fa-solid fa-house" style="color: #74C0FC;"></i>
-      </div>
+                <div class="footer-section">
+                    <h4>FIND US ON</h4>
+                    <i class="fa-brands fa-facebook" style="color: #1374be;"></i>
+                    <i class="fa-brands fa-youtube" style="color: #e11305;"></i>
+                    <i class="fa-brands fa-instagram" style="color: #ae3287;"></i>
+                    <i class="fa-brands fa-tiktok fa-beat"></i>
+                    <i class="fa-solid fa-house" style="color: #74C0FC;"></i>
+                </div>
 
-      <div class="footer-app">
-        <h3>Get Our App</h3>
-        <p>to enjoy your best online shopping experience.</p>
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/QR_code_example.svg" alt="QR Code" width="80" />
-        <div>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" width="120" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Download_on_the_App_Store_Badge.svg" alt="App Store" width="120" />
-        </div>
-        <img src="https://online.gov.vn/Content/EndUser/LogoCCDVSaleNoti/logoSaleNoti.png" alt="Thông báo BCT" width="150" />
-      </div>
-    </div>
+                <div class="footer-app">
+                    <h3>Get Our App</h3>
+                    <p>to enjoy your best online shopping experience.</p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/QR_code_example.svg" alt="QR Code" width="80" />
+                    <div>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Play Store" width="120" />
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Download_on_the_App_Store_Badge.svg" alt="App Store" width="120" />
+                    </div>
+                    <img src="https://online.gov.vn/Content/EndUser/LogoCCDVSaleNoti/logoSaleNoti.png" alt="Thông báo BCT" width="150" />
+                </div>
+            </div>
 
-    <div class="footer-bottom">
-      <img src="image/BD.png" alt="Beauty Daily Logo" width="120" />
-    </div>
-  </footer>
-    <script src="JS.js"></script>
-    <script >
-         document.getElementById("forgotForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const email = document.getElementById("forgotEmail").value;
-      if (email) {
-        alert("Yêu cầu đặt lại mật khẩu đã được gửi tới " + email);
-        window.location.href = "login.html";
-      }
-    });
-    </script>
+            <div class="footer-bottom">
+                <img src="image/BD.png" alt="Beauty Daily Logo" width="120" />
+            </div>
+        </footer>
+        <script src="JS.js"></script>
     </body>
 </html>

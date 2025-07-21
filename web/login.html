@@ -30,13 +30,13 @@
                         <button class="login-btn" id="loginBtn">LOGIN</button>
                         <ul class="dropdown-list" id="loginDropdown">
                             <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
-                            <li><i class="fa-regular fa-user"></i><a href="register.html">Đăng ký</a></li>
+                            <li><i class="fa-regular fa-user"></i><a href="register.jsp">Đăng ký</a></li>
                             <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
                     </div>
-                    <a href="cart.jsp" id="myBagBtn" class="btn-bag">
+                    <a href="mybag.html" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
                     </a>
                 </div>
@@ -44,7 +44,6 @@
 
             <nav>
                 <ul class="nav-bar">
-                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">
@@ -99,14 +98,13 @@
                             <input type="password" name="password" class="form-control" id="password" required>
                         </div>
                         <div class="mb-2 text-end">
-                            <a href="forgotPassword.html" class="text-decoration-none" style="font-size: 0.9em;">Quên mật khẩu?</a>
+                            <a href="forgotPassword.jsp" class="text-decoration-none" style="font-size: 0.9em;">Quên mật khẩu?</a>
                         </div>
                         <div id="alerterorr" style="display: none;" class="alert alert-danger" role="alert">
                             Email hoặc mật khẩu không đúng
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
-                        <div id="error" style="color:red; margin-top:10px; text-align:center;"></div>
-                        <p class="text-center mt-2">Bạn chưa có tài khoản? <a href="register.html">Đăng ký</a></p>  
+                        <p class="text-center mt-2">Bạn chưa có tài khoản? <a href="register.jsp">Đăng ký</a></p>  
                 </form>
             </div>
         </section>
@@ -163,6 +161,8 @@
             </div>
         </footer>
         <script src="JS.js"></script>
+
+        <p id="error" style="color:red;"></p>
 
         <script>
             const params = new URLSearchParams(window.location.search);

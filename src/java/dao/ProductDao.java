@@ -3,140 +3,159 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import model.Connect;
 import model.Product;
+import model.ProductImage;
+import model.ProductVariant;
 
 public class ProductDao {
 
     private Connection conn;
 
     public ProductDao() throws Exception {
-        conn = connect.kn();
+        conn = Connect.getConnection();
         if (conn == null) {
             throw new SQLException("Không thể kết nối tới cơ sở dữ liệu. Hãy kiểm tra lại kết nối!");
         }
     }
 
-    // Thêm sản phẩm mới
     public void addProduct(Product product) throws SQLException {
-        String sql = "INSERT INTO products (product_name, description, price, discount_price, stock_quantity, sku, ingredients, image_url, image_gallery, category_id, brand_id, status, rating_average, review_count, created_at, updated_at) "
-                   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, product.getProductName());
-            ps.setString(2, product.getDescription());
-            ps.setBigDecimal(3, product.getPrice());
-            ps.setBigDecimal(4, product.getDiscountPrice());
-            ps.setInt(5, product.getStockQuantity());
-            ps.setString(6, product.getSku());
-            ps.setString(7, product.getIngredients());
-            ps.setString(8, product.getImageUrl());
-            ps.setString(9, product.getImageGallery());
-            ps.setInt(10, product.getCategoryId());
-            ps.setInt(11, product.getBrandId());
-            ps.setString(12, product.getStatus());
-            ps.setFloat(13, product.getRatingAverage());
-            ps.setInt(14, product.getReviewCount());
-            ps.setTimestamp(15, product.getCreatedAt());
-            ps.setTimestamp(16, product.getUpdatedAt());
-            ps.executeUpdate();
+        try {
+            conn.setAutoCommit(false);
+            int productId = insertProduct(product);
+            insertProductImages(productId, product.getImageGallery());
+            insertProductVariants(productId, product.getVariants());
+            conn.commit();
+        } catch (SQLException e) {
+            conn.rollback();
+            throw e;
+        } finally {
+            conn.setAutoCommit(true);
         }
     }
 
-    // Cập nhật sản phẩm
-    public void updateProduct(Product product) throws SQLException {
-        String sql = "UPDATE products SET product_name = ?, description = ?, price = ?, discount_price = ?, stock_quantity = ?, sku = ?, ingredients = ?, "
-                   + "image_url = ?, image_gallery = ?, category_id = ?, brand_id = ?, status = ?, rating_average = ?, review_count = ?, updated_at = ? "
-                   + "WHERE product_id = ?";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, product.getProductName());
-            ps.setString(2, product.getDescription());
-            ps.setBigDecimal(3, product.getPrice());
-            ps.setBigDecimal(4, product.getDiscountPrice());
-            ps.setInt(5, product.getStockQuantity());
-            ps.setString(6, product.getSku());
-            ps.setString(7, product.getIngredients());
-            ps.setString(8, product.getImageUrl());
-            ps.setString(9, product.getImageGallery());
-            ps.setInt(10, product.getCategoryId());
-            ps.setInt(11, product.getBrandId());
-            ps.setString(12, product.getStatus());
-            ps.setFloat(13, product.getRatingAverage());
-            ps.setInt(14, product.getReviewCount());
-            ps.setTimestamp(15, product.getUpdatedAt());
-            ps.setInt(16, product.getProductId());
-            ps.executeUpdate();
-        }
-    }
+    private int insertProduct(Product product) throws SQLException {
+        String sql = "INSERT INTO products (product_name, sku, price, discount_price, description, usage, suggestion) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, product.getName());
+            ps.setString(2, product.getSku());
+            ps.setDouble(3, product.getPrice());
+            ps.setDouble(4, product.getDiscountPrice());
+            ps.setString(5, product.getDescription());
+            ps.setString(6, product.getUsage());
+            ps.setString(7, product.getSuggestion());
 
-    // Xóa sản phẩm
-    public void deleteProduct(int productId) throws SQLException {
-        String sql = "DELETE FROM products WHERE product_id = ?";
-        try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, productId);
-            ps.executeUpdate();
-        }
-    }
+            if (ps.executeUpdate() == 0) {
+                throw new SQLException("Thêm sản phẩm thất bại.");
+            }
 
-    // Lấy tất cả sản phẩm
-    public List<Product> getAllProducts() throws SQLException {
-        List<Product> list = new ArrayList<>();
-        String sql = "SELECT * FROM products";
-        try (PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                Product p = new Product();
-                p.setProductId(rs.getInt("product_id"));
-                p.setProductName(rs.getString("product_name"));
-                p.setDescription(rs.getString("description"));
-                p.setPrice(rs.getBigDecimal("price"));
-                p.setDiscountPrice(rs.getBigDecimal("discount_price"));
-                p.setStockQuantity(rs.getInt("stock_quantity"));
-                p.setSku(rs.getString("sku"));
-                p.setIngredients(rs.getString("ingredients"));
-                p.setImageUrl(rs.getString("image_url"));
-                p.setImageGallery(rs.getString("image_gallery"));
-                p.setCategoryId(rs.getInt("category_id"));
-                p.setBrandId(rs.getInt("brand_id"));
-                p.setStatus(rs.getString("status"));
-                p.setRatingAverage(rs.getFloat("rating_average"));
-                p.setReviewCount(rs.getInt("review_count"));
-                p.setCreatedAt(rs.getTimestamp("created_at"));
-                p.setUpdatedAt(rs.getTimestamp("updated_at"));
-                list.add(p);
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                }
+                throw new SQLException("Không lấy được ID sản phẩm.");
             }
         }
-        return list;
     }
 
-    // Lấy sản phẩm theo ID
-    public Product getProductById(int id) throws SQLException {
-        String sql = "SELECT * FROM products WHERE product_id = ?";
+    private void insertProductImages(int productId, List<ProductImage> images) throws SQLException {
+        String sql = "INSERT INTO product_images (product_id, image_url, sort_order, is_primary) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setInt(1, id);
+            for (ProductImage img : images) {
+                ps.setInt(1, productId);
+                ps.setString(2, img.getImageUrl());
+                ps.setInt(3, img.getSortOrder());
+                ps.setBoolean(4, img.isIsPrimary());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
+    }
+
+    private void insertProductVariants(int productId, List<ProductVariant> variants) throws SQLException {
+        if (variants == null || variants.isEmpty()) {
+            return;
+        }
+        String sql = "INSERT INTO product_variants (product_id, name, sku, price, stock_quantity) VALUES (?, ?, ?, ?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            for (ProductVariant v : variants) {
+                ps.setInt(1, productId);
+                ps.setString(2, v.getName());
+                ps.setString(3, v.getSku());
+                ps.setBigDecimal(4, v.getPrice());
+                ps.setInt(5, v.getStockQuantity());
+                ps.addBatch();
+            }
+            ps.executeBatch();
+        }
+    }
+
+    public Product getFullProductById(int productId) throws SQLException {
+        Product product = null;
+
+        // 1. Lấy thông tin chính của sản phẩm
+        String productSql = "SELECT * FROM products WHERE product_id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(productSql)) {
+            ps.setInt(1, productId);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    Product p = new Product();
-                    p.setProductId(rs.getInt("product_id"));
-                    p.setProductName(rs.getString("product_name"));
-                    p.setDescription(rs.getString("description"));
-                    p.setPrice(rs.getBigDecimal("price"));
-                    p.setDiscountPrice(rs.getBigDecimal("discount_price"));
-                    p.setStockQuantity(rs.getInt("stock_quantity"));
-                    p.setSku(rs.getString("sku"));
-                    p.setIngredients(rs.getString("ingredients"));
-                    p.setImageUrl(rs.getString("image_url"));
-                    p.setImageGallery(rs.getString("image_gallery"));
-                    p.setCategoryId(rs.getInt("category_id"));
-                    p.setBrandId(rs.getInt("brand_id"));
-                    p.setStatus(rs.getString("status"));
-                    p.setRatingAverage(rs.getFloat("rating_average"));
-                    p.setReviewCount(rs.getInt("review_count"));
-                    p.setCreatedAt(rs.getTimestamp("created_at"));
-                    p.setUpdatedAt(rs.getTimestamp("updated_at"));
-                    return p;
+                    product = new Product();
+                    product.setId(rs.getInt("product_id"));
+                    product.setName(rs.getString("product_name"));
+                    product.setSku(rs.getString("sku"));
+                    product.setPrice(rs.getDouble("price"));
+                    product.setDiscountPrice(rs.getDouble("discount_price"));
+                    product.setDescription(rs.getString("description"));
+                    product.setUsage(rs.getString("usage"));
+                    product.setSuggestion(rs.getString("suggestion"));
                 }
             }
         }
-        return null;
+
+        if (product == null) {
+            return null;
+        }
+
+        // 2. Lấy danh sách hình ảnh
+        List<ProductImage> images = new ArrayList<>();
+        String imageSql = "SELECT * FROM product_images WHERE product_id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(imageSql)) {
+            ps.setInt(1, productId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ProductImage img = new ProductImage();
+                    img.setImageId(rs.getInt("image_id"));
+                    img.setProductId(productId);
+                    img.setImageUrl(rs.getString("image_url"));
+                    img.setSortOrder(rs.getInt("sort_order"));
+                    img.setIsPrimary(rs.getBoolean("is_primary"));
+                    images.add(img);
+                }
+            }
+        }
+        product.setImageGallery(images);
+
+        // 3. Lấy danh sách biến thể
+        List<ProductVariant> variants = new ArrayList<>();
+        String variantSql = "SELECT * FROM product_variants WHERE product_id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(variantSql)) {
+            ps.setInt(1, productId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ProductVariant variant = new ProductVariant();
+                    variant.setVariantId(rs.getInt("variant_id"));
+                    variant.setProductId(productId);
+                    variant.setName(rs.getString("name"));
+                    variant.setSku(rs.getString("sku"));
+                    variant.setPrice(rs.getBigDecimal("price"));
+                    variant.setStockQuantity(rs.getInt("stock_quantity"));
+                    variants.add(variant);
+                }
+            }
+        }
+        product.setVariants(variants);
+
+        return product;
     }
+
 }

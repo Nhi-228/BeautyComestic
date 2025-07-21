@@ -3,10 +3,18 @@
     Created on : Jul 15, 2025, 8:17:56 PM
     Author     : nathv
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="model.Product" %>
+<%@page import="model.Product" %>
+<%@page import="model.ProductImage" %>
+<%@page import="model.ProductVariant" %>
+<%@page import="java.util.List" %>
+<%@page import="dao.ProductDao" %>
+<%@page import="jakarta.servlet.*" %>
+<%@page import="jakarta.servlet.http.*" %>
+<%@page import="model.Product" %>
+<%
+    Product product = (Product) request.getAttribute("product");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -49,7 +57,6 @@
 
             <nav>
                 <ul class="nav-bar">
-                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">
@@ -84,7 +91,7 @@
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.jsp">Personal Care</a>
+                        <a href="personalcare.html">Personal Care</a>
                     </li>
                 </ul>
             </nav>
@@ -92,7 +99,7 @@
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
 
-
+<% if (product != null) { %>
         <!-- PRODUCT DETAIL -->
         <section class="products">
             <div class="container">
@@ -113,10 +120,10 @@
                     <div class="products-content-right">
                         <div class="products-name">
                             <h1>3CE BARE COVER CUSHION</h1>
-                            <p class="status">Tình trạng: <span class="stock">Còn hàng</span> | Mã SKU: SP670942631</p>
+                            <p class="status">Tình trạng: <span class="stock"><%= product.getStatus() %> </span> | Mã SKU: <%= product.getSku() %></p>
                         </div>
                         <div class="products-price">
-                            <span class="old-price">450,000₫</span>
+                            <span class="old-price"><%= product.getPrice() %> ₫</span>
                             <span class="discount">-15%</span>
                             <p class="save">Tiết kiệm 67,500₫</p>
                         </div>
@@ -147,10 +154,10 @@
                             </div>
                             <div class="products-content-right-button-content-big">
                                 <div class="products-content-right-button-content-title row">
-                                    <div class="products-content-right-button-content-item" data-tab="product">Mô tả sản phẩm</div>
-                                    <div class="products-content-right-button-content-item" data-tab="use">Cách dùng</div>
-                                    <div class="products-content-right-button-content-item" data-tab="suggest">Gợi ý</div>
-                                    <div class="products-content-right-button-content-item" data-tab="evaluate">Đánh giá</div>
+                                    <div class="products-content-right-button-content-item" data-tab="product">Product description</div>
+                                    <div class="products-content-right-button-content-item" data-tab="use">Use</div>
+                                    <div class="products-content-right-button-content-item" data-tab="suggest">Suggest</div>
+                                    <div class="products-content-right-button-content-item" data-tab="evaluate">Evaluate</div>
 
                                 </div>
                                 <div class="products-content-right-button-content">
@@ -197,61 +204,44 @@
 
                                     </div>
                                     <div class="tab-content" data-tab="suggest">
-                                        <b>Gợi ý:</b><br>
-                                        - Kết hợp với kem nền 3CE để có lớp nền hoàn hảo, lâu trôi.<br>
-                                        - Sử dụng thêm xịt khoáng để giữ lớp nền tươi tắn suốt ngày dài.<br>
-                                        - Phù hợp cho mọi loại da, đặc biệt là da khô cần dưỡng ẩm.<br>
+
                                     </div>
-                                    <div class="tab-content" data-tab="evaluate">
-                                        <b>Đánh giá:</b><br>
-                                        - Sản phẩm được nhiều beauty blogger Hàn Quốc đánh giá cao về độ che phủ và tự nhiên.<br>
-                                        - Người dùng phản hồi lớp nền mỏng nhẹ, không gây bí da.<br>
-                                        - Đa số khách hàng hài lòng với khả năng giữ ẩm và độ bền màu của cushion.<br>
-                                    </div>
+                                    <div class="tab-content" data-tab="evaluate"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
         </section>
+    <% } else { %>
+    <p>Không tìm thấy sản phẩm.</p>
+    <% } %>
         <section class="product-related container">
             <div class="product-related-tittle">
                 <p> Sản phẩm liên quan </p>
+
             </div>
             <div class="products-content row">
-                <%
-                    List<Product> products = (List<Product>) request.getAttribute("products");
-                    if (products != null) {
-                        for (Product p : products) {
-                %>
                 <div class="product-related-item">
-                    <img src="<%= p.getImageUrl()%>" alt="">
-                    <h1><%= p.getProductName()%></h1>
-                    <p><%= p.getPrice()%><sup>đ</sup></p>
-                </div>
-                <%      }
-                } else { %>
-                <div class="product-related-item">
-                    <img src="image/cushion.jpg" alt="">
+                    <img src="image/cushion1.1.jpg" alt="">
                     <h1>3CE BARE COVER CUSHION</h1>
-                    <p>580000<sup>đ</sup></p>
+                    <p>450000<sup>đ</sup></p>
                 </div>
                 <div class="product-related-item">
-                    <img src="image/mascara.jpg" alt="">
-                    <h1>Mascara</h1>
-                    <p>190000<sup>đ</sup></p>
+                    <img src="image/cushion1.2.jpg" alt="">
+                    <h1>3CE BARE COVER CUSHION</h1>
+                    <p>450000<sup>đ</sup></p>
                 </div>
                 <div class="product-related-item">
-                    <img src="image/phanmat.png" alt="">
-                    <h1>Palette Eyes</h1>
-                    <p>2000000<sup>đ</sup></p>
+                    <img src="image/cushion1.3.jpg" alt="">
+                    <h1>3CE BARE COVER CUSHION</h1>
+                    <p>450000<sup>đ</sup></p>
                 </div>
                 <div class="product-related-item">
-                    <img src="image/kematnuoc.jpg" alt="">
-                    <h1>Bút kẻ mắt nước</h1>
-                    <p>175000<sup>đ</sup></p>
+                    <img src="image/cushion1.4.jpg" alt="">
+                    <h1>3CE BARE COVER CUSHION</h1>
+                    <p>450000<sup>đ</sup></p>
                 </div>
-                <% }%>
             </div>
         </section>
 
@@ -297,62 +287,6 @@
             </div>
         </footer>
         <script src="JS.js"></script>
-        <script >
-            const addToCartBtn = document.querySelector('.add-to-cart');
-
-// Khi click, thêm sản phẩm vào localStorage
-            addToCartBtn.addEventListener('click', function () {
-                const product = {
-                    id: "SP670942631",
-                    name: "3CE BARE COVER CUSHION",
-                    price: 450000,
-                    quantity: parseInt(document.querySelector('.quantity-box input').value),
-                    image: "image/cushion.jpg"
-                };
-
-                // Lấy giỏ hàng từ localStorage (nếu chưa có thì tạo mới)
-                let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-                // Kiểm tra nếu sản phẩm đã có trong giỏ → tăng số lượng
-                const existing = cart.find(p => p.id === product.id);
-                if (existing) {
-                    existing.quantity += product.quantity;
-                } else {
-                    cart.push(product);
-                }
-
-                // Lưu lại vào localStorage
-                localStorage.setItem("cart", JSON.stringify(cart));
-
-                // Hiển thị thông báo hoặc chuyển trang nếu cần
-                alert("Đã thêm vào giỏ hàng!");
-                function updateCartCount() {
-                    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-                    const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
-                    document.getElementById("cart-count").textContent = totalQuantity;
-                }
-
-// Gọi hàm khi trang load
-                window.addEventListener("load", updateCartCount);
-            });
-            document.getElementById("buyNowBtn").addEventListener("click", function () {
-                // (Tuỳ chọn) bạn có thể lưu thông tin sản phẩm cần thanh toán riêng nếu cần
-                const product = {
-                    id: "SP670942631",
-                    name: "3CE BARE COVER CUSHION",
-                    price: 450000,
-                    quantity: parseInt(document.querySelector('.quantity-box input').value),
-                    image: "image/cushion.jpg"
-                };
-
-                // Lưu sản phẩm tạm thời vào localStorage để dùng ở trang payment
-                localStorage.setItem("paymentProduct", JSON.stringify(product));
-
-                // Chuyển sang trang thanh toán
-                window.location.href = "payment.html";
-            });
-
-        </script>
     </body>
 </html>
 
