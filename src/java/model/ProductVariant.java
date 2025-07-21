@@ -1,35 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
-
 import java.math.BigDecimal;
 
-/**
- *
- * @author nathv
- */
+
 public class ProductVariant {
     private int variantId;
-    private int productId;          // FK đến Product
-    private String name;            // Ví dụ: “Màu đỏ - Size M”
-    private String sku;
-    private BigDecimal price;
-    private BigDecimal discountPrice;
+    private int productId;
+    private String variantName;
+    private String variantValue;
+    private BigDecimal priceAdjustment;
     private int stockQuantity;
+    private String sku;
+    private boolean active;
 
     public ProductVariant() {
     }
 
-    public ProductVariant(int variantId, int productId, String name, String sku, BigDecimal price, BigDecimal discountPrice, int stockQuantity) {
+    
+    public ProductVariant(int variantId, int productId, String variantName, String variantValue,
+                          BigDecimal priceAdjustment, int stockQuantity, String sku, boolean isActive) {
         this.variantId = variantId;
         this.productId = productId;
-        this.name = name;
-        this.sku = sku;
-        this.price = price;
-        this.discountPrice = discountPrice;
+        this.variantName = variantName;
+        this.variantValue = variantValue;
+        this.priceAdjustment = priceAdjustment;
         this.stockQuantity = stockQuantity;
+        this.sku = sku;
+        this.active = isActive;
     }
 
     public int getVariantId() {
@@ -48,36 +44,28 @@ public class ProductVariant {
         this.productId = productId;
     }
 
-    public String getName() {
-        return name;
+    public String getVariantName() {
+        return variantName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setVariantName(String variantName) {
+        this.variantName = variantName;
     }
 
-    public String getSku() {
-        return sku;
+    public String getVariantValue() {
+        return variantValue;
     }
 
-    public void setSku(String sku) {
-        this.sku = sku;
+    public void setVariantValue(String variantValue) {
+        this.variantValue = variantValue;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getPriceAdjustment() {
+        return priceAdjustment;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public BigDecimal getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public void setDiscountPrice(BigDecimal discountPrice) {
-        this.discountPrice = discountPrice;
+    public void setPriceAdjustment(BigDecimal priceAdjustment) {
+        this.priceAdjustment = priceAdjustment;
     }
 
     public int getStockQuantity() {
@@ -88,5 +76,19 @@ public class ProductVariant {
         this.stockQuantity = stockQuantity;
     }
 
-    
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
 }

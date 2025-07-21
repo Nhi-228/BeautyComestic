@@ -1,12 +1,14 @@
 package model;
 
+
+
 public class ProductImage {
     private int imageId;
-    private int productId;           // FK đến Product
+    private int productId;
     private String imageUrl;
     private String altText;
     private int sortOrder;
-    private boolean isPrimary;
+    private boolean Primary;
 
     public ProductImage(int imageId, int productId, String imageUrl, String altText, int sortOrder, boolean isPrimary) {
         this.imageId = imageId;
@@ -14,11 +16,13 @@ public class ProductImage {
         this.imageUrl = imageUrl;
         this.altText = altText;
         this.sortOrder = sortOrder;
-        this.isPrimary = isPrimary;
+        this.Primary = isPrimary;
     }
 
     public ProductImage() {
     }
+
+    
 
     public int getImageId() {
         return imageId;
@@ -60,13 +64,11 @@ public class ProductImage {
         this.sortOrder = sortOrder;
     }
 
-    public boolean isIsPrimary() {
-        return isPrimary;
+    public boolean isPrimary() {
+        return Primary;
     }
 
-    public void setIsPrimary(boolean isPrimary) {
-        this.isPrimary = isPrimary;
+    public void setPrimary(boolean Primary) {
+        this.Primary = Primary;
     }
-
-    
 }

@@ -2,7 +2,6 @@ package dao;
 
 
 import java.sql.*;
-import model.Connect;
 import model.User;
 
 public class UserDAO {

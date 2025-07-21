@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Category;
 import model.Category;
-import model.Connect;
-import model.Connect;
 /**
  *
  * @author BINH NHI

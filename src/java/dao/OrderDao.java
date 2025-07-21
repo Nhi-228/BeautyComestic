@@ -2,8 +2,6 @@ package dao;
 
 import java.sql.*;
 import java.util.*;
-import model.Connect;
-import model.Connect;
 import model.Order;
 import model.Order;
 

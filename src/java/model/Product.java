@@ -1,59 +1,81 @@
 package model;
+
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Product {
-    private int id;
-    private String name;
-    private String sku;
+    private int productId;
+    private String productName;
+    private String description;
     private double price;
     private double discountPrice;
-    private String description;
-    private String usage;
-    private String suggestion;
-
-    private List<ProductImage> imageGallery;     // Danh sách ảnh của sản phẩm
-    private List<ProductVariant> variants;       // Danh sách biến thể của sản phẩm
-
- 
-    // Getters & Setters
+    private int stockQuantity;
+    private String sku;
+    private String ingredients;
+    private String imageUrl;
+    private String imageGallery;
+    private int categoryId;
+    private int brandId;
+    private String status;
+    private double ratingAverage;
+    private int reviewCount;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public Product() {
     }
 
-    public Product(String name, String sku, String status, double price, double discountPrice, String description, String usage, String suggestion) {
-        this.name = name;
-        this.sku = sku;
+    
+    
+    public Product(int productId, String productName, String description, double price, double discountPrice,
+                   int stockQuantity, String sku, String ingredients, String imageUrl, String imageGallery,
+                   int categoryId, int brandId, String status, double ratingAverage, int reviewCount,
+                   Timestamp createdAt, Timestamp updatedAt) {
+        this.productId = productId;
+        this.productName = productName;
+        this.description = description;
         this.price = price;
         this.discountPrice = discountPrice;
-        this.description = description;
-        this.usage = usage;
-        this.suggestion = suggestion;
+        this.stockQuantity = stockQuantity;
+        this.sku = sku;
+        this.ingredients = ingredients;
+        this.imageUrl = imageUrl;
+        this.imageGallery = imageGallery;
+        this.categoryId = categoryId;
+        this.brandId = brandId;
+        this.status = status;
+        this.ratingAverage = ratingAverage;
+        this.reviewCount = reviewCount;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
+
     
 
-    public int getId() {
-        return id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public String getName() {
-        return name;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getSku() {
-        return sku;
+    public String getDescription() {
+        return description;
     }
 
-    public void setSku(String sku) {
-        this.sku = sku;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
     public double getPrice() {
         return price;
     }
@@ -70,44 +92,99 @@ public class Product {
         this.discountPrice = discountPrice;
     }
 
-    public String getDescription() {
-        return description;
+    public int getStockQuantity() {
+        return stockQuantity;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStockQuantity(int stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
-    public String getUsage() {
-        return usage;
+    public String getSku() {
+        return sku;
     }
 
-    public void setUsage(String usage) {
-        this.usage = usage;
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
-    public String getSuggestion() {
-        return suggestion;
+    public String getIngredients() {
+        return ingredients;
     }
 
-    public void setSuggestion(String suggestion) {
-        this.suggestion = suggestion;
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
     }
 
-    public List<ProductImage> getImageGallery() {
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageGallery() {
         return imageGallery;
     }
 
-    public void setImageGallery(List<ProductImage> imageGallery) {
+    public void setImageGallery(String imageGallery) {
         this.imageGallery = imageGallery;
     }
 
-    public List<ProductVariant> getVariants() {
-        return variants;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setVariants(List<ProductVariant> variants) {
-        this.variants = variants;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
-    
+
+    public int getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(int brandId) {
+        this.brandId = brandId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public double getRatingAverage() {
+        return ratingAverage;
+    }
+
+    public void setRatingAverage(double ratingAverage) {
+        this.ratingAverage = ratingAverage;
+    }
+
+    public int getReviewCount() {
+        return reviewCount;
+    }
+
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 }
