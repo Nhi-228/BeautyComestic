@@ -1,14 +1,15 @@
 package model;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.List;
 
 public class Product {
+
     private int productId;
     private String productName;
     private String description;
-    private double price;
-    private double discountPrice;
+    private BigDecimal price;
+    private BigDecimal discountPrice;
     private int stockQuantity;
     private String sku;
     private String ingredients;
@@ -17,40 +18,13 @@ public class Product {
     private int categoryId;
     private int brandId;
     private String status;
-    private double ratingAverage;
+    private float ratingAverage;
     private int reviewCount;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    private boolean active;
 
-    public Product() {
-    }
-
-    
-    
-    public Product(int productId, String productName, String description, double price, double discountPrice,
-                   int stockQuantity, String sku, String ingredients, String imageUrl, String imageGallery,
-                   int categoryId, int brandId, String status, double ratingAverage, int reviewCount,
-                   Timestamp createdAt, Timestamp updatedAt) {
-        this.productId = productId;
-        this.productName = productName;
-        this.description = description;
-        this.price = price;
-        this.discountPrice = discountPrice;
-        this.stockQuantity = stockQuantity;
-        this.sku = sku;
-        this.ingredients = ingredients;
-        this.imageUrl = imageUrl;
-        this.imageGallery = imageGallery;
-        this.categoryId = categoryId;
-        this.brandId = brandId;
-        this.status = status;
-        this.ratingAverage = ratingAverage;
-        this.reviewCount = reviewCount;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-    }
-
-    
+    // Getters and Setters
 
     public int getProductId() {
         return productId;
@@ -76,19 +50,19 @@ public class Product {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public double getDiscountPrice() {
+    public BigDecimal getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(double discountPrice) {
+    public void setDiscountPrice(BigDecimal discountPrice) {
         this.discountPrice = discountPrice;
     }
 
@@ -156,11 +130,11 @@ public class Product {
         this.status = status;
     }
 
-    public double getRatingAverage() {
+    public float getRatingAverage() {
         return ratingAverage;
     }
 
-    public void setRatingAverage(double ratingAverage) {
+    public void setRatingAverage(float ratingAverage) {
         this.ratingAverage = ratingAverage;
     }
 
@@ -186,5 +160,12 @@ public class Product {
 
     public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public boolean isActive() {
+        return status != null && status.equalsIgnoreCase("active");
+    }
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

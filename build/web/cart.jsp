@@ -5,6 +5,12 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("userEmail") == null) {
+        response.sendRedirect("login.html");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,7 +18,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 -->
 <html>
     <head>
-        <link rel="stylesheet" href="style.css" />
+        <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
@@ -23,7 +29,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
-
             <div class="main-header">
                 <div class="search-box">
                     <input type="text" placeholder="Gift with purchase" />
@@ -32,6 +37,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
                     <div class="login-dropdown">
+                        <% if (session.getAttribute("userEmail") == null) { %>
                         <button class="login-btn" id="loginBtn">LOGIN</button>
                         <ul class="dropdown-list" id="loginDropdown">
                             <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
@@ -40,15 +46,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
+                        <% } else { %>
+                            <button class="login-btn" id="loginBtn"><%= session.getAttribute("userEmail") %></button>
+                            <ul class="dropdown-list" id="loginDropdown">
+                                <li><i class="fa-regular fa-user"></i>Email : <%= session.getAttribute("userEmail") %></li>
+                                <li><i class="fa-regular fa-user"></i><a href="logout">Đăng xuất</a></li>
+                                <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+                                <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
+                                <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
+                            </ul>
+                        <% } %>
                     </div>
-                    <a href="mybag.html" id="myBagBtn" class="btn-bag">
+                    <a href="cart.jsp" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
                     </a>
                 </div>
             </div>
-
             <nav>
                 <ul class="nav-bar">
+                    <li><a href="category.jsp">ALL</a></li>
+                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">
@@ -83,11 +100,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.html">Personal Care</a>
+                        <a href="personalcare.jsp">Personal Care</a>
                     </li>
                 </ul>
             </nav>
-
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
 
@@ -156,7 +172,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <p style=" color: red; font-weight: bold;">Mua thêm <span style="font-size:18px; ">50000 đ</span>để được nhận thêm ưu đãi  </p>
                         </div>
                         <div class="cart-content-right-button">
-                            <button>Tiếp tục mua sắm </button>
+                            <button onclick="window.location.href='category.jsp'">Tiếp tục mua sắm </button>
                             <button>Thanh toán </button>
                         </div>
                         <div class="cart-content-right-insign">

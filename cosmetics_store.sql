@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 21, 2025 lúc 06:01 AM
+-- Thời gian đã tạo: Th7 17, 2025 lúc 02:58 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.0.30
 
@@ -87,7 +87,7 @@ CREATE TABLE `customers` (
   `email` varchar(100) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `birth_date` date DEFAULT NULL,
-  `gender` enum('male','female') DEFAULT NULL,
+  `gender` enum('male','female','other') DEFAULT NULL,
   `address` text DEFAULT NULL,
   `city` varchar(50) DEFAULT NULL,
   `district` varchar(50) DEFAULT NULL,
@@ -186,6 +186,8 @@ CREATE TABLE `products` (
   `stock_quantity` int(11) DEFAULT 0,
   `sku` varchar(50) DEFAULT NULL,
   `ingredients` text DEFAULT NULL,
+  `image_url` varchar(500) DEFAULT NULL,
+  `image_gallery` text DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `brand_id` int(11) DEFAULT NULL,
   `status` enum('active','inactive','out_of_stock','discontinued') DEFAULT 'active',
@@ -204,7 +206,7 @@ CREATE TABLE `products` (
 CREATE TABLE `product_images` (
   `image_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `image_url` text NOT NULL,
+  `image_url` varchar(500) NOT NULL,
   `alt_text` varchar(200) DEFAULT NULL,
   `sort_order` int(11) DEFAULT 0,
   `is_primary` tinyint(1) DEFAULT 0
@@ -383,10 +385,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `username`, `email`, `password`, `full_name`, `phone`, `address`, `role`, `created_at`, `updated_at`, `is_active`) VALUES
 (1, 'admin', 'admin@gmail.com', '123456', '', NULL, NULL, 'admin', '2025-07-14 14:53:34', '2025-07-15 14:23:49', 1),
 (2, 'nhat', 'nhat@gmail.com', '1', '', NULL, NULL, 'customer', '2025-07-15 14:24:31', '2025-07-15 14:24:31', 1),
-(3, 'staff', 'staff@gmail.com', '123456', '', NULL, NULL, 'staff', '2025-07-16 01:14:31', '2025-07-16 01:14:31', 1),
-(8, 'nhat22', 'nhat03@gmail.com', '1', '0987654321', 'abcxyza', '1', 'customer', '2025-07-19 07:34:16', '2025-07-19 07:34:16', 1),
-(12, 'nahhh', 'teststaff@gmail.com', '123', '0932131232', 'nguyen van nhat', 'dsa', 'staff', '2025-07-20 12:02:50', '2025-07-20 12:02:50', 1),
-(13, '123', 'nhat0@gmail.com', '123', '0987654321', 'abcxyza', '1', 'customer', '2025-07-20 12:21:21', '2025-07-20 12:21:21', 1);
+(3, 'staff', 'staff@gmail.com', '123456', '', NULL, NULL, 'staff', '2025-07-16 01:14:31', '2025-07-16 01:14:31', 1);
 
 -- --------------------------------------------------------
 
@@ -640,7 +639,7 @@ ALTER TABLE `order_items`
 -- AUTO_INCREMENT cho bảng `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT cho bảng `product_images`
@@ -688,7 +687,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `wishlist`

@@ -3,12 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
-
+import model.Category;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import model.Category;
-import model.Category;
 /**
  *
  * @author BINH NHI
@@ -17,7 +15,7 @@ public class CategoryDao {
      private Connection conn;
 
     public CategoryDao() throws Exception {
-        conn = Connect.getConnection(); // Hàm kết nối CSDL từ lớp Connect bạn đã có
+        conn = connect.kn(); // Hàm kết nối CSDL từ lớp Connect bạn đã có
     }
 
     // Thêm danh mục mới

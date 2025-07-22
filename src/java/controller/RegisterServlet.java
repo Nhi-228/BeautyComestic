@@ -1,3 +1,4 @@
+package controller;
 
 import dao.UserDAO;
 import model.User;
@@ -25,21 +26,33 @@ public class RegisterServlet extends HttpServlet {
         String fullname = request.getParameter("fullname");
         String address = request.getParameter("address");
 
-        User u = new User(username, email, password, sdt, fullname, address);
+        User u = new User();
+        u.setUsername(username);
+        u.setEmail(email);
+        u.setPassword(password);
+        u.setFull_name(fullname);
+        u.setPhone(sdt);
+        u.setAddress(address);
+
         try {
             UserDAO dao = new UserDAO();
             boolean isValid = dao.exists(username, email);
             if (!isValid) {
                 int result = dao.add(u);
                 if (result > 0) {
-                    request.setAttribute("message", "Đăng ký thành công!");
+                    out.println("<!DOCTYPE html>");
+                    out.println("<html><head><title>Đăng ký</title></head><body>");
+                    out.println("<h2>Đăng ký thành công!</h2>");
+                    out.println("<a href='login.jsp'>Đăng nhập ngay</a>");
+                    out.println("</body></html>");
+
+                    response.sendRedirect("login.html");
                 } else {
-                    request.setAttribute("message", "Đăng ký thất bại! Vui lòng thử lại.");
+                    out.println("<h3>Đăng ký thất bại!</h3>");
                 }
             } else {
-                request.setAttribute("message", "Tài khoản hoặc email đã tồn tại!");
+                out.println("<h3>Tài khoản hoặc email đã tồn tại!</h3>");
             }
-            request.getRequestDispatcher("register.jsp").forward(request, response);
 
         } catch (Exception e) {
             throw new ServletException("Lỗi khi xử lý đăng ký", e);

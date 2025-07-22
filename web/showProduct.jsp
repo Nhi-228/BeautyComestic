@@ -75,7 +75,7 @@
                         <a href="addproduct.jsp">Tạo mới sản phẩm</a>
                         <a href="addcategory.jsp">Thêm danh mục</a>
                         <a href="addsupplier.jsp">Thêm nhà cung cấp</a>
-                        <a href="showProduct.jsp">Danh sách sản phẩm</a>
+                        <a href="viewProduct">Danh sách sản phẩm</a>
                     </div>
                 </li>
                 <li>
@@ -97,13 +97,18 @@
 
             <div class="d-flex gap-3 mb-4">
                 <input type="text" id="searchInput" class="form-control w-50" placeholder="🔍 Tìm theo tên sản phẩm..." />
+                <%
+                    java.util.Set<Integer> categorySet = new java.util.HashSet<>();
+                    for (Object obj : (java.util.List)request.getAttribute("products")) {
+                        model.Product p = (model.Product)obj;
+                        if (p.getCategoryId() != 0) categorySet.add(p.getCategoryId());
+                    }
+                %>
                 <select id="categoryFilter" class="form-select w-25">
                     <option value="">-- Tất cả danh mục --</option>
-                    <c:forEach var="p" items="${products}">
-                        <c:if test="${not empty p.categoryId}">
-                            <option value="${p.categoryId}">${p.categoryId}</option>
-                        </c:if>
-                    </c:forEach>
+                    <% for (Integer catId : categorySet) { %>
+                        <option value="<%=catId%>"><%=catId%></option>
+                    <% } %>
                 </select>
             </div>
 
@@ -128,7 +133,7 @@
                             <td>${p.productName}</td>
                             <td><img src="${p.imageUrl}" alt="" width="50" /></td>
                             <td>${p.stockQuantity}</td>
-                            <td><c:out value="${p.active ? 'Còn hàng' : 'Hết hàng'}"/></td>
+                            <td><c:out value="${p.active && p.stockQuantity > 0 ? 'Còn hàng' : 'Hết hàng'}"/></td>
                             <td>${p.price} đ</td>
                             <td>${p.categoryId}</td>
                             <td>

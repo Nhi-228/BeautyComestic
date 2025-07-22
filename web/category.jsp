@@ -5,6 +5,25 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Product" %>
+<%@ page import="dao.ProductDao" %>
+<%@ page import="dao.ProductImageDao" %>
+<%@ page import="model.ProductImage" %>
+<%
+    if (session.getAttribute("userEmail") == null) {
+        response.sendRedirect("login.html");
+        return;
+    }
+    List<Product> productList = null;
+    try {
+        productList = new dao.ProductDao().getAllProducts();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    ProductImageDao imgDao = null;
+    try { imgDao = new dao.ProductImageDao(); } catch(Exception ex) { ex.printStackTrace(); }
+%>
 <!DOCTYPE html>
 <!--
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,7 +33,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <head>
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-        <title>TODO supply a title</title>
+        <title>Beauty Daily</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
@@ -23,7 +42,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <div class="top-bar">
                 <span>Quick Access</span>
             </div>
-
             <div class="main-header">
                 <div class="search-box">
                     <input type="text" placeholder="Gift with purchase" />
@@ -32,6 +50,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 <div class="logo">Beauty Daily</div>
                 <div class="actions">
                     <div class="login-dropdown">
+                        <% if (session.getAttribute("userEmail") == null) { %>
                         <button class="login-btn" id="loginBtn">LOGIN</button>
                         <ul class="dropdown-list" id="loginDropdown">
                             <li><i class="fa-regular fa-user"></i><a href="login.html">Đăng nhập</a></li>
@@ -40,15 +59,26 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
                             <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
                         </ul>
+                        <% } else { %>
+                            <button class="login-btn" id="loginBtn"><%= session.getAttribute("userEmail") %></button>
+                            <ul class="dropdown-list" id="loginDropdown">
+                                <li><i class="fa-regular fa-user"></i>Email : <%= session.getAttribute("userEmail") %></li>
+                                <li><i class="fa-regular fa-user"></i><a href="logout">Đăng xuất</a></li>
+                                <li><i class="fa-regular fa-heart"></i><a href="#">Wish List</a></li>
+                                <li><i class="fa-solid fa-box"></i><a href="#">My Order</a></li>
+                                <li><i class="fa-solid fa-star"></i><a href="#">VIP Privileges</a></li>
+                            </ul>
+                        <% } %>
                     </div>
-                    <a href="mybag.html" id="myBagBtn" class="btn-bag">
+                    <a href="cart.jsp" id="myBagBtn" class="btn-bag">
                         <i class="fa-solid fa-cart-shopping" style="color: #f22b07;"></i> MY BAG (<span id="cart-count">0</span>)
                     </a>
                 </div>
             </div>
-
             <nav>
                 <ul class="nav-bar">
+                    <li><a href="category.jsp">ALL</a></li>
+                    <li><a href="home.jsp">Home</a></li>
                     <li class="dropdown">
                         <a href="#">Summer Sale</a>
                         <ul class="dropdown-menu">
@@ -83,21 +113,24 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="personalcare.html">Personal Care</a>
+                        <a href="personalcare.jsp">Personal Care</a>
                     </li>
                 </ul>
             </nav>
-
             <div class="alert-bar">Collect more hot vouchers at Voucher Zone</div>
         </header>
 
-
+        <% if (session.getAttribute("userRole") != null && session.getAttribute("userRole").equals("admin")) { %>
+            <div style="margin: 20px 0 0 20px;">
+                <a href="Admin.jsp" style="padding: 8px 16px; background: #f22b07; color: #fff; border-radius: 4px; text-decoration: none; font-weight: bold;">Quay lại trang Admin</a>
+            </div>
+        <% } %>
 
 
         <section class="cartelogy">
             <div class="container">
                 <div class="cartelogy-top row">
-                    <p>Home</p><span>&#8594;</span><p>Makeup</p>
+                    <p>Home</p><span>&#8594;</span><p>All</p>
                 </div>
             </div>
             <div class="container">
@@ -107,28 +140,28 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
 
                             <li class="cartelogy-left-li"><a href="">Makeup</a>
                                 <ul>
-                                    <li><a href="">Cushion</a></li>
-                                    <li><a href="">Cream</a></li>
-                                    <li><a href="">Mascara</a></li>
-                                    <li><a href="">Lip teen</a></li>
+                                    <li><a href="cushion.jsp">Cushion</a></li>
+                                    <li><a href="cream.jsp">Cream</a></li>
+                                    <li><a href="mascara.jsp">Mascara</a></li>
+                                    <li><a href="lipteen.jsp">Lip teen</a></li>
                                 </ul>
                             </li>
                             <li class="cartelogy-left-li"><a href="">Skincare</a>
                                 <ul>
-                                    <li><a href="">Serum</a></li>
-                                    <li><a href="">Cleaning</a></li>
-                                    <li><a href="">Mask</a></li>
-                                    <li><a href="">Acne treatment</a></li>
-                                    <li><a href="">Tonner</a></li>
+                                    <li><a href="serum.jsp">Serum</a></li>
+                                    <li><a href="cleaning.jsp">Cleaning</a></li>
+                                    <li><a href="mask.jsp">Mask</a></li>
+                                    <li><a href="acnetreatment.jsp">Acne treatment</a></li>
+                                    <li><a href="tonner.jsp">Tonner</a></li>
 
                                 </ul>
                             </li>
                             <li class="cartelogy-left-li"><a href="">Hair Care</a>
                                 <ul>
-                                    <li><a href="">Shampoo</a></li>
-                                    <li><a href="">Conditioner</a></li>
-                                    <li><a href="">Hair mask</a></li>
-                                    <li><a href="">Hair oil</a></li>
+                                    <li><a href="shampoo.jsp">Shampoo</a></li>
+                                    <li><a href="conditioner.jsp">Conditioner</a></li>
+                                    <li><a href="hairmask.jsp">Hair mask</a></li>
+                                    <li><a href="hairoil.jsp">Hair oil</a></li>
                                 </ul>
                             </li>
 
@@ -138,7 +171,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                     <div class="cartelogy-right row">
                         <div class="cartelogy-right-top">
                             <div class="cartelogy-right-top-item">
-                                <p>MAKEUPS</p>
+                                <p>ALL</p>
                             </div>
                             <div class="cartelogy-right-top-item">
                                 <button><span>filter</span><i class="fa-solid fa-filter" style="color: #4e82c6;"></i></button>
@@ -154,102 +187,41 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                             </div>
                         </div>
                         <div class="cartegory-right-content">
-                            <div class="cartegory-right-content-item"
-                                 data-category="makeup"
-                                 data-brand="3ce"
-                                 data-type="cushion"
-                                 data-tone="light"
-                                 data-price="280000">
-                                <img src="image/cushion.jpg" alt="" >
-                                <h1>3CE BARE COVER CUSHION </h1>
-                                <p>580.000<sup>đ</sup></p>
+                            <% if (productList != null) {
+                                for (Product p : productList) {
+                                    ProductImage img = null;
+                                    if (imgDao != null) {
+                                        try { img = imgDao.getPrimaryImageByProductId(p.getProductId()); } catch(Exception ex) { ex.printStackTrace(); }
+                                    }
+                            %>
+                                <div class="cartegory-right-content-item">
+                                    <a href="products.jsp?id=<%=p.getProductId()%>">
+                                        <% if (img != null) { %>
+                                            <img src="<%= (img != null && img.getImageUrl() != null && !img.getImageUrl().isEmpty()) ? img.getImageUrl() : "image/no-image.png" %>" alt="" onerror="this.onerror=null;this.src='image/no-image.png';">
+                                        <% } else { %>
+                                            <img src="image/no-image.png" alt="">
+                                        <% } %>
+                                        <h1><%=p.getProductName()%></h1>
+                                    </a>
+                                    <p><%=p.getPrice()%><sup>đ</sup></p>
+                                </div>
+                            <%  }
+                            } else { %>
+                                <p>Không có sản phẩm nào!</p>
+                            <% } %>
+                        </div>
+                        <div class="cartegory-right-bottom">
+                            <div class="cartegory-right-bottem-items">
+                                <p> Hien thi 2 <span>|</span> 4 san pham </p>
                             </div>
-                            <div class="cartegory-right-content-item"
-                                 <div class="cartegory-right-content-item"
-                                 data-category="makeup"
-                                 data-brand="3ce"
-                                 data-type="eye shadow"
-                                 data-tone="light"
-                                 data-price="380000">
-                                    <img src="image/takeface.jpg" alt="" >
-                                    <h1>3CE NEW TAKE FACE BLUSHER</h1>
-                                    <p>380.000<sup>đ</sup></p>
-                                </div>
-                                <div class="cartegory-right-content-item"
-                                     <div class="cartegory-right-content-item"
-                                     data-category="makeup"
-                                     data-brand="canmake"
-                                     data-type="mascara"
-                                     data-tone="dark"
-                                     data-price="190000">
-                                        <img src="image/mascara.jpg" alt="">
-                                        <h1>Mascara</h1>
-                                        <p>190.000<sup>đ</sup></p>
-                                    </div>
-                                    <div class="cartegory-right-content-item"
-                                         data-category="makeup"
-                                         data-brand="canmake"
-                                         data-type="eye shadow"
-                                         data-tone="light"
-                                         data-price="2000000">
-                                        <img src="image/phanmat.png" alt="">
-                                        <h1>Palette Eyes</h1>
-                                        <p>2.000.000<sup>đ</sup></p>
-                                    </div>
-                                    <div class="cartegory-right-content-item"
-                                         data-category="makeup"
-                                         data-brand="maybellin"
-                                         data-type="but cushion"
-                                         data-tone="light"
-                                         data-price="120000">
-                                        <img src="image/butcushion.jpg"  alt="" >
-                                        <h1>But Cushion</h1>
-                                        <p>120.000<sup>đ</sup></p>
-                                    </div>
-                                    <div class="cartegory-right-content-item"
-                                         data-category="makeup"
-                                         data-brand="maybellin"
-                                         data-type="eyeliner"
-                                         data-tone="dark"
-                                         data-price="175000">
-                                        <img src="image/kematnuoc.jpg" alt="">
-                                        <h1>But ke mat nuoc</h1>
-                                        <p>175.000<sup>đ</sup></p>
-                                    </div>
-                                    <div class="cartegory-right-content-item"
-                                         data-category="makeup"
-                                         data-brand="3ce"
-                                         data-type="lip tin"
-                                         data-tone="light"
-                                         data-price="350000">
-                                        <img src="image/liptin.png" alt="" >
-                                        <h1>3CE LIP TIN</h1>
-                                        <p>350.000<sup>đ</sup></p>
-                                    </div>
-                                    <div class="cartegory-right-content-item"
-                                         data-category="makeup"
-                                         data-brand="maybellin"
-                                         data-type="foundation cream"
-                                         data-tone="light"
-                                         data-price="200000">
-                                        <img src="image/kemnen.jpg" alt="">
-                                        <h1>Kem nen Maybeline</h1>
-                                        <p>200.000<sup>đ</sup></p>
-                                    </div>
-                                </div>
-                                <div class="cartegory-right-bottom">
-                                    <div class="cartegory-right-bottem-items">
-                                        <p> Hien thi 2 <span>|</span> 4 san pham </p>
-                                    </div>
-                                    <div>
-                                        <p><span>&#187;</span>1 2 3 4 5 <span>&#187;</span></p>
-                                    </div>
-                                </div>
+                            <div>
+                                <p><span>&#187;</span>1 2 3 4 5 <span>&#187;</span></p>
                             </div>
-
                         </div>
                     </div>
-                    </section>    
+
+                </div>
+            </section>    
 
 
 

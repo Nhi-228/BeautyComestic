@@ -1,4 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    if (session.getAttribute("userRole") == null || !session.getAttribute("userRole").equals("admin")) {
+        response.sendRedirect("login.html");
+        return;
+    }
+%>
 <%@ page import="jakarta.servlet.http.*, jakarta.servlet.*" %>
 
 <!DOCTYPE html>
@@ -157,20 +163,19 @@
                             <div class="mb-3">
                                 <label for="role" class="form-label">Vai trò</label>
                                 <select class="form-select" name="role" id="role" required>
-                                    <option value="admin">Admin</option>
-                                    <option value="staff">Staff</option>
-                                    <option value="customer">Customer</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Staff">Staff</option>
+                                    <option value="Customer">Customer</option>
                                 </select>
                             </div>
                             <%
-                                String msg = (String) request.getAttribute("message");
-                                if (msg != null) {
+                                String message = (String) request.getAttribute("message");
+                                if (message != null) {
                             %>
-                            <p style="color: green;"><%= msg%></p>
+                            <div style="color: green;"><%= message%></div>
                             <%
                                 }
                             %>
-
 
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Thêm nhân viên</button>

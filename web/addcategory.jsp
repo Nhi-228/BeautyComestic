@@ -1,5 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="dao.CategoryDao,model.Category" %>
+<%
+    if (session.getAttribute("userRole") == null || !session.getAttribute("userRole").equals("admin")) {
+        response.sendRedirect("login.html");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>

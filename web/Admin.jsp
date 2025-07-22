@@ -1,5 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="jakarta.servlet.http.*, jakarta.servlet.*" %>
+<%
+    if (session.getAttribute("userRole") == null || !session.getAttribute("userRole").equals("admin")) {
+        response.sendRedirect("login.html");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +59,7 @@
         <div class="col-md-2 sidebar">
             <div class="email-info" style="color: #23272b;"><i class="fa-regular fa-user"></i> Email: ${sessionScope.userEmail}</div>
             <ul class="list-unstyled">
-                <li><a href="http://localhost:8080/BeautyCosmestic-new/home.jsp"><i class="fa-solid fa-cash-register"></i> Bán hàng</a></li>
+                <li><a href="home.jsp"><i class="fa-solid fa-cash-register"></i> Bán hàng</a></li>
                 <li><a href="#"><i class="fa-solid fa-sliders"></i> Điều khiển</a></li>
 
                 <!-- Quản lý nhân viên -->
@@ -79,7 +85,7 @@
                         <a href="addproduct.jsp">Tạo mới sản phẩm</a>
                         <a href="addcategory.jsp">Thêm danh mục</a>
                         <a href="addsupplier.jsp">Thêm nhà cung cấp</a>
-                        <a href="showProduct.jsp">Danh sách sản phẩm</a>
+                        <a href="viewProduct">Danh sách sản phẩm</a>
                     </div>
                 </li>
 

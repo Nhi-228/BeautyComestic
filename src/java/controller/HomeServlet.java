@@ -1,5 +1,7 @@
+package controller;
 
-import jakarta.enterprise.context.SessionScoped;
+
+import dao.UserDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,32 +18,18 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = req.getSession(false); // không tạo nếu không tồn tại
         try {
-           
-            if (session != null && session.getAttribute("userEmail") != null) {
-                
-            String email = (String) session.getAttribute("userEmail");
-            String fullName = (String) session.getAttribute("userFullName");
-            String role = (String) session.getAttribute("userRole");
-            String userName = (String) session.getAttribute("userName");
-            // Đẩy dữ liệu sang JSP để hiển thị
-            req.setAttribute("email", email);
-            req.setAttribute("fullName", fullName);
-            req.setAttribute("role", role);
-            req.setAttribute("userName", userName);
-            // Nếu tồn tại email trong session → chuyển tiếp tới home.jsp
-                if ("admin".equalsIgnoreCase(role)) {
-                    resp.sendRedirect("ADMIN/Admin.jsp"); // hoặc "admin/home"
-                } else if ("customer".equalsIgnoreCase(role)) {
-                    resp.sendRedirect("home.jsp"); // hoặc "home"
-                }
-        } else {
-            // Ngược lại redirect về login
-            resp.sendRedirect("login.html");
-        }       
+            UserDAO dao = new UserDAO();
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+        if (session != null && session.getAttribute("userEmail") != null) {
+            // Nếu tồn tại email trong session → chuyển tiếp tới home.jsp
+            req.getRequestDispatcher("/home.jsp").forward(req, resp);
+        } else {
+            // Ngược lại redirect về login
+            resp.sendRedirect("login.html");
+        }
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)

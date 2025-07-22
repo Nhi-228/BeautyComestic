@@ -1,9 +1,3 @@
-<%-- 
-    Document   : addProduct
-    Created on : Jul 21, 2025, 3:15:26 PM
-    Author     : BINH NHI
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -1,3 +1,5 @@
+package controller;
+
 
 import dao.UserDAO;
 import jakarta.servlet.ServletException;
@@ -14,21 +16,31 @@ public class LoginServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        String email = req.getParameter("email");
-        String password = req.getParameter("password");
+        String email = req.getParameter("email").trim();
+        String password = req.getParameter("password").trim();
 
         try {
             UserDAO dao = new UserDAO();
             boolean isValid = dao.checkLogin(email, password);
             if (isValid) {
-                User user = dao.getUserByEmail(email);
-
-                HttpSession session = req.getSession();
-                session.setAttribute("userEmail", user.getEmail());
-                session.setAttribute("userFullName", user.getFull_name());
-                session.setAttribute("userRole", user.getRole());
-                session.setAttribute("userName", user.getUsername());
-                res.sendRedirect("home");              // hoặc forward
+                HttpSession session = req.getSession(); // tạo hoặc lấy session hiện tại
+                session.setAttribute("userEmail", email);   // lưu email vào session
+                // Lấy role từ DB
+                model.User user = dao.getUserByEmail(email);
+                if (user != null) {
+                    session.setAttribute("userRole", user.getRole()); // Lưu role vào session
+                    if ("admin".equals(user.getRole())) {
+                        res.sendRedirect("Admin.jsp");
+                        return;
+                    } else if ("staff".equals(user.getRole())) {
+                        res.sendRedirect("showstaff.jsp");
+                        return;
+                    } else {
+                        res.sendRedirect("home.jsp");
+                        return;
+                    }
+                }
+                res.sendRedirect("home.jsp"); // fallback
             } else {
                 res.sendRedirect("login.html?error=true");
             }
